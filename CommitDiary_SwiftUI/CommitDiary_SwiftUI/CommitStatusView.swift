@@ -9,6 +9,13 @@ import SwiftUI
 
 struct CommitStatusView: View {
     var body: some View {
+        NavigationView {
+            content
+                .navigationTitle("활동")
+        }
+    }
+    
+    private var content: some View {
         VStack {
             todaysCommitView()
             commitHistoryView()

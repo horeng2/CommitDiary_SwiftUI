@@ -16,6 +16,8 @@
 		480BE91028EA1DAD00883E98 /* CommitDiary_SwiftUIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480BE90F28EA1DAD00883E98 /* CommitDiary_SwiftUIUITestsLaunchTests.swift */; };
 		486EAA4128EA1E9D00D86DA2 /* ViewIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4028EA1E9D00D86DA2 /* ViewIndex.swift */; };
 		486EAA4328EA1EF100D86DA2 /* CommitStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4228EA1EF100D86DA2 /* CommitStatusView.swift */; };
+		486EAA4528EA229900D86DA2 /* CommitNoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4428EA229900D86DA2 /* CommitNoteListView.swift */; };
+		486EAA4728EA231200D86DA2 /* CommitNoteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4628EA231200D86DA2 /* CommitNoteRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		480BE90F28EA1DAD00883E98 /* CommitDiary_SwiftUIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitDiary_SwiftUIUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		486EAA4028EA1E9D00D86DA2 /* ViewIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewIndex.swift; sourceTree = "<group>"; };
 		486EAA4228EA1EF100D86DA2 /* CommitStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitStatusView.swift; sourceTree = "<group>"; };
+		486EAA4428EA229900D86DA2 /* CommitNoteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitNoteListView.swift; sourceTree = "<group>"; };
+		486EAA4628EA231200D86DA2 /* CommitNoteRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitNoteRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,8 @@
 				486EAA4028EA1E9D00D86DA2 /* ViewIndex.swift */,
 				480BE8F628EA1DAD00883E98 /* Assets.xcassets */,
 				480BE8F828EA1DAD00883E98 /* Preview Content */,
+				486EAA4428EA229900D86DA2 /* CommitNoteListView.swift */,
+				486EAA4628EA231200D86DA2 /* CommitNoteRowView.swift */,
 			);
 			path = CommitDiary_SwiftUI;
 			sourceTree = "<group>";
@@ -264,6 +270,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				480BE8F528EA1DAC00883E98 /* RootTabView.swift in Sources */,
+				486EAA4728EA231200D86DA2 /* CommitNoteRowView.swift in Sources */,
+				486EAA4528EA229900D86DA2 /* CommitNoteListView.swift in Sources */,
 				486EAA4328EA1EF100D86DA2 /* CommitStatusView.swift in Sources */,
 				480BE8F328EA1DAC00883E98 /* CommitDiary_SwiftUIApp.swift in Sources */,
 				486EAA4128EA1E9D00D86DA2 /* ViewIndex.swift in Sources */,
