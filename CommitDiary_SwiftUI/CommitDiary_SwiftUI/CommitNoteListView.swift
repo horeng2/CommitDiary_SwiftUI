@@ -22,7 +22,7 @@ struct CommitNoteListView: View {
 }
 
 extension CommitNoteListView {
-    func commitNoteListView() -> some View {
+    private func commitNoteListView() -> some View {
         List {
             ForEach(notes, id: \.self) {note in
                 makeNavigationLink(of: note)
@@ -31,7 +31,7 @@ extension CommitNoteListView {
         }
     }
     
-    func makeNavigationLink(of note: String) -> some View {
+    private func makeNavigationLink(of note: String) -> some View {
         NavigationLink {
             //detail view
         } label: {

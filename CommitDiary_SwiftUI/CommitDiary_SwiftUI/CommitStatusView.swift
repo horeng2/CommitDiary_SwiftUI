@@ -25,14 +25,14 @@ struct CommitStatusView: View {
 }
 
 extension CommitStatusView {
-    func todaysCommitView() -> some View {
+    private func todaysCommitView() -> some View {
         VStack {
             Text("오늘의 커밋")
             Text("19회")
         }
     }
     
-    func commitHistoryView() -> some View {
+    private func commitHistoryView() -> some View {
         HStack {
             VStack {
                 Text("연속기록")
@@ -45,7 +45,7 @@ extension CommitStatusView {
         }
     }
     
-    func commitGraphStatusView() -> some View {
+    private func commitGraphStatusView() -> some View {
         VStack {
             commitGraphView()
             HStack{
@@ -57,7 +57,7 @@ extension CommitStatusView {
         .padding(.horizontal, 30)
     }
     
-    func commitGraphView() -> some View {
+    private func commitGraphView() -> some View {
         ZStack(alignment: .leading) {
             Rectangle()
                 .stroke(.black, lineWidth: 3)

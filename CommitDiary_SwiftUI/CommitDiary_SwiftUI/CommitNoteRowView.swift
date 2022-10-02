@@ -25,14 +25,14 @@ struct CommitNoteRowView: View {
 }
 
 extension CommitNoteRowView {
-    func noteInfoView() -> some View {
+    private func noteInfoView() -> some View {
         VStack {
             Text("date")
             Text(title)
         }
     }
     
-    func commitCountView() -> some View {
+    private func commitCountView() -> some View {
         Text("🌱\(commitCount)")
     }
 }
