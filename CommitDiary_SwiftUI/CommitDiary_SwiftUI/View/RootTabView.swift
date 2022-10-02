@@ -22,6 +22,11 @@ struct RootTabView: View {
                     Image(systemName: "crown")
                     Text("Note")
                 }
+            SettingView()
+                .tabItem {
+                    Image(systemName: "gear")
+                    Text("Setting")
+                }
         }
     }
 }

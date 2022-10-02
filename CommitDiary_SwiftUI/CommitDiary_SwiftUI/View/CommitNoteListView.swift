@@ -33,7 +33,7 @@ extension CommitNoteListView {
     
     private func makeNavigationLink(of note: String) -> some View {
         NavigationLink {
-            //detail view
+            CommitNoteDetailView(note: note)
         } label: {
             CommitNoteRowView(title: note, commitCount: 5)
         }
