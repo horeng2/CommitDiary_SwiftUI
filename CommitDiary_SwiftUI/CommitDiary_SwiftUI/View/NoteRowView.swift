@@ -1,5 +1,5 @@
 //
-//  CommitNoteCellView.swift
+//  NoteRowView.swift
 //  CommitDiary_SwiftUI
 //
 //  Created by 서녕 on 2022/10/03.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CommitNoteRowView: View {
+struct NoteRowView: View {
     @State var title: String
     @State var commitCount: Int
     
@@ -24,7 +24,7 @@ struct CommitNoteRowView: View {
     }
 }
 
-extension CommitNoteRowView {
+extension NoteRowView {
     private func noteInfoView() -> some View {
         VStack {
             Text("date")
@@ -37,8 +37,8 @@ extension CommitNoteRowView {
     }
 }
 
-struct CommitNoteRowView_Previews: PreviewProvider {
+struct NoteRowView_Previews: PreviewProvider {
     static var previews: some View {
-        CommitNoteRowView(title: "title", commitCount: 5)
+        NoteRowView(title: "title", commitCount: 5)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  CommitNoteDetailView.swift
+//  NoteDetailView.swift
 //  CommitDiary_SwiftUI
 //
 //  Created by 서녕 on 2022/10/03.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CommitNoteDetailView: View {
+struct NoteDetailView: View {
     @State var note: String
     var body: some View {
         NavigationView {
@@ -26,7 +26,7 @@ struct CommitNoteDetailView: View {
     }
 }
 
-extension CommitNoteDetailView {
+extension NoteDetailView {
     private func dateView() -> some View {
         Text("2022.09.30.")
     }
@@ -48,8 +48,8 @@ sdfsdfsdfsfsfsfsdfsfdssfsdfsfsfsfsf
     }
 }
 
-struct CommitNoteDetailView_Previews: PreviewProvider {
+struct NoteDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        CommitNoteDetailView(note: "note")
+        NoteDetailView(note: "note")
     }
 }

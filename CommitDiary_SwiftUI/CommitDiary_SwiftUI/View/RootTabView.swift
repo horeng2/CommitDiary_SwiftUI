@@ -17,7 +17,7 @@ struct RootTabView: View {
                     Image(systemName: "flame")
                     Text("Today")
                 }
-            CommitNoteListView()
+            NoteListView()
                 .tabItem {
                     Image(systemName: "crown")
                     Text("Note")

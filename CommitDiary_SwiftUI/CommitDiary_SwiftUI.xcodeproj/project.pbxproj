@@ -16,10 +16,10 @@
 		480BE91028EA1DAD00883E98 /* CommitDiary_SwiftUIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480BE90F28EA1DAD00883E98 /* CommitDiary_SwiftUIUITestsLaunchTests.swift */; };
 		486EAA4128EA1E9D00D86DA2 /* ViewIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4028EA1E9D00D86DA2 /* ViewIndex.swift */; };
 		486EAA4328EA1EF100D86DA2 /* CommitStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4228EA1EF100D86DA2 /* CommitStatusView.swift */; };
-		486EAA4528EA229900D86DA2 /* CommitNoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4428EA229900D86DA2 /* CommitNoteListView.swift */; };
-		486EAA4728EA231200D86DA2 /* CommitNoteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4628EA231200D86DA2 /* CommitNoteRowView.swift */; };
+		486EAA4528EA229900D86DA2 /* NoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4428EA229900D86DA2 /* NoteListView.swift */; };
+		486EAA4728EA231200D86DA2 /* NoteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4628EA231200D86DA2 /* NoteRowView.swift */; };
 		486EAA4928EA282100D86DA2 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4828EA282100D86DA2 /* SettingView.swift */; };
-		486EAA4C28EA2CFE00D86DA2 /* CommitNoteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4B28EA2CFE00D86DA2 /* CommitNoteDetailView.swift */; };
+		486EAA4C28EA2CFE00D86DA2 /* NoteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4B28EA2CFE00D86DA2 /* NoteDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,10 +52,10 @@
 		480BE90F28EA1DAD00883E98 /* CommitDiary_SwiftUIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitDiary_SwiftUIUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		486EAA4028EA1E9D00D86DA2 /* ViewIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewIndex.swift; sourceTree = "<group>"; };
 		486EAA4228EA1EF100D86DA2 /* CommitStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitStatusView.swift; sourceTree = "<group>"; };
-		486EAA4428EA229900D86DA2 /* CommitNoteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitNoteListView.swift; sourceTree = "<group>"; };
-		486EAA4628EA231200D86DA2 /* CommitNoteRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitNoteRowView.swift; sourceTree = "<group>"; };
+		486EAA4428EA229900D86DA2 /* NoteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListView.swift; sourceTree = "<group>"; };
+		486EAA4628EA231200D86DA2 /* NoteRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRowView.swift; sourceTree = "<group>"; };
 		486EAA4828EA282100D86DA2 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
-		486EAA4B28EA2CFE00D86DA2 /* CommitNoteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitNoteDetailView.swift; sourceTree = "<group>"; };
+		486EAA4B28EA2CFE00D86DA2 /* NoteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,9 +145,9 @@
 			children = (
 				480BE8F428EA1DAC00883E98 /* RootTabView.swift */,
 				486EAA4228EA1EF100D86DA2 /* CommitStatusView.swift */,
-				486EAA4428EA229900D86DA2 /* CommitNoteListView.swift */,
-				486EAA4628EA231200D86DA2 /* CommitNoteRowView.swift */,
-				486EAA4B28EA2CFE00D86DA2 /* CommitNoteDetailView.swift */,
+				486EAA4428EA229900D86DA2 /* NoteListView.swift */,
+				486EAA4628EA231200D86DA2 /* NoteRowView.swift */,
+				486EAA4B28EA2CFE00D86DA2 /* NoteDetailView.swift */,
 				486EAA4828EA282100D86DA2 /* SettingView.swift */,
 			);
 			path = View;
@@ -284,9 +284,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				480BE8F528EA1DAC00883E98 /* RootTabView.swift in Sources */,
-				486EAA4728EA231200D86DA2 /* CommitNoteRowView.swift in Sources */,
-				486EAA4C28EA2CFE00D86DA2 /* CommitNoteDetailView.swift in Sources */,
-				486EAA4528EA229900D86DA2 /* CommitNoteListView.swift in Sources */,
+				486EAA4728EA231200D86DA2 /* NoteRowView.swift in Sources */,
+				486EAA4C28EA2CFE00D86DA2 /* NoteDetailView.swift in Sources */,
+				486EAA4528EA229900D86DA2 /* NoteListView.swift in Sources */,
 				486EAA4928EA282100D86DA2 /* SettingView.swift in Sources */,
 				486EAA4328EA1EF100D86DA2 /* CommitStatusView.swift in Sources */,
 				480BE8F328EA1DAC00883E98 /* CommitDiary_SwiftUIApp.swift in Sources */,
