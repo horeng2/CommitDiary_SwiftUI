@@ -8,15 +8,37 @@
 import SwiftUI
 
 struct NoteListView: View {
+    @State var isShowNoteDetailView = false
     let notes = ["aaa", "bbb", "vvv"]
+    
     var body: some View {
         NavigationView {
             content
-                .navigationTitle("잔디일기")
         }
     }
     
     private var content: some View {
+        listView()
+            .navigationTitle("잔디일기")
+            .toolbar {
+                plusButtonView()
+            }
+    }
+}
+
+extension NoteListView {
+    private func plusButtonView() -> some View {
+        Button {
+            isShowNoteDetailView = true
+        } label: {
+            Image(systemName: "plus")
+                .fullScreenCover(isPresented: $isShowNoteDetailView) {
+                    NoteDetailView(note: "")
+                }
+        }
+    }
+    
+    private func listView() -> some View {
         List {
             ForEach(notes, id: \.self) {note in
                 makeNavigationLink(of: note)
@@ -24,9 +46,7 @@ struct NoteListView: View {
             .listRowSeparator(.visible)
         }
     }
-}
-
-extension NoteListView {
+    
     private func makeNavigationLink(of note: String) -> some View {
         NavigationLink {
             NoteDetailView(note: note)
