@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct Note {
+    var title = ""
+    var date = Date()
+    var description = ""
+}

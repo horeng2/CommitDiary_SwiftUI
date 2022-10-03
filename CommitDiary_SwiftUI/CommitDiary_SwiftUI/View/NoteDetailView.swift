@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct NoteDetailView: View {
-    @State var note: String
+    @State var note: Note
+    let commitCount: Int
+    
     var body: some View {
         NavigationView {
             content
@@ -19,6 +21,7 @@ struct NoteDetailView: View {
         VStack(alignment: .leading) {
             dateView()
             commitCountView()
+            titleView()
             noteContentView()
             Spacer()
         }
@@ -27,31 +30,44 @@ struct NoteDetailView: View {
 
 extension NoteDetailView {
     private func dateView() -> some View {
-        TextField(note, text: $note)
-            .placeholder(when: note.isEmpty) {
-                Text("제목")
-            }
-    }
-    
-    private func titleView() -> some View {
-        TextField(note, text: $note)
+        Text(note.date.longDateString())
+                    .font(.system(size: 24))
+                    .foregroundColor(.black)
     }
     
     private func commitCountView() -> some View {
-        TextField("3번 커밋했어요", text: $note)
+        Text("오늘의 커밋은 \(commitCount)회!")
+    }
+    
+    private func titleView() -> some View {
+        TextField(note.title, text: $note.title)
+            .placeholder(when: note.title.isEmpty) {
+                Text("제목을 입력하세요")
+                    .font(.system(size: 24))
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(.gray)
+            }
+            .font(.system(size: 24))
+            .multilineTextAlignment(.leading)
+            .foregroundColor(.black)
     }
     
     private func noteContentView() -> some View {
-        Text("""
-sdfsdfsdfsfsfsfsdfsfdssfsdfsfsfsfsfs
-sdfsdfsdfsfsfsfsdfsfdssfsdfsfsfsfsf
-sdfsdfsdfsfsfsfsdfsfdssfsdfsfsfsfsf
-""")
+        TextField(note.description, text: $note.description)
+            .placeholder(when: note.description.isEmpty) {
+                Text("내용을 입력하세요")
+                    .font(.system(size: 24))
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(.gray)
+            }
+            .font(.system(size: 24))
+            .multilineTextAlignment(.leading)
+            .foregroundColor(.black)
     }
 }
 
 struct NoteDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        NoteDetailView(note: "note")
+        NoteDetailView(note: Note(title: "", date: Date(), description: ""), commitCount: 8)
     }
 }
