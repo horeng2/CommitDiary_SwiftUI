@@ -7,14 +7,15 @@
 
 import SwiftUI
 
-struct Extension_View: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-struct Extension_View_Previews: PreviewProvider {
-    static var previews: some View {
-        Extension_View()
-    }
+extension View {
+    func placeholder<Content: View>(
+        when willShow: Bool,
+        alignment: Alignment = .leading,
+        @ViewBuilder placeholder: () -> Content
+    ) -> some View {
+            ZStack(alignment: alignment) {
+                placeholder().opacity(willShow ? 1 : 0)
+                self
+            }
+        }
 }

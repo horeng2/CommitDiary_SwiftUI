@@ -12,7 +12,6 @@ struct NoteDetailView: View {
     var body: some View {
         NavigationView {
             content
-                .navigationTitle(note)
         }
     }
     
@@ -28,15 +27,18 @@ struct NoteDetailView: View {
 
 extension NoteDetailView {
     private func dateView() -> some View {
-        Text("2022.09.30.")
+        TextField(note, text: $note)
+            .placeholder(when: note.isEmpty) {
+                Text("제목")
+            }
     }
     
     private func titleView() -> some View {
-        Text(note)
+        TextField(note, text: $note)
     }
     
     private func commitCountView() -> some View {
-        Text("3번 커밋했어요")
+        TextField("3번 커밋했어요", text: $note)
     }
     
     private func noteContentView() -> some View {
