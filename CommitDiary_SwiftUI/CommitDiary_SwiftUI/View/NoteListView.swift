@@ -9,7 +9,9 @@ import SwiftUI
 
 struct NoteListView: View {
     @State var isShowNoteDetailView = false
-    let notes = ["aaa", "bbb", "vvv"]
+    let notes = [Note(title: "1", date: Date(), description: "111"),
+                 Note(title: "2", date: Date(), description: "222"),
+                 Note(title: "3", date: Date(), description: "333")]
     
     var body: some View {
         NavigationView {
@@ -28,30 +30,27 @@ struct NoteListView: View {
 
 extension NoteListView {
     private func plusButtonView() -> some View {
-        Button {
-            isShowNoteDetailView = true
+        NavigationLink {
+            NoteDetailView(note: Note(), commitCount: 7)
         } label: {
             Image(systemName: "plus")
-                .fullScreenCover(isPresented: $isShowNoteDetailView) {
-                    NoteDetailView(note: "")
-                }
         }
     }
     
     private func listView() -> some View {
         List {
-            ForEach(notes, id: \.self) {note in
+            ForEach(notes, id: \.title) {note in
                 makeNavigationLink(of: note)
             }
             .listRowSeparator(.visible)
         }
     }
     
-    private func makeNavigationLink(of note: String) -> some View {
+    private func makeNavigationLink(of note: Note) -> some View {
         NavigationLink {
-            NoteDetailView(note: note)
+            NoteDetailView(note: note, commitCount: 7)
         } label: {
-            NoteRowView(title: note, commitCount: 5)
+            NoteRowView(title: note.title, commitCount: 5)
         }
     }
 }
