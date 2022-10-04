@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 struct UserInfo: Decodable {
     let id: String
     let name: String
@@ -24,5 +22,16 @@ struct UserInfo: Decodable {
         case profileImageUrl = "avatar_url"
         case githubUrl = "html_url"
         case blogUrl = "blog"
+    }
+}
+
+extension UserInfo {
+    static var empty: UserInfo {
+        UserInfo(id: "",
+                 name: "",
+                 bio: "",
+                 profileImageUrl: "",
+                 githubUrl: "",
+                 blogUrl: "")
     }
 }
