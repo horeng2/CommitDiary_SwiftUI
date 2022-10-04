@@ -6,34 +6,35 @@
 //
 
 import Foundation
+import Combine
 
-class APICaller {
+class APIProvider {
     private let session: URLSession
     
     init(session: URLSession = URLSession.shared) {
         self.session = session
     }
     
-    func request(_ request: UserInfoRequest, completionHandler: @escaping (Result<UserInfo, NetworkError>) -> Void) {
-        guard let urlRequest = request.urlRequest else {
-            return
+    func request(requestType: UserInfoRequest) async throws -> UserInfo {
+        guard let request = requestType.urlRequest else {
+            throw NetworkError.urlError
         }
-        session.dataTask(with: urlRequest) { data, response, error in
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {
-                      let errorCode = String(describing: response)
-                      return completionHandler(.failure(.statusCodeError(code: errorCode)))
-                  }
-            guard let data = data else {
-                return completionHandler(.failure(.invaildData))
-            }
             
-            guard let userInfo = try? JSONDecoder().decode(UserInfo.self, from: data) else {
-                return
-            }
-            print(userInfo)
-            completionHandler(.success(userInfo))
+        guard let (data, response) = try? await session.data(for: request)
+            else {
+            throw NetworkError.invaildData
         }
-        .resume()
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+            let errorCode = String(describing: response)
+            throw NetworkError.statusCodeError(code: errorCode)
+        }
+            
+        guard let userInfo = try? JSONDecoder().decode(UserInfo.self, from: data) else {
+            throw NetworkError.parsingError(type: "UserInfo")
+        }
+            
+        return userInfo
     }
 }
