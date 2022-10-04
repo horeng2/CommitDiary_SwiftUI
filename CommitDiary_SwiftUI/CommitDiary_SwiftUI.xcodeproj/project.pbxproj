@@ -20,6 +20,10 @@
 		486EAA4728EA231200D86DA2 /* NoteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4628EA231200D86DA2 /* NoteRowView.swift */; };
 		486EAA4928EA282100D86DA2 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4828EA282100D86DA2 /* SettingView.swift */; };
 		486EAA4C28EA2CFE00D86DA2 /* NoteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4B28EA2CFE00D86DA2 /* NoteDetailView.swift */; };
+		486EAA4E28EAB44000D86DA2 /* Extension+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4D28EAB44000D86DA2 /* Extension+View.swift */; };
+		486EAA5028EAED5C00D86DA2 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4F28EAED5C00D86DA2 /* Note.swift */; };
+		486EAA5228EAF41B00D86DA2 /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA5128EAF41B00D86DA2 /* Extension+Date.swift */; };
+		486EAA5528EC15FE00D86DA2 /* NoteData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA5328EC15FE00D86DA2 /* NoteData.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +60,10 @@
 		486EAA4628EA231200D86DA2 /* NoteRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRowView.swift; sourceTree = "<group>"; };
 		486EAA4828EA282100D86DA2 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		486EAA4B28EA2CFE00D86DA2 /* NoteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailView.swift; sourceTree = "<group>"; };
+		486EAA4D28EAB44000D86DA2 /* Extension+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+View.swift"; sourceTree = "<group>"; };
+		486EAA4F28EAED5C00D86DA2 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		486EAA5128EAF41B00D86DA2 /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
+		486EAA5428EC15FE00D86DA2 /* NoteData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NoteData.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,7 +156,11 @@
 				486EAA4428EA229900D86DA2 /* NoteListView.swift */,
 				486EAA4628EA231200D86DA2 /* NoteRowView.swift */,
 				486EAA4B28EA2CFE00D86DA2 /* NoteDetailView.swift */,
+				486EAA5328EC15FE00D86DA2 /* NoteData.xcdatamodeld */,
 				486EAA4828EA282100D86DA2 /* SettingView.swift */,
+				486EAA4D28EAB44000D86DA2 /* Extension+View.swift */,
+				486EAA4F28EAED5C00D86DA2 /* Note.swift */,
+				486EAA5128EAF41B00D86DA2 /* Extension+Date.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -284,9 +296,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				480BE8F528EA1DAC00883E98 /* RootTabView.swift in Sources */,
+				486EAA4E28EAB44000D86DA2 /* Extension+View.swift in Sources */,
 				486EAA4728EA231200D86DA2 /* NoteRowView.swift in Sources */,
 				486EAA4C28EA2CFE00D86DA2 /* NoteDetailView.swift in Sources */,
 				486EAA4528EA229900D86DA2 /* NoteListView.swift in Sources */,
+				486EAA5528EC15FE00D86DA2 /* NoteData.xcdatamodeld in Sources */,
+				486EAA5228EAF41B00D86DA2 /* Extension+Date.swift in Sources */,
+				486EAA5028EAED5C00D86DA2 /* Note.swift in Sources */,
 				486EAA4928EA282100D86DA2 /* SettingView.swift in Sources */,
 				486EAA4328EA1EF100D86DA2 /* CommitStatusView.swift in Sources */,
 				480BE8F328EA1DAC00883E98 /* CommitDiary_SwiftUIApp.swift in Sources */,
@@ -615,6 +631,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		486EAA5328EC15FE00D86DA2 /* NoteData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				486EAA5428EC15FE00D86DA2 /* NoteData.xcdatamodel */,
+			);
+			currentVersion = 486EAA5428EC15FE00D86DA2 /* NoteData.xcdatamodel */;
+			path = NoteData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 480BE8E728EA1DAC00883E98 /* Project object */;
 }
