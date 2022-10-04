@@ -6,16 +6,16 @@
 //
 
 import Foundation
-import UIKit
+import SwiftUI
 
 struct LoginManager {
     static var shared = LoginManager()
     static let isLoginKey = "isLogin"
+    static let tokenKey = "token"
     
     private let clientId = "d7dbc87ea8c0b68452f7"
     private let clientSecret = "9fa2a43c208619ab8f7fb0201b1e3445d565a6cc"
     private let scope = "repo,user"
-    private let tokenKey = "token"
 
     lazy var loginUrl: URL = {
         let urlString = "https://github.com/login/oauth/authorize"
@@ -31,13 +31,13 @@ struct LoginManager {
     func login(with temporaryCode: URL) {
         let code = temporaryCode.absoluteString.components(separatedBy: "code=").last ?? ""
         requestAccessToken(with: code) { token in
-            Keychain.create(key: tokenKey, token: token)
+            Keychain.create(key: LoginManager.tokenKey, token: token)
         }
         UserDefaults.standard.set(true, forKey: LoginManager.isLoginKey)
     }
     
     func logout() {
-        Keychain.delete(key: tokenKey)
+        Keychain.delete(key: LoginManager.tokenKey)
         UserDefaults.standard.set(false, forKey: LoginManager.isLoginKey)
     }
     

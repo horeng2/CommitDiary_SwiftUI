@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct SettingView: View {
+    @EnvironmentObject var userInfoService: UserInfoService
     @State var settingList = [Color.red, Color.blue, Color.green, Color.yellow, Color.black]
+    
     var body: some View {
         NavigationView {
             content
@@ -26,10 +28,19 @@ struct SettingView: View {
 
 extension SettingView {
     private func userInfoView() -> some View {
-        VStack {
-            Image(systemName: "flame")
-            Text("김선영")
-            Text("horeng2")
+        HStack {
+            AsyncImage(url: URL(string: userInfoService.userInfo.profileImageUrl)) { image in
+                image.resizable()
+            } placeholder: {
+                Color.white
+            }
+            .frame(width: 100, height: 100)
+            .clipShape(RoundedRectangle(cornerRadius: 25))
+            
+            VStack{
+                Text(userInfoService.userInfo.name)
+                Text(userInfoService.userInfo.id)
+            }
         }
     }
     
