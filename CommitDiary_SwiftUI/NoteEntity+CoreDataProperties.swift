@@ -11,18 +11,17 @@ import CoreData
 
 
 extension NoteEntity {
-
     @nonobjc public class func fetchRequest() -> NSFetchRequest<NoteEntity> {
         return NSFetchRequest<NoteEntity>(entityName: "NoteEntity")
     }
-
-    @NSManaged public var title: String?
-    @NSManaged public var date: Date?
-    @NSManaged public var noteDescription: String?
-    @NSManaged public var id: UUID?
-
-}
-
-extension NoteEntity : Identifiable {
-
+    
+    @NSManaged public var id: UUID
+    @NSManaged public var title: String
+    @NSManaged public var date: Date
+    @NSManaged public var noteDescription: String
+    
+    static let idKey = "id"
+    static let titleKey = "title"
+    static let dateKey = "date"
+    static let noteDescriptionKey = "noteDescription"
 }
