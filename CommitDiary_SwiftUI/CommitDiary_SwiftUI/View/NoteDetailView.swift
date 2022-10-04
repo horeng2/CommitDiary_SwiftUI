@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct NoteDetailView: View {
+    @Environment(\.managedObjectContext) private var managedObjectContext
+    @Environment(\.presentationMode) var presentationMode
     @State var note: Note
     let commitCount: Int
     
@@ -23,6 +25,7 @@ struct NoteDetailView: View {
             commitCountView()
             titleView()
             noteContentView()
+            exitButtonView()
             Spacer()
         }
     }
@@ -64,10 +67,48 @@ extension NoteDetailView {
             .multilineTextAlignment(.leading)
             .foregroundColor(.black)
     }
+    
+    private func exitButtonView() -> some View {
+        HStack {
+            Button {
+                self.presentationMode.wrappedValue.dismiss()
+            } label: {
+                Text("취소")
+                    .font(.system(size: 20))
+                    .fontWeight(.bold)
+                    .frame(width: 130, height: 50, alignment: .center)
+                    .foregroundColor(.white)
+                    .background(.blue)
+                    .cornerRadius(20)
+            }
+            
+            Button {
+                note.store(in: managedObjectContext)
+                saveContext()
+                self.presentationMode.wrappedValue.dismiss()
+            } label: {
+                Text("저장")
+                    .font(.system(size: 20))
+                    .fontWeight(.bold)
+                    .frame(width: 130, height: 50, alignment: .center)
+                    .foregroundColor(.white)
+                    .background(.blue)
+                    .cornerRadius(20)
+            }
+        }
+    }
+    
+    private func saveContext() {
+        do {
+          try managedObjectContext.save()
+        } catch {
+          print("Error saving managed object context: \(error)")
+        }
+    }
 }
 
 struct NoteDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        NoteDetailView(note: Note(title: "", date: Date(), description: ""), commitCount: 8)
+        NoteDetailView(note: Note(), commitCount: 8)
     }
 }
