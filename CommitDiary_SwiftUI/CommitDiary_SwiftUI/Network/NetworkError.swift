@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+enum NetworkError: Error {
+    case parsingError(type: String)
+    case statusCodeError(code: String)
+    case invaildData
+}
