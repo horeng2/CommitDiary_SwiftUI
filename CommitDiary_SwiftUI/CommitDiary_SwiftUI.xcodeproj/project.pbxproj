@@ -34,6 +34,7 @@
 		486EAA6B28EC3D0000D86DA2 /* UserInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA6A28EC3D0000D86DA2 /* UserInfoRequest.swift */; };
 		486EAA6D28EC3D0F00D86DA2 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA6C28EC3D0F00D86DA2 /* UserInfo.swift */; };
 		486EAA6F28EC3D4200D86DA2 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA6E28EC3D4200D86DA2 /* NetworkError.swift */; };
+		486EAA7228EC544600D86DA2 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA7128EC544600D86DA2 /* Keychain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		486EAA6C28EC3D0F00D86DA2 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		486EAA6E28EC3D4200D86DA2 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		486EAA7028EC3DB900D86DA2 /* CommitDiary-SwiftUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CommitDiary-SwiftUI-Info.plist"; sourceTree = SOURCE_ROOT; };
+		486EAA7128EC544600D86DA2 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				486EAA6528EC3C9800D86DA2 /* LoginManager.swift */,
+				486EAA7128EC544600D86DA2 /* Keychain.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 				486EAA4728EA231200D86DA2 /* NoteRowView.swift in Sources */,
 				486EAA6F28EC3D4200D86DA2 /* NetworkError.swift in Sources */,
 				486EAA4C28EA2CFE00D86DA2 /* NoteDetailView.swift in Sources */,
+				486EAA7228EC544600D86DA2 /* Keychain.swift in Sources */,
 				486EAA4528EA229900D86DA2 /* NoteListView.swift in Sources */,
 				486EAA5528EC15FE00D86DA2 /* NoteData.xcdatamodeld in Sources */,
 				486EAA5828EC18BF00D86DA2 /* CoreDataStack.swift in Sources */,
