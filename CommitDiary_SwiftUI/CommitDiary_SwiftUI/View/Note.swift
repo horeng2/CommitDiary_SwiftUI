@@ -8,7 +8,16 @@
 import Foundation
 
 struct Note {
-    var title = ""
-    var date = Date()
-    var description = ""
+    var id: UUID
+    var title: String
+    var date: Date
+    var description: String
+    
+    
+    init() {
+        self.id = UUID()
+        self.title = ""
+        self.date = Date()
+        self.description = ""
+    }
 }
