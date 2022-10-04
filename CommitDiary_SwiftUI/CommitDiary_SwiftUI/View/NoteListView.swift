@@ -6,22 +6,41 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct NoteListView: View {
+    @Environment(\.managedObjectContext) private var managedObjectContext
+    @FetchRequest(
+      entity: NoteEntity.entity(),
+      sortDescriptors: [
+        NSSortDescriptor(keyPath: \NoteEntity.id, ascending: true)
+      ]
+    ) var notes: FetchedResults<NoteEntity>
+    
     @State var isShowNoteDetailView = false
-    let notes = [Note(title: "1", date: Date(), description: "111"),
-                 Note(title: "2", date: Date(), description: "222"),
-                 Note(title: "3", date: Date(), description: "333")]
     
     var body: some View {
         NavigationView {
-            content
+            if notes.isEmpty {
+                emptyContent
+            } else {
+                listContent
+            }
         }
     }
     
-    private var content: some View {
+    private var emptyContent: some View {
+        Text("기록을 작성해주세요.")
+            .foregroundColor(.gray)
+            .navigationTitle("빈 일기장 💬")
+            .toolbar {
+                plusButtonView()
+            }
+    }
+    
+    private var listContent: some View {
         listView()
-            .navigationTitle("잔디일기")
+            .navigationTitle("잔디일기 🌱")
             .toolbar {
                 plusButtonView()
             }
@@ -39,8 +58,8 @@ extension NoteListView {
     
     private func listView() -> some View {
         List {
-            ForEach(notes, id: \.title) {note in
-                makeNavigationLink(of: note)
+            ForEach(notes, id: \.id) {noteObject in
+                makeNavigationLink(of: Note(managedObject: noteObject))
             }
             .listRowSeparator(.visible)
         }
@@ -52,6 +71,14 @@ extension NoteListView {
         } label: {
             NoteRowView(title: note.title, commitCount: 5)
         }
+    }
+    
+    func saveContext() {
+      do {
+        try managedObjectContext.save()
+      } catch {
+        print("Error saving managed object context: \(error)")
+      }
     }
 }
 
