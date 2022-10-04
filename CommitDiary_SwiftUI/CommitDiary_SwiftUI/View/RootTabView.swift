@@ -46,8 +46,7 @@ extension RootTabView {
             Text("로그인")
         }
         .onOpenURL { temporaryCode in
-            LoginManager.shared.requestAccessToken(with: temporaryCode)
-            UserDefaults.standard.set(true, forKey: LoginManager.isLoginKey)
+            LoginManager.shared.login(with: temporaryCode)
         }
     }
 }

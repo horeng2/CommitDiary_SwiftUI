@@ -51,7 +51,7 @@ extension SettingView {
             Section {
                 logoutButtonView()
                     .onTapGesture {
-                        UserDefaults.standard.set(false, forKey: LoginManager.isLoginKey)
+                        LoginManager.shared.logout()
                     }
             }
         }
