@@ -42,12 +42,11 @@ extension RootTabView {
     }
     
     private func loginView() -> some View {
-        Link(destination: LoginManager.shared.requestCode()) {
+        Link(destination: LoginManager.shared.loginUrl) {
             Text("로그인")
         }
-        .onOpenURL { url in
-            let code = url.absoluteString.components(separatedBy: "code=").last ?? ""
-            LoginManager.shared.requestAccessToken(with: code)
+        .onOpenURL { temporaryCode in
+            LoginManager.shared.requestAccessToken(with: temporaryCode)
             UserDefaults.standard.set(true, forKey: LoginManager.isLoginKey)
         }
     }

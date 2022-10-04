@@ -9,14 +9,14 @@ import Foundation
 import UIKit
 
 struct LoginManager {
-    static let shared = LoginManager()
+    static var shared = LoginManager()
     static let isLoginKey = "isLogin"
     
     private let clientId = "d7dbc87ea8c0b68452f7"
     private let clientSecret = "9fa2a43c208619ab8f7fb0201b1e3445d565a6cc"
     private let scope = "repo,user"
-    
-    func requestCode() -> URL {
+
+    lazy var loginUrl: URL = {
         let urlString = "https://github.com/login/oauth/authorize"
         var components = URLComponents(string: urlString)!
         components.queryItems = [
@@ -25,9 +25,11 @@ struct LoginManager {
         ]
         
         return components.url!
-    }
+    }()
     
-    func requestAccessToken(with code: String) {
+    func requestAccessToken(with temporaryCode: URL) {
+        let code = temporaryCode.absoluteString.components(separatedBy: "code=").last ?? ""
+        
         let urlString = "https://github.com/login/oauth/access_token"
         var components = URLComponents(string: urlString)!
         components.queryItems = [
