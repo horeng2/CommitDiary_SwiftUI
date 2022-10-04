@@ -9,8 +9,19 @@ import SwiftUI
 
 struct RootTabView: View {
     @State var index = ViewIndex.commitStatusView.index
+    @State var isLogin = false
     
     var body: some View {
+        if isLogin {
+            rootTabView()
+        } else {
+            loginView()
+        }
+    }
+}
+
+extension RootTabView {
+    private func rootTabView() -> some View {
         TabView(selection: $index) {
             CommitStatusView()
                 .tabItem {
@@ -27,6 +38,17 @@ struct RootTabView: View {
                     Image(systemName: "gear")
                     Text("Setting")
                 }
+        }
+    }
+    
+    private func loginView() -> some View {
+        Link(destination: LoginManager.shared.requestCode()) {
+            Text("로그인")
+        }
+        .onOpenURL { url in
+            let code = url.absoluteString.components(separatedBy: "code=").last ?? ""
+            LoginManager.shared.requestAccessToken(with: code)
+            isLogin = true
         }
     }
 }

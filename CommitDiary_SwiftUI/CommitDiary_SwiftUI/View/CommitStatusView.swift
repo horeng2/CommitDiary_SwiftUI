@@ -13,6 +13,7 @@ struct CommitStatusView: View {
             content
                 .navigationTitle("활동")
         }
+        .navigationViewStyle(.stack)
     }
     
     private var content: some View {
