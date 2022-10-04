@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct SettingView: View {
-    @State var settingList = ["pink", "blue", "green", "yellow", "black"]
+    @State var settingList = [Color.red, Color.blue, Color.green, Color.yellow, Color.black]
     var body: some View {
         NavigationView {
             content
-                .navigationTitle("설정")
         }
+        .navigationViewStyle(.stack)
     }
     
     private var content: some View {
         VStack {
             settingListView()
+                .navigationTitle("설정")
         }
     }
 }
@@ -37,25 +38,50 @@ extension SettingView {
             userInfoView()
             Section {
                 ForEach(settingList, id: \.self) { color in
-                    settingRow(text: color)
+                    pickColorButtonView(color: color)
                 }
             } header: {
                 Text("컬러")
             }
             Section {
-                settingRow(text: "move to github")
+                moveButtonView()
             } header: {
                 Text("이동")
             }
             Section {
-                settingRow(text: "로그아웃", color: .red)
+                logoutButtonView()
+                    .onTapGesture {
+                        UserDefaults.standard.set(false, forKey: LoginManager.isLoginKey)
+                    }
             }
         }
     }
     
-    private func settingRow(text: String, color: Color? = nil) -> some View {
-        Text(text)
-            .foregroundColor(color)
+    private func pickColorButtonView(color: Color) -> some View {
+        Button {
+            print(color)
+        } label: {
+            Text(color.description)
+                .foregroundColor(.black)
+        }
+    }
+    
+    private func moveButtonView() -> some View {
+        Button {
+            print("move")
+        } label: {
+            Text("move to github")
+                .foregroundColor(.black)
+        }
+    }
+    
+    private func logoutButtonView() -> some View {
+        Button {
+            UserDefaults.standard.set(false, forKey: LoginManager.isLoginKey)
+        } label: {
+            Text("로그아웃")
+                .foregroundColor(.red)
+        }
     }
 }
 

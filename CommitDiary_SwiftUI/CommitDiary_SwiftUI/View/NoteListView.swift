@@ -27,6 +27,7 @@ struct NoteListView: View {
                 listContent
             }
         }
+        .navigationViewStyle(.stack)
     }
     
     private var emptyContent: some View {

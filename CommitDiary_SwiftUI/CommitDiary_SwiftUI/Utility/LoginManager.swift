@@ -10,6 +10,7 @@ import UIKit
 
 struct LoginManager {
     static let shared = LoginManager()
+    static let isLoginKey = "isLogin"
     
     private let clientId = "d7dbc87ea8c0b68452f7"
     private let clientSecret = "9fa2a43c208619ab8f7fb0201b1e3445d565a6cc"

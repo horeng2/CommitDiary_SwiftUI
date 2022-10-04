@@ -17,6 +17,7 @@ struct NoteDetailView: View {
         NavigationView {
             content
         }
+        .navigationViewStyle(.stack)
     }
     
     private var content: some View {

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RootTabView: View {
     @State var index = ViewIndex.commitStatusView.index
-    @State var isLogin = false
+    @AppStorage(LoginManager.isLoginKey) var isLogin = UserDefaults.standard.bool(forKey: LoginManager.isLoginKey) == true
     
     var body: some View {
         if isLogin {
@@ -48,7 +48,7 @@ extension RootTabView {
         .onOpenURL { url in
             let code = url.absoluteString.components(separatedBy: "code=").last ?? ""
             LoginManager.shared.requestAccessToken(with: code)
-            isLogin = true
+            UserDefaults.standard.set(true, forKey: LoginManager.isLoginKey)
         }
     }
 }
