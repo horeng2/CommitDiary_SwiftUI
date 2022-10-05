@@ -8,18 +8,14 @@
 import Foundation
 import Combine
 
-class APIProvider {
+class GithubNetwork {
     private let session: URLSession
     
     init(session: URLSession = URLSession.shared) {
         self.session = session
     }
     
-    func request(requestType: UserInfoRequest) async throws -> UserInfo {
-        guard let request = requestType.urlRequest else {
-            throw NetworkError.urlError
-        }
-            
+    func dataRequest(of request: URLRequest) async throws -> Data {
         guard let (data, response) = try? await session.data(for: request)
             else {
             throw NetworkError.invaildData
@@ -30,11 +26,23 @@ class APIProvider {
             let errorCode = String(describing: response)
             throw NetworkError.statusCodeError(code: errorCode)
         }
-            
+        
+        return data
+    }
+    
+    func getUserInfo(with token: String) async throws -> UserInfo {
+        guard let userInfoRequest = UserInfoRequest(token: token).urlRequest else {
+            throw NetworkError.urlError
+        }
+        
+        guard let data = try? await dataRequest(of: userInfoRequest) else {
+            throw NetworkError.invaildData
+        }
+        
         guard let userInfo = try? JSONDecoder().decode(UserInfo.self, from: data) else {
             throw NetworkError.parsingError(type: "UserInfo")
         }
-            
+        
         return userInfo
     }
 }
