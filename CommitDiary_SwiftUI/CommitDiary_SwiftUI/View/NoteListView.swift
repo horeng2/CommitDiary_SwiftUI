@@ -51,7 +51,7 @@ struct NoteListView: View {
 extension NoteListView {
     private func plusButtonView() -> some View {
         NavigationLink {
-            NoteDetailView(note: Note(), commitCount: 7)
+            NoteDetailView(note: Note(commitCount: 7))
         } label: {
             Image(systemName: "plus")
         }
@@ -68,7 +68,7 @@ extension NoteListView {
     
     private func makeNavigationLink(of note: Note) -> some View {
         NavigationLink {
-            NoteDetailView(note: note, commitCount: 7)
+            NoteDetailView(note: note)
         } label: {
             NoteRowView(title: note.title, commitCount: 5)
         }

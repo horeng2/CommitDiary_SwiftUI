@@ -12,12 +12,14 @@ struct Note {
     var title: String
     var date: Date
     var description: String
+    var commitCount: Int
     
     
-    init() {
+    init(commitCount: Int) {
         self.id = UUID()
         self.title = ""
         self.date = Date()
         self.description = ""
+        self.commitCount = commitCount
     }
 }

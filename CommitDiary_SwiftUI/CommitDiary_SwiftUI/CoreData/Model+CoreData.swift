@@ -16,6 +16,7 @@ extension Note {
         self.title = managedObject.title
         self.date = managedObject.date
         self.description = managedObject.noteDescription
+        self.commitCount = managedObject.commitCount
     }
     
     func store(in context: NSManagedObjectContext) {
@@ -26,6 +27,7 @@ extension Note {
         note.title = title
         note.date = date
         note.noteDescription = description
+        note.commitCount = commitCount
     }
     
     func update(of object: NSManagedObject) {

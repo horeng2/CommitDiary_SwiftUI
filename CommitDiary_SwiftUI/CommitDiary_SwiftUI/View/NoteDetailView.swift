@@ -11,7 +11,6 @@ struct NoteDetailView: View {
     @Environment(\.managedObjectContext) private var managedObjectContext
     @Environment(\.presentationMode) var presentationMode
     @State var note: Note
-    let commitCount: Int
     
     var body: some View {
         NavigationView {
@@ -40,7 +39,7 @@ extension NoteDetailView {
     }
     
     private func commitCountView() -> some View {
-        Text("오늘의 커밋은 \(commitCount)회!")
+        Text("오늘의 커밋은 \(note.commitCount)회!")
     }
     
     private func titleView() -> some View {
@@ -110,6 +109,6 @@ extension NoteDetailView {
 
 struct NoteDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        NoteDetailView(note: Note(), commitCount: 8)
+        NoteDetailView(note: Note(commitCount: 8))
     }
 }
