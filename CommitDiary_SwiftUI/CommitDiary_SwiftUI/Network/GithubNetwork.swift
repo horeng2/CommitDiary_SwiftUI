@@ -1,5 +1,5 @@
 //
-//  APIProvider.swift
+//  GithubNetwork.swift
 //  CommitDiary_SwiftUI
 //
 //  Created by 서녕 on 2022/10/04.
@@ -20,7 +20,6 @@ class GithubNetwork {
             else {
             throw NetworkError.invaildData
         }
-        
         guard let httpResponse = response as? HTTPURLResponse,
               (200...299).contains(httpResponse.statusCode) else {
             let errorCode = String(describing: response)
@@ -34,15 +33,38 @@ class GithubNetwork {
         guard let userInfoRequest = UserInfoRequest(token: token).urlRequest else {
             throw NetworkError.urlError
         }
-        
         guard let data = try? await dataRequest(of: userInfoRequest) else {
             throw NetworkError.invaildData
         }
-        
         guard let userInfo = try? JSONDecoder().decode(UserInfo.self, from: data) else {
             throw NetworkError.parsingError(type: "UserInfo")
         }
         
         return userInfo
+    }
+    
+    func getContributions(with userId: String) async throws -> [Contribution] {
+        guard let contributionRequest = ContributionsRequest(userId: userId).urlReauest else {
+            throw NetworkError.urlError
+        }
+        guard let data = try? await dataRequest(of: contributionRequest) else {
+            throw NetworkError.invaildData
+        }
+        guard let html = String(data: data, encoding: .utf8) else {
+            throw HTMLError.encodingError
+        }
+        
+        var contributionData = [Contribution]()
+        let classBlock = (try? HTMLParser.shared.searchClassBlock(html: html,
+                                                                  className: "js-calendar-graph-svg",
+                                                                  blockType: "svg")) ?? ""
+        do {
+            let inlineData = try HTMLParser.shared.searchInline(html: classBlock, inlineType: "rect")
+            contributionData = inlineData
+        } catch {
+            print(error)
+        }
+        
+        return contributionData
     }
 }
