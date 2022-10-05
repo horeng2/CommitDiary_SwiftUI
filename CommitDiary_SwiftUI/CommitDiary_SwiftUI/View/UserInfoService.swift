@@ -14,10 +14,8 @@ class UserInfoService: ObservableObject {
         guard let token = Keychain.read(key: LoginManager.tokenKey) else {
             return
         }
-        let apiProvider = APIProvider()
-        guard let info = try? await apiProvider.request(
-            requestType: UserInfoRequest(token: token)
-        ) else {
+        let githubNetwork = GithubNetwork()
+        guard let info = try? await githubNetwork.getUserInfo(with: token) else {
             return
         }
         DispatchQueue.main.async {
