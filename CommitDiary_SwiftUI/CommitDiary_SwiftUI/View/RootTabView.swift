@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct RootTabView: View {
+    @ObservedObject var contributionService: ContributionService
+    @ObservedObject var userInfoService: UserInfoService
     @State var index = ViewIndex.commitStatusView.index
     @AppStorage(LoginManager.isLoginKey) var isLogin = UserDefaults.standard.bool(forKey: LoginManager.isLoginKey) == true
     
     var body: some View {
-        if isLogin {
+        if contributionService.contributions.isEmpty {
+            Text("로딩뷰")
+        } else if isLogin {
             rootTabView()
         } else {
             loginView()
@@ -23,7 +27,7 @@ struct RootTabView: View {
 extension RootTabView {
     private func rootTabView() -> some View {
         TabView(selection: $index) {
-            CommitStatusView()
+            CommitStatusView(contributionService: contributionService)
                 .tabItem {
                     Image(systemName: "flame")
                     Text("Today")
@@ -33,7 +37,8 @@ extension RootTabView {
                     Image(systemName: "crown")
                     Text("Note")
                 }
-            SettingView()
+            SettingView(userInfo: $userInfoService.userInfo
+            )
                 .tabItem {
                     Image(systemName: "gear")
                     Text("Setting")
@@ -51,8 +56,8 @@ extension RootTabView {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        RootTabView()
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RootTabView()
+//    }
+//}

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingView: View {
-    @EnvironmentObject var userInfoService: UserInfoService
+    @Binding var userInfo: UserInfo
     @State var settingList = [Color.red, Color.blue, Color.green, Color.yellow, Color.black]
     
     var body: some View {
@@ -29,7 +29,7 @@ struct SettingView: View {
 extension SettingView {
     private func userInfoView() -> some View {
         HStack {
-            AsyncImage(url: URL(string: userInfoService.userInfo.profileImageUrl)) { image in
+            AsyncImage(url: URL(string: userInfo.profileImageUrl)) { image in
                 image.resizable()
             } placeholder: {
                 Color.white
@@ -38,8 +38,8 @@ extension SettingView {
             .clipShape(RoundedRectangle(cornerRadius: 25))
             
             VStack{
-                Text(userInfoService.userInfo.name)
-                Text(userInfoService.userInfo.id)
+                Text(userInfo.name)
+                Text(userInfo.id)
             }
         }
     }
@@ -98,6 +98,6 @@ extension SettingView {
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView()
+        SettingView(userInfo: .constant(UserInfo.mock))
     }
 }
