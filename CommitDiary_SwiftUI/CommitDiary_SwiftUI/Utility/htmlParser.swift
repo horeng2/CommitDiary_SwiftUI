@@ -11,74 +11,65 @@ struct HTMLParser {
     static var shared = HTMLParser()
     
     private func parseInline(html: [String], inlineType: String) -> [Contribution] {
-        let dateKey = "data-date="
-        let commitCountKey = "data-count="
+        let dateKey = "data-date"
+        let commitCountKey = "data-count"
         let levelKey = "data-level"
         
-        return html.map { inline -> Contribution in
-            let infos = inline.components(separatedBy: " ")
-            let date = infos.filter{ $0.contains(dateKey) }.first ?? ""
-            let commitCount = infos.filter{ $0.contains(commitCountKey) }.first ?? ""
-            let level = infos.filter{ $0.contains(levelKey) }.first ?? ""
+        let htmlElements = html.map{ $0.convertDictionary() }
+        let contributions =  htmlElements
+            .map { inline -> Contribution in
+                guard let date = inline[dateKey],
+                      let commitCount = inline[commitCountKey],
+                      let level = inline[levelKey] else {
+                    return Contribution.empty
+                }
+                return Contribution(date: date.stringToDate(),
+                                    commitCount: Int(commitCount) ?? 0,
+                                    level: CommitLevel(rawValue: Int(level) ?? 0) ?? .zero)
+            }
+        return contributions.sorted{ $0.date < $1.date }
+    }
+    
+    func searchClassBlock(html: String, className: String, blockTag: String) -> String {
+        var searchingPoint = html.startIndex
+        let searchingRange = html[searchingPoint..<html.endIndex]
+        
+        guard let startTagIndex = searchingRange.range(of: className),
+              let endTagIndex = searchingRange.range(of: "></\(blockTag)>") else {
+            return ""
+        }
+        
+        let startIndexOfBlock = html[startTagIndex].startIndex
+        let endIndexOfBlock = html[endTagIndex].startIndex
+        
+        let searchedBlock = html[startIndexOfBlock..<endIndexOfBlock]
+        searchingPoint = html[endTagIndex].endIndex
                 
-            let contribution = Contribution(date: date.stringToDate(),
-                                            commitCount: Int(commitCount) ?? 0,
-                                            level: CommitLevel(rawValue: Int(level) ?? 0) ?? .zero)
-            return contribution
-        }
+        return String(searchedBlock)
     }
     
-    func searchClassBlock(html: String, className: String, blockType: String) throws -> String {
-        var block = ""
-        var searchPoint = html.startIndex
-        
-        while searchPoint < html.endIndex {
-            let searchRange = html[searchPoint..<html.endIndex]
-            guard let blockStart = searchRange.range(of: className),
-                  let blockEnd = searchRange.range(of: "></\(blockType)>") else {
-                throw HTMLError.classInputError
-            }
-            let startIndex = html[blockStart].startIndex
-            let endIndex = html[blockEnd].startIndex
-            
-            let searchedBlock = html[startIndex..<endIndex]
-            searchPoint = html[blockEnd].endIndex
-            
-            block = String(searchedBlock)
-        }
-        return block
-    }
-    
-    func searchInline(html: String, inlineType: String) throws -> [Contribution] {
+    func searchInline(html: String, inlineTag: String) -> [Contribution] {
         var inlines = [String]()
-        var searchPoint = html.startIndex
+        var searchingPoint = html.startIndex
         
-        while searchPoint < html.endIndex {
-            let searchRange = html[searchPoint..<html.endIndex]
-            guard let inlineStart = searchRange.range(of: "\(inlineType) "),
-                  let inlineEnd = searchRange.range(of: "></\(inlineType)>") else {
-                throw HTMLError.inlineInputError
-            }
-            let startIndex = html[inlineStart].endIndex
-            let endIndex = html[inlineEnd].startIndex
-    
-            let inline = html[startIndex..<endIndex]
-            searchPoint = html[inlineEnd].endIndex
+        while searchingPoint < html.endIndex {
+            let searchingRange = html[searchingPoint..<html.endIndex]
             
-            inlines.append(String(inline))
+            guard let startTagIndex = searchingRange.range(of: "\(inlineTag)"),
+                  let endTagIndex = searchingRange.range(of: "></\(inlineTag)>") else {
+                return parseInline(html: inlines, inlineType: inlineTag)
+            }
+            
+            let classStartIndex = html[startTagIndex].endIndex
+            let classEndIndex = html[endTagIndex].startIndex
+            
+            let searchedInline = html[classStartIndex..<classEndIndex]
+            searchingPoint = html[endTagIndex].endIndex
+            
+            inlines.append(String(searchedInline))
         }
-        
-        return parseInline(html: inlines, inlineType: inlineType)
+        return parseInline(html: inlines, inlineType: inlineTag)
     }
-
-    let blockTags: [String] = [
-        "html", "head", "body", "frameset", "script", "noscript", "style", "meta", "link", "title", "frame",
-        "noframes", "section", "nav", "aside", "hgroup", "header", "footer", "p", "h1", "h2", "h3", "h4", "h5", "h6",
-        "ul", "ol", "pre", "div", "blockquote", "hr", "address", "figure", "figcaption", "form", "fieldset", "ins",
-        "del", "s", "dl", "dt", "dd", "li", "table", "caption", "thead", "tfoot", "tbody", "colgroup", "col", "tr", "th",
-        "td", "video", "audio", "canvas", "details", "menu", "plaintext", "template", "article", "main",
-        "svg", "math"
-    ]
 }
 
 enum HTMLError: Error {
@@ -87,7 +78,35 @@ enum HTMLError: Error {
     case encodingError
 }
 
+extension String {
+    func convertDictionary() -> [String: String] {
+        let elements = self.components(separatedBy: " ")
+            .map{ $0.components(separatedBy: ["\"", "="])
+                .filter{ !$0.isEmpty }
+            }
+        var htmlElements = [String: String]()
+        
+        elements.forEach{ element in
+            guard let key = element.first,
+                  let value = element.last else {
+                return
+            }
+            htmlElements.updateValue(value, forKey: key)
+        }
+        return htmlElements
+    }
+}
+
 //기능 구현 뒤 시도해볼 코드
+
+//let blockTags: [String] = [
+//    "html", "head", "body", "frameset", "script", "noscript", "style", "meta", "link", "title", "frame",
+//    "noframes", "section", "nav", "aside", "hgroup", "header", "footer", "p", "h1", "h2", "h3", "h4", "h5", "h6",
+//    "ul", "ol", "pre", "div", "blockquote", "hr", "address", "figure", "figcaption", "form", "fieldset", "ins",
+//    "del", "s", "dl", "dt", "dd", "li", "table", "caption", "thead", "tfoot", "tbody", "colgroup", "col", "tr", "th",
+//    "td", "video", "audio", "canvas", "details", "menu", "plaintext", "template", "article", "main",
+//    "svg", "math"
+//]
 
 //class Node {
 //    let tag: String

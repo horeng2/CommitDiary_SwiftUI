@@ -54,16 +54,12 @@ class GithubNetwork {
             throw HTMLError.encodingError
         }
         
-        var contributionData = [Contribution]()
-        let classBlock = (try? HTMLParser.shared.searchClassBlock(html: html,
-                                                                  className: "js-calendar-graph-svg",
-                                                                  blockType: "svg")) ?? ""
-        do {
-            let inlineData = try HTMLParser.shared.searchInline(html: classBlock, inlineType: "rect")
-            contributionData = inlineData
-        } catch {
-            print(error)
-        }
+        let classBlock = HTMLParser.shared.searchClassBlock(html: html,
+                                                            className: "js-calendar-graph-svg",
+                                                            blockTag: "svg")
+        
+        let contributionData = HTMLParser.shared.searchInline(html: classBlock, inlineTag: "rect")
+        
         
         return contributionData
     }
