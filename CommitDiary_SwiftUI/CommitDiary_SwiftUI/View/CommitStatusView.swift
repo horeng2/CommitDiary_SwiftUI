@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CommitStatusView: View {
+    @ObservedObject var contributionService: ContributionService
     var body: some View {
         NavigationView {
             content
@@ -18,6 +19,7 @@ struct CommitStatusView: View {
     
     private var content: some View {
         VStack {
+            ContributionView(cellsColor: contributionService.setCellsColor(columnsCount: 20))
             todaysCommitView()
             commitHistoryView()
             commitGraphStatusView()
@@ -29,7 +31,7 @@ extension CommitStatusView {
     private func todaysCommitView() -> some View {
         VStack {
             Text("오늘의 커밋")
-            Text("19회")
+            Text("10")
         }
     }
     
@@ -41,7 +43,7 @@ extension CommitStatusView {
             }
             VStack {
                 Text("최고기록")
-                Text("연속12일")
+                Text("연속\(contributionService.bestCommit)일")
             }
         }
     }
@@ -50,7 +52,7 @@ extension CommitStatusView {
         VStack {
             commitGraphView()
             HStack{
-                Text("0일")
+                Text("7일")
                 Spacer()
                 Text("12일")
             }
@@ -70,8 +72,8 @@ extension CommitStatusView {
     }
 }
 
-struct CommitStatusView_Previews: PreviewProvider {
-    static var previews: some View {
-        CommitStatusView()
-    }
-}
+//struct CommitStatusView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CommitStatusView()
+//    }
+//}
