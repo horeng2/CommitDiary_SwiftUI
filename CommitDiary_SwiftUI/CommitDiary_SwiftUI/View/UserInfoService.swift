@@ -20,6 +20,7 @@ class UserInfoService: ObservableObject {
         }
         DispatchQueue.main.async {
             self.userInfo = info
+            UserDefaults.standard.set(info.id, forKey: "userId")
         }
     }
 }
