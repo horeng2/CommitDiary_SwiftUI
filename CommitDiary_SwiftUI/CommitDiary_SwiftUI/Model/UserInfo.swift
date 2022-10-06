@@ -34,4 +34,13 @@ extension UserInfo {
                  githubUrl: "",
                  blogUrl: "")
     }
+    
+    static var mock: UserInfo {
+        UserInfo(id: "horeng2",
+                 name: "김선영",
+                 bio: "안녕하세요",
+                 profileImageUrl: "https://avatars.githubusercontent.com/u/87305744?v=4",
+                 githubUrl: "https://github.com/horeng2",
+                 blogUrl: "https://velog.io/@horeng2")
+    }
 }
