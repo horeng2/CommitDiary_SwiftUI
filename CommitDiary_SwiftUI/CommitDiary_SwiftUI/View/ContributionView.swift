@@ -8,13 +8,28 @@
 import SwiftUI
 
 struct ContributionView: View {
+    let colorCells: [[Color]]
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            CommitChart(columns: 20, spacing: 3.0) { row, column in
+                if row >= colorCells[column].count {
+                    Color("background").modifier(CalendarChartCell())
+                } else {
+                    colorCells[column][row].modifier(CalendarChartCell())
+                }
+            }
+            .frame(height: 120)
+            .padding()
     }
 }
 
-struct ContributionView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContributionView()
+struct CalendarChartCell: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .overlay(
+                Rectangle()
+                    .stroke(Color.clear, lineWidth: 1.0)
+            )
+            .cornerRadius(1.0)
     }
 }
