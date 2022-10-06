@@ -78,25 +78,6 @@ enum HTMLError: Error {
     case encodingError
 }
 
-extension String {
-    func convertDictionary() -> [String: String] {
-        let elements = self.components(separatedBy: " ")
-            .map{ $0.components(separatedBy: ["\"", "="])
-                .filter{ !$0.isEmpty }
-            }
-        var htmlElements = [String: String]()
-        
-        elements.forEach{ element in
-            guard let key = element.first,
-                  let value = element.last else {
-                return
-            }
-            htmlElements.updateValue(value, forKey: key)
-        }
-        return htmlElements
-    }
-}
-
 //기능 구현 뒤 시도해볼 코드
 
 //let blockTags: [String] = [

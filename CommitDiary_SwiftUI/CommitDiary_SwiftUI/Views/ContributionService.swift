@@ -30,7 +30,6 @@ class ContributionService: ObservableObject {
         }
     }
     
-    
     func bestCommitCount() {
         DispatchQueue.main.async {
             self.bestCommit = self.contributions.map{ $0.commitCount }.max() ?? 0
