@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ContributionView: View {
-    let colorCells: [[Color]]
+    let cellsColor: [[Color]]
 
     var body: some View {
             CommitChart(columns: 20, spacing: 3.0) { row, column in
-                if row >= colorCells[column].count {
-                    Color("background").modifier(CalendarChartCell())
+                if row >= cellsColor[column].count {
+                    Color("background").modifier(ContributionCell())
                 } else {
-                    colorCells[column][row].modifier(CalendarChartCell())
+                    cellsColor[column][row].modifier(ContributionCell())
                 }
             }
             .frame(height: 120)
@@ -23,7 +23,7 @@ struct ContributionView: View {
     }
 }
 
-struct CalendarChartCell: ViewModifier {
+struct ContributionCell: ViewModifier {
     func body(content: Content) -> some View {
         content
             .overlay(
