@@ -31,19 +31,19 @@ extension CommitStatusView {
     private func todaysCommitView() -> some View {
         VStack {
             Text("오늘의 커밋")
-            Text("10")
+            Text("\(contributionService.todaysCommit)회")
         }
     }
     
     private func commitHistoryView() -> some View {
         HStack {
             VStack {
-                Text("연속기록")
-                Text("7일")
+                Text("연속 기록")
+                Text("\(contributionService.currentContinuousCommit)일")
             }
             VStack {
-                Text("최고기록")
-                Text("연속\(contributionService.bestCommit)일")
+                Text("최장 연속 기록")
+                Text("연속 \(contributionService.bestContinuousCommit)일")
             }
         }
     }
@@ -52,9 +52,9 @@ extension CommitStatusView {
         VStack {
             commitGraphView()
             HStack{
-                Text("7일")
+                Text("\(contributionService.currentContinuousCommit)일")
                 Spacer()
-                Text("12일")
+                Text("\(contributionService.bestContinuousCommit)일")
             }
         }
         .padding(.horizontal, 30)
@@ -62,12 +62,15 @@ extension CommitStatusView {
     
     private func commitGraphView() -> some View {
         ZStack(alignment: .leading) {
+            let graphWidth: CGFloat = 200
+            let currentContinuousCommit = CGFloat(contributionService.currentContinuousCommit)
+            let bestContinuousCommit = CGFloat(contributionService.bestContinuousCommit)
+            Rectangle()
+                .frame(height: currentContinuousCommit / bestContinuousCommit * graphWidth, alignment: .leading)
+                .foregroundColor(.red)
             Rectangle()
                 .stroke(.black, lineWidth: 3)
-                .frame(height: 20, alignment: .leading)
-            Rectangle()
-                .background(.red)
-                .frame(width: 200, height: 20,  alignment: .leading)
+                .frame(height: 20,  alignment: .leading)
         }
     }
 }

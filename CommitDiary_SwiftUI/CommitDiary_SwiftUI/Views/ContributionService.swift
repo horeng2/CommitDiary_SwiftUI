@@ -10,13 +10,16 @@ import SwiftUI
 
 class ContributionService: ObservableObject {
     @Published var contributions = [Contribution]()
-    @Published var bestCommit = 0
+    @Published var todaysCommit = 0
+    @Published var currentContinuousCommit = 0
+    @Published var bestContinuousCommit = 0
     
     init() {
         let userId = UserDefaults.standard.string(forKey: "userId") ?? ""
         Task {
             await loadContribution(with: userId)
-            bestCommitCount()
+            todaysCommitCount()
+            continuousCommitCount()
         }
     }
     
@@ -30,14 +33,23 @@ class ContributionService: ObservableObject {
         }
     }
     
-    func bestCommitCount() {
+    func todaysCommitCount() {
         DispatchQueue.main.async {
-            self.bestCommit = self.contributions.map{ $0.commitCount }.max() ?? 0
+            self.todaysCommit = self.contributions.last?.commitCount ?? 0
         }
     }
     
     func continuousCommitCount() {
-        
+        DispatchQueue.main.async {
+            let continuousGroup = self.contributions.map{ String($0.level.rawValue) }.joined().split(separator: "0")
+            self.bestContinuousCommit = continuousGroup.map{ $0.count }.max() ?? 0
+            
+            if self.contributions.last?.commitCount == 0 {
+                self.currentContinuousCommit = 0
+            } else {
+                self.currentContinuousCommit = continuousGroup.last?.count ?? 0
+            }
+        }
     }
 
     func setCellsColor(columnsCount: Int) -> [[Color]] {

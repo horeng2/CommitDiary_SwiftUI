@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct RootTabView: View {
+    @State var index = ViewIndex.commitStatusView.index
+    @AppStorage(LoginManager.isLoginKey)
+    var isLogin = UserDefaults.standard.bool(forKey: LoginManager.isLoginKey) == true
     @ObservedObject var contributionService: ContributionService
     @ObservedObject var userInfoService: UserInfoService
-    @State var index = ViewIndex.commitStatusView.index
-    @AppStorage(LoginManager.isLoginKey) var isLogin = UserDefaults.standard.bool(forKey: LoginManager.isLoginKey) == true
     
     var body: some View {
         if contributionService.contributions.isEmpty {
