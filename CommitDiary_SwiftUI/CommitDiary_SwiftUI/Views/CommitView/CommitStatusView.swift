@@ -21,32 +21,66 @@ struct CommitStatusView: View {
     
     private var content: some View {
         VStack {
-            ContributionView(cellsColor: contributionService.setCellsColor(theme: colorTheme, columnsCount: 20))
+            contributionView()
+            Spacer()
             todaysCommitView()
-            commitHistoryView()
+            Spacer()
+            currentContinuousCommitView()
+            Spacer()
+            bestContinuousCommitView()
+            Spacer()
             commitGraphStatusView()
+            Spacer()
         }
     }
 }
 
 extension CommitStatusView {
+    private func contributionView() -> some View {
+        VStack {
+            HStack {
+                Text("CONTRIBUTIONS")
+                    .font(.system(size: 20, weight: .medium))
+                    .foregroundColor(.gray)
+                    .padding(.horizontal)
+                Spacer()
+            }
+            ContributionView(cellsColor: contributionService.setCellsColor(theme: colorTheme, columnsCount: 20))
+        }
+        .padding(.top, 30)
+    }
+    
     private func todaysCommitView() -> some View {
         VStack {
             Text("오늘의 커밋")
+                .font(.system(size: 20, weight: .bold))
+                .foregroundColor(.gray)
             Text("\(contributionService.todaysCommit)회")
+                .font(.system(size: 25, weight: .medium))
+                .foregroundColor(.black)
         }
     }
     
-    private func commitHistoryView() -> some View {
-        HStack {
-            VStack {
-                Text("연속 기록")
-                Text("\(contributionService.currentContinuousCommit)일")
-            }
-            VStack {
-                Text("최장 연속 기록")
-                Text("연속 \(contributionService.bestContinuousCommit)일")
-            }
+    private func currentContinuousCommitView() -> some View {
+        VStack {
+            Text("연속 기록")
+                .font(.system(size: 20, weight: .bold))
+                .foregroundColor(.gray)
+            Text("\(contributionService.currentContinuousCommit)일")
+                .font(.system(size: 25, weight: .medium))
+                .foregroundColor(.black)
+        }
+        
+    }
+    
+    private func bestContinuousCommitView() -> some View {
+        VStack {
+            Text("최장 연속 기록")
+                .font(.system(size: 20, weight: .bold))
+                .foregroundColor(.gray)
+            Text("연속 \(contributionService.bestContinuousCommit)일")
+                .font(.system(size: 25, weight: .medium))
+                .foregroundColor(.black)
         }
     }
     
@@ -55,11 +89,15 @@ extension CommitStatusView {
             commitGraphView()
             HStack{
                 Text("0일")
+                    .font(.system(size: 20, weight: .medium))
+                    .foregroundColor(.gray)
                 Spacer()
                 Text("\(contributionService.bestContinuousCommit)일")
+                    .font(.system(size: 20, weight: .medium))
+                    .foregroundColor(.gray)
             }
         }
-        .padding(.horizontal, 30)
+        .padding(.horizontal)
     }
     
     private func commitGraphView() -> some View {
@@ -71,7 +109,7 @@ extension CommitStatusView {
                 .frame(width: currentContinuousCommit / bestContinuousCommit * graphWidth,
                        height: 20,
                        alignment: .leading)
-                .foregroundColor(.red)
+                .foregroundColor(colorTheme.levelfourColor)
             Rectangle()
                 .stroke(.black, lineWidth: 2)
                 .frame(height: 20,  alignment: .leading)
@@ -79,8 +117,8 @@ extension CommitStatusView {
     }
 }
 
-//struct CommitStatusView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CommitStatusView()
-//    }
-//}
+struct CommitStatusView_Previews: PreviewProvider {
+    static var previews: some View {
+        CommitStatusView(contributionService: ContributionService(), colorTheme: .constant(Theme.defaultGreen))
+    }
+}

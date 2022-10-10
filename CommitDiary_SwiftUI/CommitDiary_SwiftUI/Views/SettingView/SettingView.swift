@@ -9,9 +9,10 @@ import SwiftUI
 
 struct SettingView: View {
     @Environment(\.openURL) var openURL
-    @Binding var userInfo: UserInfo
-    @State var settingList = [Color.red, Color.blue, Color.green, Color.yellow, Color.black]
+    @State var tapColorThemeButton = false
     @State var showingMoveGithubAlert = false
+    @State var tapLogoutButton = false
+    @Binding var userInfo: UserInfo
     @Binding var index: Int
     @Binding var colorTheme: Theme
     
@@ -31,23 +32,6 @@ struct SettingView: View {
 }
 
 extension SettingView {
-    private func userInfoView() -> some View {
-        HStack {
-            AsyncImage(url: URL(string: userInfo.profileImageUrl)) { image in
-                image.resizable()
-            } placeholder: {
-                Color.white
-            }
-            .frame(width: 100, height: 100)
-            .clipShape(RoundedRectangle(cornerRadius: 25))
-            
-            VStack{
-                Text(userInfo.name)
-                Text(userInfo.id)
-            }
-        }
-    }
-    
     private func settingListView() -> some View {
         List {
             userInfoView()
@@ -56,7 +40,7 @@ extension SettingView {
                     pickColorButtonView(theme: theme)
                 }
             } header: {
-                Text("컬러")
+                Text("테마 색상")
             }
             Section {
                 moveButtonView()
@@ -72,18 +56,40 @@ extension SettingView {
         }
     }
     
-    private func pickColorButtonView(theme: Theme) -> some View {
-        Button {
-            colorTheme = theme
-            UserDefaults.standard.set(theme.rawValue, forKey: "theme")
-        } label: {
-            Text(theme.rawValue)
-                .foregroundColor(.black)
+    private func userInfoView() -> some View {
+        HStack {
+            AsyncImage(url: URL(string: userInfo.profileImageUrl)) { image in
+                image.resizable()
+            } placeholder: {
+                Image(systemName: "person")
+                    .resizable()
+                    .frame(width: 30, height: 30)
+            }
+            .frame(width: 100, height: 100)
+            .clipShape(RoundedRectangle(cornerRadius: 50))
+            
+            VStack(alignment: .leading) {
+                Text(userInfo.name)
+                    .fontWeight(.bold)
+                Text(userInfo.id)
+                    .fontWeight(.bold)
+            }
+            .padding(.horizontal)
         }
     }
     
+    private func pickColorButtonView(theme: Theme) -> some View {
+        Button(theme.rawValue) {
+            tapColorThemeButton = true
+            colorTheme = theme
+            UserDefaults.standard.set(theme.rawValue, forKey: "theme")
+        }
+        .foregroundColor(.black)
+        .alert("테마가 변경되었습니다!", isPresented: $tapColorThemeButton) {}
+    }
+    
     private func moveButtonView() -> some View {
-        Button("move to github") {
+        Button("Github로 이동") {
             showingMoveGithubAlert = true
             index = ViewIndex.settingView.index
         }
@@ -97,17 +103,21 @@ extension SettingView {
     }
     
     private func logoutButtonView() -> some View {
-        Button {
-            UserDefaults.standard.set(false, forKey: LoginManager.isLoginKey)
-        } label: {
-            Text("로그아웃")
-                .foregroundColor(.red)
+        Button("로그아웃") {
+            tapLogoutButton = true
+        }
+        .foregroundColor(.red)
+        .alert("로그아웃하시겠습니까?", isPresented: $tapLogoutButton) {
+            Button("취소", role: .cancel) {}
+            Button("확인", role: .destructive) {
+                UserDefaults.standard.set(false, forKey: LoginManager.isLoginKey)
+            }
         }
     }
 }
 
-//struct SettingView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SettingView(userInfo: .constant(UserInfo.mock))
-//    }
-//}
+struct SettingView_Previews: PreviewProvider {
+    static var previews: some View {
+        SettingView(userInfo: .constant(UserInfo.mock), index: .constant(4), colorTheme: .constant(.defaultGreen))
+    }
+}

@@ -27,7 +27,7 @@ struct NoteRowView: View {
 
 extension NoteRowView {
     private func noteInfoView() -> some View {
-        VStack {
+        VStack(alignment: .leading) {
             Text(date.toString())
             Text(title)
         }
@@ -38,8 +38,8 @@ extension NoteRowView {
     }
 }
 
-//struct NoteRowView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NoteRowView(title: "title", date: Date(), commitCount: 5)
-//    }
-//}
+struct NoteRowView_Previews: PreviewProvider {
+    static var previews: some View {
+        NoteRowView(title: "title", date: Date(), commitCount: 5)
+    }
+}

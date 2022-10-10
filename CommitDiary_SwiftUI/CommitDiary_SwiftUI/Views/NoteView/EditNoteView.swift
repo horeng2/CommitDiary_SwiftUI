@@ -112,8 +112,8 @@ extension EditNoteView {
     }
 }
 
-//struct EditNoteView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EditNoteView(note: Note(commitCount: 8))
-//    }
-//}
+struct EditNoteView_Previews: PreviewProvider {
+    static var previews: some View {
+        EditNoteView(note: Note(commitCount: 8), isModifyMode: true)
+    }
+}

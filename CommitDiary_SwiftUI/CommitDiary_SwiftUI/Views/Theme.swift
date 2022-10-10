@@ -9,11 +9,11 @@ import Foundation
 import SwiftUI
 
 enum Theme: String, CaseIterable {
-    case defaultGreen
-    case blue
-    case orange
-    case pink
-    case black
+    case defaultGreen = "초록"
+    case blue = "파랑"
+    case orange = "주황"
+    case pink = "분홍"
+    case black = "검정"
     
     func colorSet(by level: CommitLevel) -> Color {
         switch level {

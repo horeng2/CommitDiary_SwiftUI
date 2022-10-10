@@ -91,8 +91,9 @@ extension NoteListView {
     }
 }
 
-//struct NoteListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NoteListView()
-//    }
-//}
+struct NoteListView_Previews: PreviewProvider {
+    static var previews: some View {
+        let contributionService = ContributionService()
+        NoteListView(contributionService: contributionService)
+    }
+}

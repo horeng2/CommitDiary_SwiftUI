@@ -60,8 +60,10 @@ extension RootTabView {
     }
 }
 
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RootTabView()
-//    }
-//}
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        let contributionService = ContributionService()
+        let userInfoservice = UserInfoService()
+        RootTabView(contributionService: contributionService, userInfoService: userInfoservice)
+    }
+}
