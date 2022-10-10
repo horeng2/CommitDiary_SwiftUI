@@ -33,7 +33,7 @@ extension RootTabView {
                     Image(systemName: "flame")
                     Text("Today")
                 }
-            NoteListView()
+            NoteListView(contributionService: contributionService)
                 .tabItem {
                     Image(systemName: "crown")
                     Text("Note")

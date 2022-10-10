@@ -9,6 +9,7 @@ import SwiftUI
 import CoreData
 
 struct NoteListView: View {
+    @ObservedObject var contributionService: ContributionService
     @Environment(\.managedObjectContext) private var managedObjectContext
     @FetchRequest(
       entity: NoteEntity.entity(),
@@ -51,7 +52,8 @@ struct NoteListView: View {
 extension NoteListView {
     private func plusButtonView() -> some View {
         NavigationLink {
-            NoteDetailView(note: Note(commitCount: 7))
+            EditNoteView(note: Note(commitCount: contributionService.todaysCommit),
+                         isModifyMode: false)
         } label: {
             Image(systemName: "plus")
         }
@@ -68,9 +70,9 @@ extension NoteListView {
     
     private func makeNavigationLink(of note: Note) -> some View {
         NavigationLink {
-            NoteDetailView(note: note)
+            EditNoteView(note: note, isModifyMode: true)
         } label: {
-            NoteRowView(title: note.title, commitCount: 5)
+            NoteRowView(title: note.title, commitCount: note.commitCount)
         }
     }
     
@@ -83,8 +85,8 @@ extension NoteListView {
     }
 }
 
-struct NoteListView_Previews: PreviewProvider {
-    static var previews: some View {
-        NoteListView()
-    }
-}
+//struct NoteListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NoteListView()
+//    }
+//}

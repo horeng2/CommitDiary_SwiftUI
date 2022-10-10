@@ -52,7 +52,7 @@ extension CommitStatusView {
         VStack {
             commitGraphView()
             HStack{
-                Text("\(contributionService.currentContinuousCommit)일")
+                Text("0일")
                 Spacer()
                 Text("\(contributionService.bestContinuousCommit)일")
             }
@@ -66,10 +66,12 @@ extension CommitStatusView {
             let currentContinuousCommit = CGFloat(contributionService.currentContinuousCommit)
             let bestContinuousCommit = CGFloat(contributionService.bestContinuousCommit)
             Rectangle()
-                .frame(height: currentContinuousCommit / bestContinuousCommit * graphWidth, alignment: .leading)
+                .frame(width: currentContinuousCommit / bestContinuousCommit * graphWidth,
+                       height: 20,
+                       alignment: .leading)
                 .foregroundColor(.red)
             Rectangle()
-                .stroke(.black, lineWidth: 3)
+                .stroke(.black, lineWidth: 2)
                 .frame(height: 20,  alignment: .leading)
         }
     }

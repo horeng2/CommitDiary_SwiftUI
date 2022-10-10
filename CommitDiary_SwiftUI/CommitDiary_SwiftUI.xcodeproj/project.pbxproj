@@ -19,7 +19,7 @@
 		486EAA4528EA229900D86DA2 /* NoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4428EA229900D86DA2 /* NoteListView.swift */; };
 		486EAA4728EA231200D86DA2 /* NoteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4628EA231200D86DA2 /* NoteRowView.swift */; };
 		486EAA4928EA282100D86DA2 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4828EA282100D86DA2 /* SettingView.swift */; };
-		486EAA4C28EA2CFE00D86DA2 /* NoteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4B28EA2CFE00D86DA2 /* NoteDetailView.swift */; };
+		486EAA4C28EA2CFE00D86DA2 /* EditNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4B28EA2CFE00D86DA2 /* EditNoteView.swift */; };
 		486EAA4E28EAB44000D86DA2 /* Extension+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4D28EAB44000D86DA2 /* Extension+View.swift */; };
 		486EAA5028EAED5C00D86DA2 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4F28EAED5C00D86DA2 /* Note.swift */; };
 		486EAA5228EAF41B00D86DA2 /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA5128EAF41B00D86DA2 /* Extension+Date.swift */; };
@@ -78,7 +78,7 @@
 		486EAA4428EA229900D86DA2 /* NoteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListView.swift; sourceTree = "<group>"; };
 		486EAA4628EA231200D86DA2 /* NoteRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRowView.swift; sourceTree = "<group>"; };
 		486EAA4828EA282100D86DA2 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
-		486EAA4B28EA2CFE00D86DA2 /* NoteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailView.swift; sourceTree = "<group>"; };
+		486EAA4B28EA2CFE00D86DA2 /* EditNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteView.swift; sourceTree = "<group>"; };
 		486EAA4D28EAB44000D86DA2 /* Extension+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+View.swift"; sourceTree = "<group>"; };
 		486EAA4F28EAED5C00D86DA2 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		486EAA5128EAF41B00D86DA2 /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
@@ -266,7 +266,7 @@
 			children = (
 				486EAA4428EA229900D86DA2 /* NoteListView.swift */,
 				486EAA4628EA231200D86DA2 /* NoteRowView.swift */,
-				486EAA4B28EA2CFE00D86DA2 /* NoteDetailView.swift */,
+				486EAA4B28EA2CFE00D86DA2 /* EditNoteView.swift */,
 			);
 			path = NoteView;
 			sourceTree = "<group>";
@@ -430,7 +430,7 @@
 				486EAA8228EDB5A900D86DA2 /* ContributionService.swift in Sources */,
 				486EAA6F28EC3D4200D86DA2 /* NetworkError.swift in Sources */,
 				4884571E28EF3724007269F3 /* ContributionView.swift in Sources */,
-				486EAA4C28EA2CFE00D86DA2 /* NoteDetailView.swift in Sources */,
+				486EAA4C28EA2CFE00D86DA2 /* EditNoteView.swift in Sources */,
 				486EAA7C28ED6AD300D86DA2 /* ContributionsRequest.swift in Sources */,
 				486EAA7228EC544600D86DA2 /* Keychain.swift in Sources */,
 				486EAA4528EA229900D86DA2 /* NoteListView.swift in Sources */,

@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-struct NoteDetailView: View {
+struct EditNoteView: View {
     @Environment(\.managedObjectContext) private var managedObjectContext
     @Environment(\.presentationMode) var presentationMode
     @State var note: Note
+    @State var isModifyMode: Bool
     
     var body: some View {
         NavigationView {
@@ -31,7 +32,7 @@ struct NoteDetailView: View {
     }
 }
 
-extension NoteDetailView {
+extension EditNoteView {
     private func dateView() -> some View {
         Text(note.date.longDateString())
                     .font(.system(size: 24))
@@ -107,8 +108,8 @@ extension NoteDetailView {
     }
 }
 
-struct NoteDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        NoteDetailView(note: Note(commitCount: 8))
-    }
-}
+//struct EditNoteView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EditNoteView(note: Note(commitCount: 8))
+//    }
+//}
