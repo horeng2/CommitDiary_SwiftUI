@@ -30,9 +30,14 @@ extension Note {
         note.commitCount = commitCount
     }
     
-    func update(of object: NSManagedObject) {
-        object.setValue(title, forKey: NoteEntity.titleKey)
-        object.setValue(date, forKey: NoteEntity.dateKey)
-        object.setValue(description, forKey: NoteEntity.noteDescriptionKey)
+    func update(_ note: Note, in context: NSManagedObjectContext) {
+        let fetchRequest =  NoteEntity.newFetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id = %@", note.id)
+        guard let updatedObject = try? context.fetch(fetchRequest).first else {
+            return
+        }
+        updatedObject.setValue(title, forKey: NoteEntity.titleKey)
+        updatedObject.setValue(date, forKey: NoteEntity.dateKey)
+        updatedObject.setValue(description, forKey: NoteEntity.noteDescriptionKey)
     }
 }

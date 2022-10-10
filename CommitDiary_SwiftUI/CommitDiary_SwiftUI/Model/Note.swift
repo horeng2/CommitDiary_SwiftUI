@@ -8,7 +8,7 @@
 import Foundation
 
 struct Note {
-    var id: UUID
+    var id: String
     var title: String
     var date: Date
     var description: String
@@ -16,7 +16,7 @@ struct Note {
     
     
     init(commitCount: Int) {
-        self.id = UUID()
+        self.id = UUID().uuidString
         self.title = ""
         self.date = Date()
         self.description = ""
