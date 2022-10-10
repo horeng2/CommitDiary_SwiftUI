@@ -15,7 +15,7 @@ struct RootTabView: View {
     @ObservedObject var userInfoService: UserInfoService
     
     var body: some View {
-        if contributionService.contributions.isEmpty {
+        if contributionService.contributions.isEmpty && isLogin {
             Text("로딩뷰")
         } else if isLogin {
             rootTabView()

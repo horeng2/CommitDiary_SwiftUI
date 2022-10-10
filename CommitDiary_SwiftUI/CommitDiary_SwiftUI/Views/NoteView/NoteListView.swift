@@ -10,6 +10,9 @@ import CoreData
 
 struct NoteListView: View {
     @ObservedObject var contributionService: ContributionService
+    var didSave =  NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
+    @State var refreshID = UUID()
+    
     @Environment(\.managedObjectContext) private var managedObjectContext
     @FetchRequest(
       entity: NoteEntity.entity(),
@@ -17,8 +20,7 @@ struct NoteListView: View {
         NSSortDescriptor(keyPath: \NoteEntity.id, ascending: true)
       ]
     ) var notes: FetchedResults<NoteEntity>
-    
-    @State var isShowNoteDetailView = false
+
     
     var body: some View {
         NavigationView {
@@ -72,7 +74,11 @@ extension NoteListView {
         NavigationLink {
             EditNoteView(note: note, isModifyMode: true)
         } label: {
-            NoteRowView(title: note.title, commitCount: note.commitCount)
+            NoteRowView(title: note.title, date: note.date, commitCount: note.commitCount)
+        }
+        .id(refreshID)
+        .onReceive(self.didSave) { _ in
+            self.refreshID = UUID()
         }
     }
     

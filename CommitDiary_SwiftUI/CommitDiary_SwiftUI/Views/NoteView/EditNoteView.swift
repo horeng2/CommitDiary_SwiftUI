@@ -34,7 +34,7 @@ struct EditNoteView: View {
 
 extension EditNoteView {
     private func dateView() -> some View {
-        Text(note.date.longDateString())
+        Text(note.date.toString())
                     .font(.system(size: 24))
                     .foregroundColor(.black)
     }
@@ -84,7 +84,11 @@ extension EditNoteView {
             }
             
             Button {
-                note.store(in: managedObjectContext)
+                if isModifyMode {
+                    note.update(note, in: managedObjectContext)
+                } else {
+                    note.store(in: managedObjectContext)
+                }
                 saveContext()
                 self.presentationMode.wrappedValue.dismiss()
             } label: {
