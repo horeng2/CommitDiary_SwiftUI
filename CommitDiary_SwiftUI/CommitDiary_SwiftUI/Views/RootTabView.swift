@@ -33,12 +33,12 @@ extension RootTabView {
         TabView(selection: $index) {
             CommitStatusView(contributionService: contributionService, colorTheme: $colorTheme)
                 .tabItem {
-                    Image(systemName: "flame")
+                    Image(systemName: "leaf.fill")
                     Text("Today")
                 }
             NoteListView(contributionService: contributionService)
                 .tabItem {
-                    Image(systemName: "crown")
+                    Image(systemName: "magazine")
                     Text("Note")
                 }
             SettingView(userInfo: $userInfoService.userInfo, index: $index, colorTheme: $colorTheme)
