@@ -36,19 +36,4 @@ enum CommitLevel: Int, CaseIterable {
     case two
     case three
     case four
-    
-    func color() -> Color {
-        switch self {
-        case .zero:
-            return Color("lv0")
-        case .one:
-            return Color("lv1")
-        case .two:
-            return Color("lv2")
-        case .three:
-            return Color("lv3")
-        case .four:
-            return Color("lv4")
-        }
-    }
 }

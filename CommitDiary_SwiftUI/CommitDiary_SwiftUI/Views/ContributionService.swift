@@ -52,7 +52,7 @@ class ContributionService: ObservableObject {
         }
     }
 
-    func setCellsColor(columnsCount: Int) -> [[Color]] {
+    func setCellsColor(theme: Theme, columnsCount: Int) -> [[Color]] {
         guard let lastDate = contributions.last?.date else {
             return []
         }
@@ -65,7 +65,7 @@ class ContributionService: ObservableObject {
         var colors = [[Color]]()
 
         for index in stride(from: 0, to: levels.count, by: rows) {
-            let splitedColors = levels[index..<Swift.min(index+rows, levels.count)].map{ $0.color() }
+            let splitedColors = levels[index..<Swift.min(index+rows, levels.count)].map{ theme.colorSet(by: $0) }
             colors.append(splitedColors)
         }
         return colors

@@ -13,6 +13,7 @@ struct SettingView: View {
     @State var settingList = [Color.red, Color.blue, Color.green, Color.yellow, Color.black]
     @State var showingMoveGithubAlert = false
     @Binding var index: Int
+    @Binding var colorTheme: Theme
     
     var body: some View {
         NavigationView {
@@ -51,8 +52,8 @@ extension SettingView {
         List {
             userInfoView()
             Section {
-                ForEach(settingList, id: \.self) { color in
-                    pickColorButtonView(color: color)
+                ForEach(Theme.allCases, id: \.self) { theme in
+                    pickColorButtonView(theme: theme)
                 }
             } header: {
                 Text("컬러")
@@ -71,11 +72,12 @@ extension SettingView {
         }
     }
     
-    private func pickColorButtonView(color: Color) -> some View {
+    private func pickColorButtonView(theme: Theme) -> some View {
         Button {
-            print(color)
+            colorTheme = theme
+            UserDefaults.standard.set(theme.rawValue, forKey: "theme")
         } label: {
-            Text(color.description)
+            Text(theme.rawValue)
                 .foregroundColor(.black)
         }
     }

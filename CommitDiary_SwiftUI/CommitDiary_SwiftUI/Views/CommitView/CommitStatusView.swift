@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CommitStatusView: View {
     @ObservedObject var contributionService: ContributionService
+    @Binding var colorTheme: Theme
+    
     var body: some View {
         NavigationView {
             content
@@ -19,7 +21,7 @@ struct CommitStatusView: View {
     
     private var content: some View {
         VStack {
-            ContributionView(cellsColor: contributionService.setCellsColor(columnsCount: 20))
+            ContributionView(cellsColor: contributionService.setCellsColor(theme: colorTheme, columnsCount: 20))
             todaysCommitView()
             commitHistoryView()
             commitGraphStatusView()
