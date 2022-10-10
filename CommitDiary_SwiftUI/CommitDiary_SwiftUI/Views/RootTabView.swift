@@ -38,12 +38,12 @@ extension RootTabView {
                     Image(systemName: "crown")
                     Text("Note")
                 }
-            SettingView(userInfo: $userInfoService.userInfo
-            )
+            SettingView(userInfo: $userInfoService.userInfo, index: $index)
                 .tabItem {
                     Image(systemName: "gear")
                     Text("Setting")
                 }
+                .tag(ViewIndex.settingView.index)
         }
     }
     
