@@ -10,10 +10,8 @@ import SwiftUI
 struct SettingView: View {
     @Environment(\.openURL) var openURL
     @State var tapColorThemeButton = false
-    @State var showingMoveGithubAlert = false
     @State var tapLogoutButton = false
     @Binding var userInfo: UserInfo
-    @Binding var index: Int
     @Binding var colorTheme: Theme
     
     var body: some View {
@@ -90,16 +88,9 @@ extension SettingView {
     
     private func moveButtonView() -> some View {
         Button("Github로 이동") {
-            showingMoveGithubAlert = true
-            index = ViewIndex.settingView.index
+            openURL(URL(string: userInfo.githubUrl)!)
         }
         .foregroundColor(.black)
-        .alert("이동하시겠습니까?", isPresented: $showingMoveGithubAlert) {
-            Button("취소", role: .cancel) {}
-            Button("이동", role: .destructive) {
-                openURL(URL(string: userInfo.githubUrl)!)
-            }
-        }
     }
     
     private func logoutButtonView() -> some View {
@@ -118,6 +109,6 @@ extension SettingView {
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView(userInfo: .constant(UserInfo.mock), index: .constant(4), colorTheme: .constant(.defaultGreen))
+        SettingView(userInfo: .constant(UserInfo.mock), colorTheme: .constant(.defaultGreen))
     }
 }

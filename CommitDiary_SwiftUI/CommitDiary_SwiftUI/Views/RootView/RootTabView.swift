@@ -19,7 +19,7 @@ struct RootTabView: View {
     
     var body: some View {
         if contributionService.contributions.isEmpty && isLogin {
-            Text("로딩뷰")
+            progressView()
         } else if isLogin {
             rootTabView()
         } else {
@@ -45,7 +45,6 @@ extension RootTabView {
                 .tag(ViewIndex.noteListView.index)
             SettingView(
                 userInfo: $userInfoService.userInfo,
-                index: $index,
                 colorTheme: $colorTheme
             )
             .tabItem {
@@ -54,6 +53,12 @@ extension RootTabView {
             }
             .tag(ViewIndex.settingView.index)
         }
+    }
+    
+    private func progressView() -> some View {
+        ProgressView()
+            .progressViewStyle(.circular)
+            .scaleEffect(2)
     }
 }
 
