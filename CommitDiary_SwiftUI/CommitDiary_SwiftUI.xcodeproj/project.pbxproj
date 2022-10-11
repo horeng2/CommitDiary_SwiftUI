@@ -46,6 +46,7 @@
 		4884572428F4497D007269F3 /* Extension+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884572328F4497D007269F3 /* Extension+Color.swift */; };
 		4884572628F45118007269F3 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884572528F45118007269F3 /* Theme.swift */; };
 		4884572828F551F5007269F3 /* Extension+UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884572728F551F5007269F3 /* Extension+UIApplication.swift */; };
+		4884572A28F55463007269F3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884572928F55463007269F3 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +110,7 @@
 		4884572328F4497D007269F3 /* Extension+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Color.swift"; sourceTree = "<group>"; };
 		4884572528F45118007269F3 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		4884572728F551F5007269F3 /* Extension+UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIApplication.swift"; sourceTree = "<group>"; };
+		4884572928F55463007269F3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +204,7 @@
 			children = (
 				486EAA4028EA1E9D00D86DA2 /* ViewIndex.swift */,
 				4884572528F45118007269F3 /* Theme.swift */,
+				4884572928F55463007269F3 /* LoginView.swift */,
 				480BE8F428EA1DAC00883E98 /* RootTabView.swift */,
 				4884571F28EF418D007269F3 /* CommitView */,
 				4884572028EF4199007269F3 /* NoteView */,
@@ -435,6 +438,7 @@
 				486EAA6028EC1F8900D86DA2 /* NoteEntity+CoreDataProperties.swift in Sources */,
 				486EAA6928EC3CE800D86DA2 /* GithubNetwork.swift in Sources */,
 				486EAA4E28EAB44000D86DA2 /* Extension+View.swift in Sources */,
+				4884572A28F55463007269F3 /* LoginView.swift in Sources */,
 				486EAA6628EC3C9800D86DA2 /* LoginManager.swift in Sources */,
 				486EAA4728EA231200D86DA2 /* NoteRowView.swift in Sources */,
 				486EAA8228EDB5A900D86DA2 /* ContributionService.swift in Sources */,

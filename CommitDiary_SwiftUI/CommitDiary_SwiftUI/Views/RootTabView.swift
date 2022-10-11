@@ -23,7 +23,7 @@ struct RootTabView: View {
         } else if isLogin {
             rootTabView()
         } else {
-            loginView()
+            LoginView()
         }
     }
 }
@@ -53,15 +53,6 @@ extension RootTabView {
                 Text("Setting")
             }
             .tag(ViewIndex.settingView.index)
-        }
-    }
-    
-    private func loginView() -> some View {
-        Link(destination: LoginManager.shared.loginUrl) {
-            Text("로그인")
-        }
-        .onOpenURL { temporaryCode in
-            LoginManager.shared.login(with: temporaryCode)
         }
     }
 }
