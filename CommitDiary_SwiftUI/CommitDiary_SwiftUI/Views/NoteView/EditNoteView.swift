@@ -91,6 +91,7 @@ extension EditNoteView {
                     }
                 }
         }
+        .onAppear(perform: UIApplication.shared.hideKeyboard)
     }
     
     private func noteContentView() -> some View {
@@ -110,6 +111,7 @@ extension EditNoteView {
                 )
                 .padding()
         }
+        .onAppear(perform: UIApplication.shared.hideKeyboard)
     }
     
     private func saveContext() {

@@ -45,6 +45,7 @@
 		4884571E28EF3724007269F3 /* ContributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884571D28EF3724007269F3 /* ContributionView.swift */; };
 		4884572428F4497D007269F3 /* Extension+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884572328F4497D007269F3 /* Extension+Color.swift */; };
 		4884572628F45118007269F3 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884572528F45118007269F3 /* Theme.swift */; };
+		4884572828F551F5007269F3 /* Extension+UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884572728F551F5007269F3 /* Extension+UIApplication.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,7 @@
 		4884571D28EF3724007269F3 /* ContributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionView.swift; sourceTree = "<group>"; };
 		4884572328F4497D007269F3 /* Extension+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Color.swift"; sourceTree = "<group>"; };
 		4884572528F45118007269F3 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		4884572728F551F5007269F3 /* Extension+UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIApplication.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,6 +292,7 @@
 				486EAA4D28EAB44000D86DA2 /* Extension+View.swift */,
 				486EAA5128EAF41B00D86DA2 /* Extension+Date.swift */,
 				4884572328F4497D007269F3 /* Extension+Color.swift */,
+				4884572728F551F5007269F3 /* Extension+UIApplication.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				486EAA5F28EC1F8900D86DA2 /* NoteEntity+CoreDataClass.swift in Sources */,
 				486EAA5C28EC1B8900D86DA2 /* CoreDataHelpers.swift in Sources */,
 				480BE8F528EA1DAC00883E98 /* RootTabView.swift in Sources */,
+				4884572828F551F5007269F3 /* Extension+UIApplication.swift in Sources */,
 				486EAA6028EC1F8900D86DA2 /* NoteEntity+CoreDataProperties.swift in Sources */,
 				486EAA6928EC3CE800D86DA2 /* GithubNetwork.swift in Sources */,
 				486EAA4E28EAB44000D86DA2 /* Extension+View.swift in Sources */,
