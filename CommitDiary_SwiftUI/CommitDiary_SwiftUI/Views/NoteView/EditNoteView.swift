@@ -13,6 +13,7 @@ struct EditNoteView: View {
     @Environment(\.presentationMode) var presentationMode
     @State var note: Note
     @State var isModifyMode: Bool
+    @State var isEmptyData = false
     
     var body: some View {
             content
@@ -33,20 +34,29 @@ struct EditNoteView: View {
 }
 
 extension EditNoteView {
+    private func saveNote(isModifyMode: Bool) {
+        if isModifyMode {
+            note.update(note, in: managedObjectContext)
+        } else {
+            note.store(in: managedObjectContext)
+        }
+        saveContext()
+        self.presentationMode.wrappedValue.dismiss()
+    }
+    
     private func saveButtonView() -> some View {
         Button {
-            if isModifyMode {
-                note.update(note, in: managedObjectContext)
+            if note.title.isEmpty || note.description.isEmpty {
+                isEmptyData = true
             } else {
-                note.store(in: managedObjectContext)
+                saveNote(isModifyMode: isModifyMode)
             }
-            saveContext()
-            self.presentationMode.wrappedValue.dismiss()
         } label: {
             Text("저장")
                 .font(.system(size: 20))
                 .fontWeight(.bold)
         }
+        .alert("모든 값을 입력해주세요.", isPresented: $isEmptyData) {}
     }
     
     private func dateView() -> some View {

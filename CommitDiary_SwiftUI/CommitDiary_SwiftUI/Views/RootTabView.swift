@@ -36,11 +36,13 @@ extension RootTabView {
                     Image(systemName: "leaf.fill")
                     Text("Today")
                 }
+                .tag(ViewIndex.commitStatusView.index)
             NoteListView()
                 .tabItem {
                     Image(systemName: "magazine")
                     Text("Note")
                 }
+                .tag(ViewIndex.noteListView.index)
             SettingView(
                 userInfo: $userInfoService.userInfo,
                 index: $index,
