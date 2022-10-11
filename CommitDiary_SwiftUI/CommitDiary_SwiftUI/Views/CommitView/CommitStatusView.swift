@@ -72,7 +72,6 @@ extension CommitStatusView {
                 .font(.system(size: 25, weight: .medium))
                 .foregroundColor(.black)
         }
-        
     }
     
     private func bestContinuousCommitView() -> some View {

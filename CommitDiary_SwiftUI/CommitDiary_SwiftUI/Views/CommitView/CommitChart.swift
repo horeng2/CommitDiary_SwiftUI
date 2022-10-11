@@ -15,10 +15,10 @@ struct CommitChart<Index: View>: View {
     
     var body: some View {
         HStack(alignment: .center, spacing: spacing) {
-            ForEach(0..<columns, id: \.self) { row in
+            ForEach(0..<columns, id: \.self) { column in
                 VStack(alignment: .center, spacing: spacing) {
-                    ForEach(0..<rows, id: \.self) { column in
-                        index(column, row)
+                    ForEach(0..<rows, id: \.self) { row in
+                        index(row, column)
                     }
                 }
             }
