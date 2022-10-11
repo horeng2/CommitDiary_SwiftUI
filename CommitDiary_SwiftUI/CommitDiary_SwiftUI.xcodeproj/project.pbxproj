@@ -163,10 +163,11 @@
 			children = (
 				486EAA7028EC3DB900D86DA2 /* CommitDiary-SwiftUI-Info.plist */,
 				480BE8F228EA1DAC00883E98 /* CommitDiary_SwiftUIApp.swift */,
-				486EAA5628EC18AF00D86DA2 /* CoreData */,
 				486EAA4A28EA2CCB00D86DA2 /* Views */,
+				4884573028F5795B007269F3 /* Service */,
 				486EAA6328EC2E7100D86DA2 /* Model */,
 				486EAA6728EC3CD300D86DA2 /* Network */,
+				486EAA5628EC18AF00D86DA2 /* CoreData */,
 				486EAA6428EC3C8100D86DA2 /* Utility */,
 				480BE8F628EA1DAD00883E98 /* Assets.xcassets */,
 				480BE8F828EA1DAD00883E98 /* Preview Content */,
@@ -209,8 +210,6 @@
 				4884572028EF4199007269F3 /* NoteView */,
 				4884572128EF41A2007269F3 /* SettingView */,
 				4884572228EF4260007269F3 /* Extensions */,
-				486EAA7528EC72C400D86DA2 /* UserInfoService.swift */,
-				486EAA8128EDB5A900D86DA2 /* ContributionService.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -306,6 +305,15 @@
 				4884572928F55463007269F3 /* LoginView.swift */,
 			);
 			path = RootView;
+			sourceTree = "<group>";
+		};
+		4884573028F5795B007269F3 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				486EAA7528EC72C400D86DA2 /* UserInfoService.swift */,
+				486EAA8128EDB5A900D86DA2 /* ContributionService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
