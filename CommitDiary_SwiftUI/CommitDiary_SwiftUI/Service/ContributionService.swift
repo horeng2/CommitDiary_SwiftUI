@@ -61,14 +61,13 @@ class ContributionService: ObservableObject {
         }
         let rows = 7
         let blankCellCount = rows - Calendar.current.component(.weekday, from: lastDate)
-        
         let cellCount = rows * columnsCount - blankCellCount
-        
         let levels = contributions.suffix(cellCount).map{ $0.level }
+        
         var colors = [[Color]]()
-
         for index in stride(from: 0, to: levels.count, by: rows) {
-            let splitedColors = levels[index..<Swift.min(index+rows, levels.count)].map{ theme.colorSet(by: $0) }
+            let splitedColors = levels[index..<Swift.min(index+rows, levels.count)]
+                .map{ theme.colorSet(by: $0) }
             colors.append(splitedColors)
         }
         return colors

@@ -11,8 +11,6 @@ import CoreData
 struct NoteListView: View {
     @EnvironmentObject var contributionService: ContributionService
     var didSave =  NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
-    @State var refreshID = UUID()
-    
     @Environment(\.managedObjectContext) private var managedObjectContext
     @FetchRequest(
       entity: NoteEntity.entity(),
@@ -66,10 +64,7 @@ extension NoteListView {
             ForEach(notes, id: \.id) {noteObject in
                 makeNavigationLink(of: Note(managedObject: noteObject))
             }
-            .onDelete{ indexSet in
-                let index = indexSet[indexSet.startIndex]
-                managedObjectContext.delete(notes[index])
-            }
+            .onDelete(perform: deleteNote)
             .listRowSeparator(.visible)
         }
     }
@@ -84,10 +79,14 @@ extension NoteListView {
                 commitCount: note.commitCount
             )
         }
-        .id(refreshID)
-        .onReceive(self.didSave) { _ in
-            self.refreshID = UUID()
+    }
+    
+    func deleteNote(at offsets: IndexSet) {
+        for offset in offsets {
+            let note = notes[offset]
+            managedObjectContext.delete(note)
         }
+        saveContext()
     }
     
     func saveContext() {
