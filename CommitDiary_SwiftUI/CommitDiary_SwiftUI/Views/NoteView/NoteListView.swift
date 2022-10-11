@@ -17,7 +17,7 @@ struct NoteListView: View {
     @FetchRequest(
       entity: NoteEntity.entity(),
       sortDescriptors: [
-        NSSortDescriptor(keyPath: \NoteEntity.id, ascending: true)
+        NSSortDescriptor(keyPath: \NoteEntity.date, ascending: false)
       ]
     ) var notes: FetchedResults<NoteEntity>
 
