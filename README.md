@@ -2,7 +2,7 @@
 - 기간: 2022. 10. 03. ~ 2022. 10. 11.
 
 ## 프로젝트 소개
-GitHub API를 이용한 Commit 정보 제공 및 메모 기능을  앱입니다.
+GitHub API를 이용한 Commit 정보 제공 및 메모 기능이 있는 앱입니다.
 
 GitHub token을 Keychain으로 관리하며, 메모는 CoreData에 저장됩니다.
 
