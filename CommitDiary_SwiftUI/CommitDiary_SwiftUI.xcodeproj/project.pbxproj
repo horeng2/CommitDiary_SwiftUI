@@ -45,6 +45,8 @@
 		4884572628F45118007269F3 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884572528F45118007269F3 /* Theme.swift */; };
 		4884572828F551F5007269F3 /* Extension+UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884572728F551F5007269F3 /* Extension+UIApplication.swift */; };
 		4884572A28F55463007269F3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884572928F55463007269F3 /* LoginView.swift */; };
+		4884573228F5B1D7007269F3 /* SecretKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4884573128F5B1D7007269F3 /* SecretKey.plist */; };
+		4884573428F5B22A007269F3 /* APIKeyBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884573328F5B22A007269F3 /* APIKeyBundle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +109,8 @@
 		4884572528F45118007269F3 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		4884572728F551F5007269F3 /* Extension+UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIApplication.swift"; sourceTree = "<group>"; };
 		4884572928F55463007269F3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		4884573128F5B1D7007269F3 /* SecretKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SecretKey.plist; sourceTree = "<group>"; };
+		4884573328F5B22A007269F3 /* APIKeyBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKeyBundle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +243,8 @@
 				486EAA7128EC544600D86DA2 /* Keychain.swift */,
 				486EAA7D28ED781F00D86DA2 /* htmlParser.swift */,
 				486EAA8328EDBB0000D86DA2 /* Extension+String.swift */,
+				4884573128F5B1D7007269F3 /* SecretKey.plist */,
+				4884573328F5B22A007269F3 /* APIKeyBundle.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -415,6 +421,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				480BE8FA28EA1DAD00883E98 /* Preview Assets.xcassets in Resources */,
+				4884573228F5B1D7007269F3 /* SecretKey.plist in Resources */,
 				480BE8F728EA1DAD00883E98 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -442,6 +449,7 @@
 			files = (
 				486EAA6B28EC3D0000D86DA2 /* UserInfoRequest.swift in Sources */,
 				486EAA5F28EC1F8900D86DA2 /* NoteEntity+CoreDataClass.swift in Sources */,
+				4884573428F5B22A007269F3 /* APIKeyBundle.swift in Sources */,
 				486EAA5C28EC1B8900D86DA2 /* CoreDataHelpers.swift in Sources */,
 				480BE8F528EA1DAC00883E98 /* RootTabView.swift in Sources */,
 				4884572828F551F5007269F3 /* Extension+UIApplication.swift in Sources */,

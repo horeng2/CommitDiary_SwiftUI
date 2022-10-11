@@ -34,16 +34,6 @@ struct EditNoteView: View {
 }
 
 extension EditNoteView {
-    private func saveNote(isModifyMode: Bool) {
-        if isModifyMode {
-            note.update(note, in: managedObjectContext)
-        } else {
-            note.store(in: managedObjectContext)
-        }
-        saveContext()
-        self.presentationMode.wrappedValue.dismiss()
-    }
-    
     private func saveButtonView() -> some View {
         Button {
             if note.title.isEmpty || note.description.isEmpty {
@@ -112,6 +102,18 @@ extension EditNoteView {
                 .padding()
         }
         .onAppear(perform: UIApplication.shared.hideKeyboard)
+    }
+}
+
+extension EditNoteView {
+    private func saveNote(isModifyMode: Bool) {
+        if isModifyMode {
+            note.update(note, in: managedObjectContext)
+        } else {
+            note.store(in: managedObjectContext)
+        }
+        saveContext()
+        self.presentationMode.wrappedValue.dismiss()
     }
     
     private func saveContext() {

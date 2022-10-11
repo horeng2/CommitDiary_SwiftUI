@@ -10,7 +10,6 @@ import CoreData
 
 struct NoteListView: View {
     @EnvironmentObject var contributionService: ContributionService
-    var didSave =  NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
     @Environment(\.managedObjectContext) private var managedObjectContext
     @FetchRequest(
       entity: NoteEntity.entity(),

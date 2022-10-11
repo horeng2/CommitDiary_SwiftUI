@@ -13,8 +13,8 @@ struct LoginManager {
     static let isLoginKey = "isLogin"
     static let tokenKey = "token"
     
-    private let clientId = "d7dbc87ea8c0b68452f7"
-    private let clientSecret = "9fa2a43c208619ab8f7fb0201b1e3445d565a6cc"
+    private let clientId = Bundle.main.client_id
+    private let clientSecret = Bundle.main.client_secret
     private let scope = "repo,user"
 
     lazy var loginUrl: URL = {
