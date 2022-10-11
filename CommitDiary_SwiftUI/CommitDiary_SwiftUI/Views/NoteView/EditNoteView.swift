@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct EditNoteView: View {
     @Environment(\.managedObjectContext) private var managedObjectContext
@@ -14,92 +15,90 @@ struct EditNoteView: View {
     @State var isModifyMode: Bool
     
     var body: some View {
-        NavigationView {
             content
-        }
-        .navigationViewStyle(.stack)
+            .toolbar {
+                saveButtonView()
+            }
     }
     
     private var content: some View {
-        VStack(alignment: .leading) {
+        VStack(spacing: 0) {
             dateView()
             commitCountView()
             titleView()
             noteContentView()
-            exitButtonView()
             Spacer()
         }
     }
 }
 
 extension EditNoteView {
+    private func saveButtonView() -> some View {
+        Button {
+            if isModifyMode {
+                note.update(note, in: managedObjectContext)
+            } else {
+                note.store(in: managedObjectContext)
+            }
+            saveContext()
+            self.presentationMode.wrappedValue.dismiss()
+        } label: {
+            Text("저장")
+                .font(.system(size: 20))
+                .fontWeight(.bold)
+        }
+    }
+    
     private func dateView() -> some View {
         Text(note.date.toString())
-                    .font(.system(size: 24))
+                    .font(.system(size: 25))
                     .foregroundColor(.black)
     }
     
     private func commitCountView() -> some View {
-        Text("오늘의 커밋은 \(note.commitCount)회!")
+        Text("🌱 오늘의 커밋은 \(note.commitCount)회 🌱")
+            .font(.system(size: 20, weight: .medium))
+            .foregroundColor(.gray)
+            .padding()
     }
     
     private func titleView() -> some View {
-        TextField(note.title, text: $note.title)
-            .placeholder(when: note.title.isEmpty) {
-                Text("제목을 입력하세요")
-                    .font(.system(size: 24))
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(.gray)
-            }
-            .font(.system(size: 24))
-            .multilineTextAlignment(.leading)
-            .foregroundColor(.black)
+        VStack(alignment: .leading, spacing: 0) {
+            Text("제목")
+                .font(.system(size: 15, weight: .medium))
+                .foregroundColor(.gray)
+                .padding(.horizontal)
+                .padding(.bottom, 0)
+            TextField(note.title, text: $note.title)
+                .textFieldStyle(.roundedBorder)
+                .font(.system(size: 22))
+                .multilineTextAlignment(.leading)
+                .foregroundColor(.black)
+                .padding()
+                .onReceive(Just(note.title)) { _ in
+                    if note.title.count > 20 {
+                        note.title = String(note.title.prefix(20))
+                    }
+                }
+        }
     }
     
     private func noteContentView() -> some View {
-        TextField(note.description, text: $note.description)
-            .placeholder(when: note.description.isEmpty) {
-                Text("내용을 입력하세요")
-                    .font(.system(size: 24))
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(.gray)
-            }
-            .font(.system(size: 24))
-            .multilineTextAlignment(.leading)
-            .foregroundColor(.black)
-    }
-    
-    private func exitButtonView() -> some View {
-        HStack {
-            Button {
-                self.presentationMode.wrappedValue.dismiss()
-            } label: {
-                Text("취소")
-                    .font(.system(size: 20))
-                    .fontWeight(.bold)
-                    .frame(width: 130, height: 50, alignment: .center)
-                    .foregroundColor(.white)
-                    .background(.blue)
-                    .cornerRadius(20)
-            }
-            
-            Button {
-                if isModifyMode {
-                    note.update(note, in: managedObjectContext)
-                } else {
-                    note.store(in: managedObjectContext)
-                }
-                saveContext()
-                self.presentationMode.wrappedValue.dismiss()
-            } label: {
-                Text("저장")
-                    .font(.system(size: 20))
-                    .fontWeight(.bold)
-                    .frame(width: 130, height: 50, alignment: .center)
-                    .foregroundColor(.white)
-                    .background(.blue)
-                    .cornerRadius(20)
-            }
+        VStack(alignment: .leading, spacing: 0) {
+            Text("내용")
+                .font(.system(size: 15, weight: .medium))
+                .foregroundColor(.gray)
+                .padding(.horizontal)
+                .padding(.bottom, 0)
+            TextEditor(text: $note.description)
+                .font(.system(size: 22))
+                .multilineTextAlignment(.leading)
+                .foregroundColor(.black)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 5)
+                    .stroke(Color.black1, lineWidth: 1)
+                )
+                .padding()
         }
     }
     
