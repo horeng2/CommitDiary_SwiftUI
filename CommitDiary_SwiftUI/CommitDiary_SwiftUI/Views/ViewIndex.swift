@@ -9,14 +9,14 @@ import Foundation
 
 enum ViewIndex {
     case commitStatusView
-    case commitNoteView
+    case noteListView
     case settingView
     
     var index: Int {
         switch self {
         case .commitStatusView:
             return 0
-        case .commitNoteView:
+        case .noteListView:
             return 1
         case .settingView:
             return 2

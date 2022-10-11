@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CommitStatusView: View {
-    @ObservedObject var contributionService: ContributionService
+    @EnvironmentObject var contributionService: ContributionService
     @Binding var colorTheme: Theme
     
     var body: some View {
@@ -118,7 +118,10 @@ extension CommitStatusView {
 }
 
 struct CommitStatusView_Previews: PreviewProvider {
+    static let contriburionService = ContributionService()
+
     static var previews: some View {
-        CommitStatusView(contributionService: ContributionService(), colorTheme: .constant(Theme.defaultGreen))
+        CommitStatusView(colorTheme: .constant(Theme.defaultGreen))
+            .environmentObject(contriburionService)
     }
 }

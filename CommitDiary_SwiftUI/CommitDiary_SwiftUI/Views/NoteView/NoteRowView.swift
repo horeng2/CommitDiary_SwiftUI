@@ -22,6 +22,7 @@ struct NoteRowView: View {
             Spacer()
             commitCountView()
         }
+        .padding(.vertical, 10)
     }
 }
 
@@ -30,6 +31,7 @@ extension NoteRowView {
         VStack(alignment: .leading) {
             Text(date.toString())
             Text(title)
+                .fontWeight(.bold)
         }
     }
     

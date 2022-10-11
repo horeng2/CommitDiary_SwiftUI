@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct NoteListView: View {
-    @ObservedObject var contributionService: ContributionService
+    @EnvironmentObject var contributionService: ContributionService
     var didSave =  NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
     @State var refreshID = UUID()
     
@@ -66,6 +66,10 @@ extension NoteListView {
             ForEach(notes, id: \.id) {noteObject in
                 makeNavigationLink(of: Note(managedObject: noteObject))
             }
+            .onDelete{ indexSet in
+                let index = indexSet[indexSet.startIndex]
+                managedObjectContext.delete(notes[index])
+            }
             .listRowSeparator(.visible)
         }
     }
@@ -94,6 +98,7 @@ extension NoteListView {
 struct NoteListView_Previews: PreviewProvider {
     static var previews: some View {
         let contributionService = ContributionService()
-        NoteListView(contributionService: contributionService)
+        NoteListView()
+            .environmentObject(contributionService)
     }
 }

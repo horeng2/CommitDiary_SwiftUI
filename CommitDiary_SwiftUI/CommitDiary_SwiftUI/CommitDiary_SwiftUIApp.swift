@@ -15,9 +15,10 @@ struct CommitDiary_SwiftUIApp: App {
     
     var body: some Scene {
         WindowGroup {
-            RootTabView(contributionService: contributionService,
-                        userInfoService: userInfoService)
+            RootTabView()
                 .environment(\.managedObjectContext, coreDataStack.context)
+                .environmentObject(userInfoService)
+                .environmentObject(contributionService)
                 .task {
                     await userInfoService.loadUserInfo()
                 }

@@ -43,6 +43,8 @@
 		486EAA8428EDBB0000D86DA2 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA8328EDBB0000D86DA2 /* Extension+String.swift */; };
 		486EAA8628EDD14500D86DA2 /* CommitChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA8528EDD14500D86DA2 /* CommitChart.swift */; };
 		4884571E28EF3724007269F3 /* ContributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884571D28EF3724007269F3 /* ContributionView.swift */; };
+		4884572428F4497D007269F3 /* Extension+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884572328F4497D007269F3 /* Extension+Color.swift */; };
+		4884572628F45118007269F3 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884572528F45118007269F3 /* Theme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +105,8 @@
 		486EAA8328EDBB0000D86DA2 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		486EAA8528EDD14500D86DA2 /* CommitChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitChart.swift; sourceTree = "<group>"; };
 		4884571D28EF3724007269F3 /* ContributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionView.swift; sourceTree = "<group>"; };
+		4884572328F4497D007269F3 /* Extension+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Color.swift"; sourceTree = "<group>"; };
+		4884572528F45118007269F3 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				486EAA4028EA1E9D00D86DA2 /* ViewIndex.swift */,
+				4884572528F45118007269F3 /* Theme.swift */,
 				480BE8F428EA1DAC00883E98 /* RootTabView.swift */,
 				4884571F28EF418D007269F3 /* CommitView */,
 				4884572028EF4199007269F3 /* NoteView */,
@@ -284,6 +289,7 @@
 			children = (
 				486EAA4D28EAB44000D86DA2 /* Extension+View.swift */,
 				486EAA5128EAF41B00D86DA2 /* Extension+Date.swift */,
+				4884572328F4497D007269F3 /* Extension+Color.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -433,6 +439,7 @@
 				486EAA4C28EA2CFE00D86DA2 /* EditNoteView.swift in Sources */,
 				486EAA7C28ED6AD300D86DA2 /* ContributionsRequest.swift in Sources */,
 				486EAA7228EC544600D86DA2 /* Keychain.swift in Sources */,
+				4884572628F45118007269F3 /* Theme.swift in Sources */,
 				486EAA4528EA229900D86DA2 /* NoteListView.swift in Sources */,
 				486EAA5528EC15FE00D86DA2 /* NoteData.xcdatamodeld in Sources */,
 				486EAA7A28ED658100D86DA2 /* Contribution.swift in Sources */,
@@ -441,6 +448,7 @@
 				486EAA8628EDD14500D86DA2 /* CommitChart.swift in Sources */,
 				486EAA8428EDBB0000D86DA2 /* Extension+String.swift in Sources */,
 				486EAA7628EC72C400D86DA2 /* UserInfoService.swift in Sources */,
+				4884572428F4497D007269F3 /* Extension+Color.swift in Sources */,
 				486EAA5028EAED5C00D86DA2 /* Note.swift in Sources */,
 				486EAA4928EA282100D86DA2 /* SettingView.swift in Sources */,
 				486EAA7E28ED781F00D86DA2 /* htmlParser.swift in Sources */,

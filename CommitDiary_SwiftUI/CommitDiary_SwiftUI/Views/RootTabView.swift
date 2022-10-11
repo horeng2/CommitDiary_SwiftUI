@@ -12,8 +12,8 @@ struct RootTabView: View {
     var isLogin = UserDefaults.standard.bool(forKey: LoginManager.isLoginKey) == true
     @AppStorage("theme")
     var colorTheme = Theme(rawValue: UserDefaults.standard.string(forKey: "theme") ?? "") ?? .defaultGreen
-    @ObservedObject var contributionService: ContributionService
-    @ObservedObject var userInfoService: UserInfoService
+    @EnvironmentObject var contributionService: ContributionService
+    @EnvironmentObject var userInfoService: UserInfoService
     @State var index = ViewIndex.commitStatusView.index
     
     
@@ -31,22 +31,26 @@ struct RootTabView: View {
 extension RootTabView {
     private func rootTabView() -> some View {
         TabView(selection: $index) {
-            CommitStatusView(contributionService: contributionService, colorTheme: $colorTheme)
+            CommitStatusView(colorTheme: $colorTheme)
                 .tabItem {
                     Image(systemName: "leaf.fill")
                     Text("Today")
                 }
-            NoteListView(contributionService: contributionService)
+            NoteListView()
                 .tabItem {
                     Image(systemName: "magazine")
                     Text("Note")
                 }
-            SettingView(userInfo: $userInfoService.userInfo, index: $index, colorTheme: $colorTheme)
-                .tabItem {
-                    Image(systemName: "gear")
-                    Text("Setting")
-                }
-                .tag(ViewIndex.settingView.index)
+            SettingView(
+                userInfo: $userInfoService.userInfo,
+                index: $index,
+                colorTheme: $colorTheme
+            )
+            .tabItem {
+                Image(systemName: "gear")
+                Text("Setting")
+            }
+            .tag(ViewIndex.settingView.index)
         }
     }
     
@@ -62,8 +66,10 @@ extension RootTabView {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let contributionService = ContributionService()
-        let userInfoservice = UserInfoService()
-        RootTabView(contributionService: contributionService, userInfoService: userInfoservice)
+        let contriburionService = ContributionService()
+        let userInfoService = UserInfoService()
+        RootTabView()
+            .environmentObject(contriburionService)
+            .environmentObject(userInfoService)
     }
 }
