@@ -80,7 +80,9 @@ extension NoteListView {
             )
         }
     }
-    
+}
+
+extension NoteListView {
     func deleteNote(at offsets: IndexSet) {
         for offset in offsets {
             let note = notes[offset]

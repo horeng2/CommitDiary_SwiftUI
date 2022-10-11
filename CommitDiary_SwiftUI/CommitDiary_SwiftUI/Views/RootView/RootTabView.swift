@@ -14,8 +14,6 @@ struct RootTabView: View {
     var colorTheme = Theme(rawValue: UserDefaults.standard.string(forKey: "theme") ?? "") ?? .defaultGreen
     @EnvironmentObject var contributionService: ContributionService
     @EnvironmentObject var userInfoService: UserInfoService
-    @State var index = ViewIndex.commitStatusView.index
-    
     
     var body: some View {
         if contributionService.contributions.isEmpty && isLogin {
@@ -30,19 +28,17 @@ struct RootTabView: View {
 
 extension RootTabView {
     private func rootTabView() -> some View {
-        TabView(selection: $index) {
+        TabView {
             CommitStatusView(colorTheme: $colorTheme)
                 .tabItem {
                     Image(systemName: "leaf.fill")
                     Text("Today")
                 }
-                .tag(ViewIndex.commitStatusView.index)
             NoteListView()
                 .tabItem {
                     Image(systemName: "magazine")
                     Text("Note")
                 }
-                .tag(ViewIndex.noteListView.index)
             SettingView(
                 userInfo: $userInfoService.userInfo,
                 colorTheme: $colorTheme
@@ -51,7 +47,6 @@ extension RootTabView {
                 Image(systemName: "gear")
                 Text("Setting")
             }
-            .tag(ViewIndex.settingView.index)
         }
     }
     
