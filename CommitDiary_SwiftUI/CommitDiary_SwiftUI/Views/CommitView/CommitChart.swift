@@ -25,7 +25,11 @@ struct CommitChart<Index: View>: View {
         }
     }
     
-    init(columns: Int, spacing: CGFloat, @ViewBuilder index: @escaping (Int, Int) -> Index) {
+    init(
+        columns: Int,
+        spacing: CGFloat,
+        @ViewBuilder index: @escaping (Int, Int) -> Index
+    ) {
         self.columns = columns
         self.spacing = spacing
         self.index = index

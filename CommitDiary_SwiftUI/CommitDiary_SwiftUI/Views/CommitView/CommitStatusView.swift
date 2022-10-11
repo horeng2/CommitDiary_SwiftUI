@@ -37,15 +37,17 @@ struct CommitStatusView: View {
 
 extension CommitStatusView {
     private func contributionView() -> some View {
-        VStack {
-            HStack {
-                Text("CONTRIBUTIONS")
-                    .font(.system(size: 20, weight: .medium))
-                    .foregroundColor(.gray)
-                    .padding(.horizontal)
-                Spacer()
-            }
-            ContributionView(cellsColor: contributionService.setCellsColor(theme: colorTheme, columnsCount: 20))
+        VStack(alignment: .leading) {
+            Text("CONTRIBUTIONS")
+                .font(.system(size: 20, weight: .medium))
+                .foregroundColor(.gray)
+                .padding(.horizontal)
+            
+            let cellsColor = contributionService.setCellsColor(
+                theme: colorTheme,
+                columnsCount: 20
+            )
+            ContributionView(cellsColor: cellsColor)
         }
         .padding(.top, 30)
     }
@@ -106,9 +108,11 @@ extension CommitStatusView {
             let currentContinuousCommit = CGFloat(contributionService.currentContinuousCommit)
             let bestContinuousCommit = CGFloat(contributionService.bestContinuousCommit)
             Rectangle()
-                .frame(width: currentContinuousCommit / bestContinuousCommit * graphWidth,
-                       height: 20,
-                       alignment: .leading)
+                .frame(
+                    width: currentContinuousCommit / bestContinuousCommit * graphWidth,
+                    height: 20,
+                    alignment: .leading
+                )
                 .foregroundColor(colorTheme.levelfourColor)
             Rectangle()
                 .stroke(.black, lineWidth: 2)

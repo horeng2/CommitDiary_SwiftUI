@@ -16,7 +16,10 @@ extension UIApplication {
         guard let window = windowScene.windows.first else {
             return
         }
-        let tapRecognizer = UITapGestureRecognizer(target: window, action: #selector(UIView.endEditing))
+        let tapRecognizer = UITapGestureRecognizer(
+            target: window,
+            action: #selector(UIView.endEditing)
+        )
         tapRecognizer.cancelsTouchesInView = false
         tapRecognizer.delegate = self
         window.addGestureRecognizer(tapRecognizer)

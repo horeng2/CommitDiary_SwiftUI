@@ -53,13 +53,10 @@ class GithubNetwork {
         guard let html = String(data: data, encoding: .utf8) else {
             throw HTMLError.encodingError
         }
-        
         let classBlock = HTMLParser.shared.searchClassBlock(html: html,
                                                             className: "js-calendar-graph-svg",
                                                             blockTag: "svg")
-        
         let contributionData = HTMLParser.shared.searchInline(html: classBlock, inlineTag: "rect")
-        
         
         return contributionData
     }

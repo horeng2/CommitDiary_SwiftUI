@@ -54,8 +54,8 @@ struct NoteListView: View {
 extension NoteListView {
     private func plusButtonView() -> some View {
         NavigationLink {
-            EditNoteView(note: Note(commitCount: contributionService.todaysCommit),
-                         isModifyMode: false)
+            let newNote = Note(commitCount: contributionService.todaysCommit)
+            EditNoteView(note: newNote, isModifyMode: false)
         } label: {
             Image(systemName: "plus")
         }
@@ -78,7 +78,11 @@ extension NoteListView {
         NavigationLink {
             EditNoteView(note: note, isModifyMode: true)
         } label: {
-            NoteRowView(title: note.title, date: note.date, commitCount: note.commitCount)
+            NoteRowView(
+                title: note.title,
+                date: note.date,
+                commitCount: note.commitCount
+            )
         }
         .id(refreshID)
         .onReceive(self.didSave) { _ in

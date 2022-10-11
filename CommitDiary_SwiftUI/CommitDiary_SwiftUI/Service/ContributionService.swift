@@ -41,7 +41,10 @@ class ContributionService: ObservableObject {
     
     func continuousCommitCount() {
         DispatchQueue.main.async {
-            let continuousGroup = self.contributions.map{ String($0.level.rawValue) }.joined().split(separator: "0")
+            let continuousGroup = self.contributions
+                .map{ String($0.level.rawValue) }
+                .joined()
+                .split(separator: "0")
             self.bestContinuousCommit = continuousGroup.map{ $0.count }.max() ?? 0
             
             if self.contributions.last?.commitCount == 0 {

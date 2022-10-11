@@ -52,6 +52,7 @@ extension SettingView {
                     }
             }
         }
+        .foregroundColor(.black)
     }
     
     private func userInfoView() -> some View {
@@ -82,7 +83,6 @@ extension SettingView {
             colorTheme = theme
             UserDefaults.standard.set(theme.rawValue, forKey: "theme")
         }
-        .foregroundColor(.black)
         .alert("테마가 변경되었습니다!", isPresented: $tapColorThemeButton) {}
     }
     
@@ -90,7 +90,6 @@ extension SettingView {
         Button("Github로 이동") {
             openURL(URL(string: userInfo.githubUrl)!)
         }
-        .foregroundColor(.black)
     }
     
     private func logoutButtonView() -> some View {
@@ -98,7 +97,7 @@ extension SettingView {
             tapLogoutButton = true
         }
         .foregroundColor(.red)
-        .alert("로그아웃하시겠습니까?", isPresented: $tapLogoutButton) {
+        .alert("로그아웃 하시겠습니까?", isPresented: $tapLogoutButton) {
             Button("취소", role: .cancel) {}
             Button("확인", role: .destructive) {
                 UserDefaults.standard.set(false, forKey: LoginManager.isLoginKey)

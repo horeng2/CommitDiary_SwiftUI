@@ -80,10 +80,10 @@ extension EditNoteView {
                 .padding(.horizontal)
                 .padding(.bottom, 0)
             TextField(note.title, text: $note.title)
-                .textFieldStyle(.roundedBorder)
                 .font(.system(size: 22))
-                .multilineTextAlignment(.leading)
                 .foregroundColor(.black)
+                .multilineTextAlignment(.leading)
+                .textFieldStyle(.roundedBorder)
                 .padding()
                 .onReceive(Just(note.title)) { _ in
                     if note.title.count > 20 {
@@ -103,8 +103,8 @@ extension EditNoteView {
                 .padding(.bottom, 0)
             TextEditor(text: $note.description)
                 .font(.system(size: 22))
-                .multilineTextAlignment(.leading)
                 .foregroundColor(.black)
+                .multilineTextAlignment(.leading)
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
                     .stroke(Color.black1, lineWidth: 1)
