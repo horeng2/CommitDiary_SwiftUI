@@ -102,6 +102,9 @@ GitHub token을 Keychain으로 관리하며, 메모는 CoreData에 저장됩니�
 | :-: |
 | ![theme](https://user-images.githubusercontent.com/87305744/195123108-e3464b8b-ca79-42c1-bc82-078f02c7b879.gif) |
 
+<br/>
+<br/>
+
 ### 내부 기능
 **1. 로그인/로그아웃**
 - LoginManager를 구현하여 로그인/로그아웃 관련 기능이 실행됩니다.
@@ -133,6 +136,7 @@ GitHub token을 Keychain으로 관리하며, 메모는 CoreData에 저장됩니�
 - 추출된 class 블록에서 tag 유형을 매개변수로 inline 블록을 추출합니다.
 - 추출된 inline 블록을 key-value 쌍의 딕셔너리로 변환합니다.
  
+<br/>
 
 ### View 기능
 **1. Contribution**
@@ -177,6 +181,8 @@ for index in stride(from: 0, to: levels.count, by: rows) {
 
 
 
+<br/>
+<br/>
 
 ## 새롭게 시도해본 기술
 ### SwiftUI에서의 CoreData
