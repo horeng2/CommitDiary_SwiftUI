@@ -13,12 +13,12 @@ struct CommitInfoRequest: APIRequest {
     let repo: RepoInfo
     let token: String
     var url: URL? {
-        URL(string: "https://api.github.com/repos/\(repo.owner.name)/\(repo.repoName)/comments")
+        URL(string: "https://api.github.com/repos/\(repo.owner.name)/\(repo.repoName)/commits")
     }
     let httpMethod = "Get"
     var headers: [String: String] {
-        ["Authorization": "Bearer \(token)",
-         "Accept": "application/vnd.github+json"]
+        ["Accept": "application/vnd.github+json",
+         "Authorization": "Bearer \(token)"]
     }
     
     var urlRequest: URLRequest? {
