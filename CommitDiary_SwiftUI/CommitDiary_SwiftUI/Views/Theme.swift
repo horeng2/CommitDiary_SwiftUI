@@ -29,6 +29,21 @@ enum Theme: String, CaseIterable {
             return levelfourColor
         }
     }
+    
+    var tableViewBackground: Color {
+        switch self {
+        case .defaultGreen:
+            return .greenTable
+        case .blue:
+            return .blueTable
+        case .orange:
+            return .orangeTable
+        case .pink:
+            return .pinkTable
+        case .black:
+            return .blackTable
+        }
+    }
         
     var levelOneColor: Color {
         switch self {
