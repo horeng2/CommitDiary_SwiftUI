@@ -8,7 +8,7 @@
 import Foundation
 
 struct RepoInfo: Decodable, Identifiable {
-    var id = UUID()
+    let id = UUID()
     let owner: Owner
     let repoName: String
     let updatedDate: String

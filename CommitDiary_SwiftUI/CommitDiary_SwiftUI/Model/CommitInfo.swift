@@ -7,20 +7,20 @@
 
 import Foundation
 
-struct CommitInfo: Decodable {
-    let items: CommitInfoItem
+struct CommitInfo: Decodable, Identifiable {
+    let id = UUID()
+    let infoItmes: CommitInfoItem
 
     private enum CodingKeys: String, CodingKey {
-        case items
+        case infoItmes = "commit"
+    }
+
+    struct CommitInfoItem: Decodable {
+        let author: Author
+        let message: String
     }
     
-    struct CommitInfoItem: Decodable {
-        let comment: String
-        let createdDate: String
-        
-        private enum CodingKeys: String, CodingKey {
-            case comment = "title"
-            case createdDate = "created_at"
-        }
+    struct Author: Decodable {
+        let date: String
     }
 }
