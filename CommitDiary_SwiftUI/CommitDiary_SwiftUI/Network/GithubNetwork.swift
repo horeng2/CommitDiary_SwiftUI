@@ -15,7 +15,10 @@ class GithubNetwork {
         self.session = session
     }
     
-    func dataRequest(of request: URLRequest) async throws -> Data {
+    func dataRequest<T: APIRequest>(of requestType: T) async throws -> T.ResponseType {
+        guard let request = requestType.urlRequest else {
+            throw NetworkError.urlError
+        }
         guard let (data, response) = try? await session.data(for: request)
             else {
             throw NetworkError.invaildData
@@ -26,30 +29,27 @@ class GithubNetwork {
             throw NetworkError.statusCodeError(code: errorCode)
         }
         
-        return data
+        guard let decodedData = try? JSONDecoder().decode(T.ResponseType.self, from: data) else {
+            throw NetworkError.parsingError(type: "\(T.ResponseType.self)")
+        }
+        return decodedData
     }
-    
-    func getUserInfo(with token: String) async throws -> UserInfo {
-        guard let userInfoRequest = UserInfoRequest(token: token).urlRequest else {
-            throw NetworkError.urlError
-        }
-        guard let data = try? await dataRequest(of: userInfoRequest) else {
-            throw NetworkError.invaildData
-        }
-        guard let userInfo = try? JSONDecoder().decode(UserInfo.self, from: data) else {
-            throw NetworkError.parsingError(type: "UserInfo")
-        }
-        
-        return userInfo
-    }
+
     
     func getContributions(with userId: String) async throws -> [Contribution] {
         guard let contributionRequest = ContributionsRequest(userId: userId).urlReauest else {
             throw NetworkError.urlError
         }
-        guard let data = try? await dataRequest(of: contributionRequest) else {
+        guard let (data, response) = try? await session.data(for: contributionRequest)
+            else {
             throw NetworkError.invaildData
         }
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+            let errorCode = String(describing: response)
+            throw NetworkError.statusCodeError(code: errorCode)
+        }
+  
         guard let html = String(data: data, encoding: .utf8) else {
             throw HTMLError.encodingError
         }

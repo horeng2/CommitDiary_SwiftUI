@@ -1,21 +1,24 @@
 //
-//  UserInfoRequest.swift
+//  CommitInfoRequest.swift
 //  CommitDiary_SwiftUI
 //
-//  Created by 서녕 on 2022/10/04.
+//  Created by 서녕 on 2022/10/16.
 //
 
 import Foundation
 
-struct UserInfoRequest: APIRequest {
-    typealias ResponseType = UserInfo
+struct CommitInfoRequest: APIRequest {
+    typealias ResponseType = [CommitInfo]
     
+    let repo: RepoInfo
     let token: String
-    var url: URL? = URL(string: "https://api.github.com/user")
+    var url: URL? {
+        URL(string: "https://api.github.com/repos/\(repo.owner.name)/\(repo.repoName)/comments")
+    }
     let httpMethod = "Get"
     var headers: [String: String] {
-        ["Authorization": "token \(token)",
-         "Accept": "application/vnd.github.v3+json"]
+        ["Authorization": "Bearer \(token)",
+         "Accept": "application/vnd.github+json"]
     }
     
     var urlRequest: URLRequest? {
