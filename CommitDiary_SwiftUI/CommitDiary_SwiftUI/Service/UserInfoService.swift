@@ -15,7 +15,7 @@ class UserInfoService: ObservableObject {
             return
         }
         let githubNetwork = GithubNetwork()
-        guard let info = try? await githubNetwork.getUserInfo(with: token) else {
+        guard let info = try? await githubNetwork.dataRequest(of: UserInfoRequest(token: token)) else {
             return
         }
         DispatchQueue.main.async {
