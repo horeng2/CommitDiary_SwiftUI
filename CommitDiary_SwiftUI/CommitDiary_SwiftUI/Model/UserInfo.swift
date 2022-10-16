@@ -14,6 +14,7 @@ struct UserInfo: Decodable {
     let profileImageUrl: String
     let githubUrl: String
     let blogUrl: String
+    let reposUrl: String
     
     private enum CodingKeys: String, CodingKey {
         case id = "login"
@@ -22,6 +23,7 @@ struct UserInfo: Decodable {
         case profileImageUrl = "avatar_url"
         case githubUrl = "html_url"
         case blogUrl = "blog"
+        case reposUrl = "repos_url"
     }
 }
 
@@ -32,7 +34,8 @@ extension UserInfo {
                  bio: "",
                  profileImageUrl: "",
                  githubUrl: "",
-                 blogUrl: "")
+                 blogUrl: "",
+                 reposUrl: "")
     }
     
     static var mock: UserInfo {
@@ -41,6 +44,7 @@ extension UserInfo {
                  bio: "안녕하세요",
                  profileImageUrl: "https://avatars.githubusercontent.com/u/87305744?v=4",
                  githubUrl: "https://github.com/horeng2",
-                 blogUrl: "https://velog.io/@horeng2")
+                 blogUrl: "https://velog.io/@horeng2",
+                 reposUrl: "https://api.github.com/users/horeng2/repos")
     }
 }
