@@ -32,6 +32,10 @@ extension Color {
     public static var defaultGreen4: Color {
         return Color("lv4")
     }
+    
+    public static var greenTable: Color {
+        return Color("greenTable")
+    }
 
     public static var blue1: Color {
         return Color("lv1_blue")
@@ -47,6 +51,10 @@ extension Color {
     
     public static var blue4: Color {
         return Color("lv4_blue")
+    }
+    
+    public static var blueTable: Color {
+        return Color("blueTable")
     }
     
     public static var orange1: Color {
@@ -65,6 +73,10 @@ extension Color {
         return Color("lv4_orange")
     }
     
+    public static var orangeTable: Color {
+        return Color("orangeTable")
+    }
+    
     public static var pink1: Color {
         return Color("lv1_pink")
     }
@@ -81,6 +93,10 @@ extension Color {
         return Color("lv4_pink")
     }
     
+    public static var pinkTable: Color {
+        return Color("pinkTable")
+    }
+    
     public static var black1: Color {
         return Color("lv1_black")
     }
@@ -95,5 +111,9 @@ extension Color {
     
     public static var black4: Color {
         return Color("lv4_black")
+    }
+    
+    public static var blackTable: Color {
+        return Color("blackTable")
     }
 }
