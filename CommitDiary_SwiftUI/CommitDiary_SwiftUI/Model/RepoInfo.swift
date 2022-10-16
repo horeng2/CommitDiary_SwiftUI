@@ -1,5 +1,5 @@
 //
-//  RepoInfos.swift
+//  RepoInfo.swift
 //  CommitDiary_SwiftUI
 //
 //  Created by 서녕 on 2022/10/16.
@@ -7,16 +7,23 @@
 
 import Foundation
 
-struct RepoInfos: Decodable {
-    let repos: [Repo]
+struct RepoInfo: Decodable, Identifiable {
+    var id = UUID()
+    let owner: Owner
+    let repoName: String
+    let updatedDate: String
     
-    struct Repo: Decodable {
+    private enum CodingKeys: String, CodingKey {
+        case owner
+        case repoName = "name"
+        case updatedDate = "updated_at"
+    }
+    
+    struct Owner: Decodable {
         let name: String
-        let commitsUrl: String
         
         private enum CodingKeys: String, CodingKey {
-            case name = "name"
-            case commitsUrl = "commits_url"
+            case name = "login"
         }
     }
 }
