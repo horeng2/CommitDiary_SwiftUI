@@ -12,6 +12,7 @@ struct EditNoteView: View {
     @Environment(\.managedObjectContext) private var managedObjectContext
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var commitInfoService: CommitInfoService
+//    @ObservedObject var note: NoteEntity
     @State var note: Note
     @State var isModifyMode: Bool
     @State var isEmptyData = false
@@ -25,7 +26,6 @@ struct EditNoteView: View {
             .toolbar {
                 saveButtonView()
             }
-            .navigationBarTitleDisplayMode(.inline)
     }
     
     private var content: some View {
@@ -35,7 +35,7 @@ struct EditNoteView: View {
                 pickLogView()
                 titleView()
                 noteDescriptionView()
-                    .onChange(of: note.description) { newValue in
+                    .onChange(of: note.noteDescription) { newValue in
                         proxy.scrollTo("newInput", anchor: .bottom)
                     }.id("newInput")
             }
@@ -54,7 +54,7 @@ extension EditNoteView {
             dateView()
             commitCountView()
         }
-        .padding(.top)
+        .padding(.top, 0)
     }
     
     private func dateView() -> some View {
@@ -106,10 +106,10 @@ extension EditNoteView {
         HStack {
             formTitleView(title: "커밋 내역 선택")
             Spacer()
-            Picker("커밋", selection: $note.commitMessages) {
+            Picker("커밋", selection: $note.commitMessage) {
                 let commitList = commitInfoService.commitMessages
-                    .filter{ $0.infoItmes.message != note.commitMessages }
-                Text(note.commitMessages).tag(note.commitMessages)
+                    .filter{ $0.infoItmes.message != note.commitMessage }
+                Text(note.commitMessage).tag(note.commitMessage)
                 ForEach(commitList, id: \.id) { commit in
                     Text(commit.infoItmes.message).tag(commit.infoItmes.message)
                 }
@@ -141,7 +141,7 @@ extension EditNoteView {
     private func noteDescriptionView() -> some View {
         VStack(alignment: .leading) {
             formTitleView(title: "내용")
-            TextEditor(text: $note.description)
+            TextEditor(text: $note.noteDescription)
                 .font(.system(.body, design: .monospaced))
                 .foregroundColor(.black)
                 .frame(minHeight: 500)
@@ -156,7 +156,7 @@ extension EditNoteView {
     
     private func saveButtonView() -> some View {
         Button {
-            if note.title.isEmpty || note.description.isEmpty {
+            if note.title.isEmpty || note.noteDescription.isEmpty {
                 isEmptyData = true
             } else {
                 saveNote(isModifyMode: isModifyMode)
@@ -209,11 +209,5 @@ extension EditNoteView {
         } catch {
             print("Error saving managed object context: \(error)")
         }
-    }
-}
-
-struct EditNoteView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditNoteView(note: Note(commitCount: 8), isModifyMode: true, colorTheme: .constant(Theme.blue))
     }
 }

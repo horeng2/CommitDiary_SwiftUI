@@ -11,19 +11,19 @@ struct Note {
     var id: String
     var title: String
     var date: Date
-    var description: String
+    var noteDescription: String
     var commitCount: Int
     var repositoryName: String
-    var commitMessages: String
+    var commitMessage: String
     
     
     init(commitCount: Int) {
         self.id = UUID().uuidString
         self.title = ""
         self.date = Date()
-        self.description = ""
+        self.noteDescription = ""
         self.commitCount = commitCount
         self.repositoryName = "선택 없음"
-        self.commitMessages = "선택 없음"
+        self.commitMessage = "선택 없음"
     }
 }

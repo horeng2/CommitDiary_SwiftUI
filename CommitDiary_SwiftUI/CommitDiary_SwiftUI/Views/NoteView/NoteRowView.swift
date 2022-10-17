@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct NoteRowView: View {
-    @State var title: String
-    @State var date: Date
-    @State var commitCount: Int
+    @ObservedObject var noteEntity: NoteEntity
     
     var body: some View {
         content
@@ -29,21 +27,15 @@ struct NoteRowView: View {
 extension NoteRowView {
     private func noteInfoView() -> some View {
         VStack(alignment: .leading) {
-            Text(title)
+            Text(noteEntity.title)
                 .font(.system(.headline, design: .monospaced))
-            Text(date.toString())
+            Text(noteEntity.date.toString())
                 .font(.system(.subheadline, design: .monospaced))
         }
     }
     
     private func commitCountView() -> some View {
-        Text("🌱\(commitCount)")
+        Text("🌱\(noteEntity.commitCount)")
             .font(.system(.body, design: .monospaced))
-    }
-}
-
-struct NoteRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        NoteRowView(title: "오늘의 삽질기록", date: Date(), commitCount: 5)
     }
 }

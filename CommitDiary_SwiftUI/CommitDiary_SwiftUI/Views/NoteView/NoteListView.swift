@@ -27,7 +27,6 @@ struct NoteListView: View {
                 listContent
             }
         }
-        .navigationViewStyle(.stack)
     }
     
     private var emptyContent: some View {
@@ -51,8 +50,7 @@ struct NoteListView: View {
 extension NoteListView {
     private func plusButtonView() -> some View {
         NavigationLink {
-            let newNote = Note(commitCount: contributionService.todaysCommit)
-            EditNoteView(note: newNote, isModifyMode: false, colorTheme: $colorTheme)
+            EditNoteView(note: Note(commitCount: contributionService.todaysCommit), isModifyMode: false, colorTheme: $colorTheme)
         } label: {
             Image(systemName: "plus")
         }
@@ -61,23 +59,15 @@ extension NoteListView {
     private func listView() -> some View {
         List {
             ForEach(notes, id: \.id) {noteObject in
-                makeNavigationLink(of: Note(managedObject: noteObject))
-                    .listRowBackground(colorTheme.viewBackground)
+                NavigationLink {
+                    EditNoteView(note: Note(managedObject: noteObject), isModifyMode: true, colorTheme: $colorTheme)
+                } label: {
+                    NoteRowView(noteEntity: noteObject)
+                }
+                .listRowBackground(colorTheme.viewBackground)
             }
             .onDelete(perform: deleteNote)
             .listRowSeparator(.visible)
-        }
-    }
-    
-    private func makeNavigationLink(of note: Note) -> some View {
-        NavigationLink {
-            EditNoteView(note: note, isModifyMode: true, colorTheme: $colorTheme)
-        } label: {
-            NoteRowView(
-                title: note.title,
-                date: note.date,
-                commitCount: note.commitCount
-            )
         }
     }
 }
