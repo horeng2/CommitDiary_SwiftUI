@@ -10,11 +10,15 @@ import SwiftUI
 struct CommitStatusView: View {
     @EnvironmentObject var contributionService: ContributionService
     @Binding var colorTheme: Theme
+    @State var isLoding = false
     
     var body: some View {
         NavigationView {
             content
                 .navigationTitle("활동")
+                .toolbar {
+                    refreshButtonView()
+                }
         }
         .navigationViewStyle(.stack)
     }
@@ -36,6 +40,26 @@ struct CommitStatusView: View {
 }
 
 extension CommitStatusView {
+    private func refreshButtonView() -> some View {
+        Button {
+            isLoding = true
+            Task{
+                try await Task.sleep(nanoseconds: 800_000_000)
+                await contributionService.loadContribution()
+                isLoding = false
+            }
+        } label: {
+            Image(systemName: "arrow.triangle.2.circlepath").opacity(isLoding ? 0.5 : 1)
+                .labelStyle(.iconOnly)
+                .imageScale(.large)
+                .rotationEffect(.degrees(isLoding ? 360 : 0))
+                .scaleEffect(isLoding ? 1.5 : 1)
+                .padding()
+                .animation(.spring(), value: isLoding)
+        }
+        .disabled(isLoding)
+    }
+    
     private func contributionView() -> some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("CONTRIBUTIONS")
