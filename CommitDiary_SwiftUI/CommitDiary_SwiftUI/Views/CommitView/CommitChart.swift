@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct CommitChart<Index: View>: View {
-    let rows = 7
-    let columns: Int
-    let spacing: CGFloat
-    let index: (Int, Int) -> Index
+    private let rows = 7
+    private let columns: Int
+    private let spacing: CGFloat
+    private let index: (Int, Int) -> Index
     
     var body: some View {
         HStack(alignment: .center, spacing: spacing) {

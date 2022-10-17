@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SettingView: View {
-    @Environment(\.openURL) var openURL
-    @EnvironmentObject var userInfoService: UserInfoService
+    @Environment(\.openURL) private var openURL
+    @EnvironmentObject private var userInfoService: UserInfoService
     @State var tapColorThemeButton = false
     @State var tapLogoutButton = false
     @Binding var colorTheme: Theme

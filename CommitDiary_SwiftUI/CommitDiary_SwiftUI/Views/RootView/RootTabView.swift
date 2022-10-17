@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RootTabView: View {
-    @EnvironmentObject var contributionService: ContributionService
+    @EnvironmentObject private var contributionService: ContributionService
     @Binding var colorTheme: Theme
     
     var body: some View {

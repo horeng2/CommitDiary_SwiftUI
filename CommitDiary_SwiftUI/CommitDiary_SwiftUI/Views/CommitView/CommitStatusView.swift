@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct CommitStatusView: View {
-    @EnvironmentObject var contributionService: ContributionService
+    @EnvironmentObject private var contributionService: ContributionService
+    @State private var isLoding = false
     @Binding var colorTheme: Theme
-    @State var isLoding = false
     
     var body: some View {
         NavigationView {

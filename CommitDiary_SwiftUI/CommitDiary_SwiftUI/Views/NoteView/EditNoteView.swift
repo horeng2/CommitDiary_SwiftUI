@@ -10,7 +10,7 @@ import Combine
 
 struct EditNoteView: View {
     @Environment(\.managedObjectContext) private var managedObjectContext
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) private var presentationMode
     @EnvironmentObject var commitInfoService: CommitInfoService
     @State var note: Note
     @State var isModifyMode: Bool
@@ -48,7 +48,7 @@ struct EditNoteView: View {
 extension EditNoteView {
     
     // MARK: Date, CommitCount Text
-    
+
     private func dayInfoView() -> some View {
         VStack {
             dateView()

@@ -9,13 +9,13 @@ import SwiftUI
 
 @main
 struct CommitDiary_SwiftUIApp: App {
-    @AppStorage(LoginManager.isLoginKey) var isLogin = false
-    @AppStorage("theme") var colorTheme = Theme.defaultGreen
+    @AppStorage(LoginManager.isLoginKey) private var isLogin = false
+    @AppStorage("theme") private var colorTheme = Theme.defaultGreen
     
-    @StateObject var userInfoService = UserInfoService()
-    @StateObject var contributionService = ContributionService()
-    @StateObject var commitInfoService = CommitInfoService()
-    let coreDataStack = CoreDataStack.shared
+    @StateObject private var userInfoService = UserInfoService()
+    @StateObject private var contributionService = ContributionService()
+    @StateObject private var commitInfoService = CommitInfoService()
+    private let coreDataStack = CoreDataStack.shared
     
     var body: some Scene {
         WindowGroup {

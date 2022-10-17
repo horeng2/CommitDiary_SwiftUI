@@ -35,17 +35,15 @@ struct LoginManager {
             Keychain.create(key: LoginManager.tokenKey, token: token)
         }
         isLogin = true
-//        UserDefaults.standard.set(true, forKey: LoginManager.isLoginKey)
     }
     
     func logout() {
         Keychain.delete(key: LoginManager.tokenKey)
-//        UserDefaults.standard.set(false, forKey: LoginManager.isLoginKey)
         isLogin = false
     }
     
     
-    func requestAccessToken(with code: String, completion: @escaping (String) -> Void)  {
+    private func requestAccessToken(with code: String, completion: @escaping (String) -> Void)  {
         let urlString = "https://github.com/login/oauth/access_token"
         var components = URLComponents(string: urlString)!
         components.queryItems = [

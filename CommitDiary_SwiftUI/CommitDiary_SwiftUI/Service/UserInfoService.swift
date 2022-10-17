@@ -27,7 +27,7 @@ class UserInfoService: ObservableObject {
         }
     }
     
-    func loadProfilImage(url: String) {
+    private func loadProfilImage(url: String) {
         guard let imageUrl = URL(string: url),
               let data = try? Data(contentsOf: imageUrl),
               let image = UIImage(data: data) else {

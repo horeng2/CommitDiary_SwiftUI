@@ -9,14 +9,14 @@ import SwiftUI
 import CoreData
 
 struct NoteListView: View {
-    @EnvironmentObject var contributionService: ContributionService
+    @EnvironmentObject private var contributionService: ContributionService
     @Environment(\.managedObjectContext) private var managedObjectContext
     @FetchRequest(
       entity: NoteEntity.entity(),
       sortDescriptors: [
         NSSortDescriptor(keyPath: \NoteEntity.date, ascending: false)
       ]
-    ) var notes: FetchedResults<NoteEntity>
+    ) private var notes: FetchedResults<NoteEntity>
     @Binding var colorTheme: Theme
     
     var body: some View {
@@ -74,7 +74,7 @@ extension NoteListView {
 }
 
 extension NoteListView {
-    func deleteNote(at offsets: IndexSet) {
+    private func deleteNote(at offsets: IndexSet) {
         withAnimation {
 
         managedObjectContext.perform {
@@ -85,7 +85,7 @@ extension NoteListView {
         
     }
     
-    func saveContext() {
+    private func saveContext() {
       do {
         try managedObjectContext.save()
       } catch {
