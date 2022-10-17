@@ -105,19 +105,22 @@ extension CommitStatusView {
     
     private func commitGraphView() -> some View {
         ZStack(alignment: .leading) {
-            let graphWidth: CGFloat = 200
-            let currentContinuousCommit = CGFloat(contributionService.currentContinuousCommit)
-            let bestContinuousCommit = CGFloat(contributionService.bestContinuousCommit)
-            Rectangle()
-                .frame(
-                    width: graphWidth / bestContinuousCommit * currentContinuousCommit,
-                    height: 20,
-                    alignment: .leading
-                )
-                .foregroundColor(colorTheme.levelfourColor)
             Rectangle()
                 .stroke(.black, lineWidth: 2)
                 .frame(height: 20,  alignment: .leading)
+            
+            if contributionService.currentContinuousCommit > 0 {
+                let graphWidth: CGFloat = 200
+                let currentContinuousCommit = CGFloat(contributionService.currentContinuousCommit)
+                let bestContinuousCommit = CGFloat(contributionService.bestContinuousCommit)
+                Rectangle()
+                    .frame(
+                        width: graphWidth / bestContinuousCommit * currentContinuousCommit,
+                        height: 20,
+                        alignment: .leading
+                    )
+                    .foregroundColor(colorTheme.levelfourColor)
+            }
         }
     }
 }

@@ -9,13 +9,13 @@ import SwiftUI
 import CoreData
 
 struct NoteListView: View {
-    @EnvironmentObject private var contributionService: ContributionService
     @Environment(\.managedObjectContext) private var managedObjectContext
+    @EnvironmentObject private var contributionService: ContributionService
     @FetchRequest(
-      entity: NoteEntity.entity(),
-      sortDescriptors: [
-        NSSortDescriptor(keyPath: \NoteEntity.date, ascending: false)
-      ]
+        entity: NoteEntity.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \NoteEntity.date, ascending: false)
+        ]
     ) private var notes: FetchedResults<NoteEntity>
     @Binding var colorTheme: Theme
     
@@ -27,6 +27,7 @@ struct NoteListView: View {
                 listContent
             }
         }
+        .navigationViewStyle(.stack)
     }
     
     private var emptyContent: some View {
@@ -68,7 +69,6 @@ extension NoteListView {
             }
             .onDelete(perform: deleteNote)
             .listRowSeparator(.visible)
-
         }
     }
 }
@@ -76,21 +76,19 @@ extension NoteListView {
 extension NoteListView {
     private func deleteNote(at offsets: IndexSet) {
         withAnimation {
-
-        managedObjectContext.perform {
-            offsets.map { notes[$0] }.forEach(managedObjectContext.delete)
-            saveContext()
+            managedObjectContext.perform {
+                offsets.map { notes[$0] }.forEach(managedObjectContext.delete)
+                saveContext()
+            }
         }
-        }
-        
     }
     
     private func saveContext() {
-      do {
-        try managedObjectContext.save()
-      } catch {
-        print("Error saving managed object context: \(error)")
-      }
+        do {
+            try managedObjectContext.save()
+        } catch {
+            print("Error saving managed object context: \(error)")
+        }
     }
 }
 
