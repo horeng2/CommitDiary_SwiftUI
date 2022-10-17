@@ -27,10 +27,13 @@ struct CommitDiary_SwiftUIApp: App {
                     .environmentObject(commitInfoService)
                     .task {
                         await userInfoService.loadUserInfo()
-                        await commitInfoService.loadRepos(from: userInfoService.userInfo.reposUrl)
+                    }
+                    .task {
                         await contributionService.loadContribution()
                     }
-                
+                    .task {
+                        await commitInfoService.loadRepos(from: userInfoService.userInfo.reposUrl)
+                    }
             } else {
                 LoginView()
             }
