@@ -74,8 +74,6 @@ extension EditNoteView {
             .onChange(of: selectedRepoId, perform: { id in
                 Task {
                     await commitInfoService.loadCommits(of: id)
-                    print(id)
-                    print(commitInfoService.commitComments)
                 }
             })
             Picker(selection: $selectedCommitId, label: Text("커밋")) {
