@@ -14,7 +14,7 @@ extension Note {
     init(managedObject: NoteEntity) {
         self.id = managedObject.id
         self.title = managedObject.title
-        self.date = managedObject.date
+        self.date = managedObject.date ?? Date()
         self.noteDescription = managedObject.noteDescription
         self.commitCount = managedObject.commitCount
         self.repositoryName = managedObject.repositoryName

@@ -58,7 +58,7 @@ extension NoteListView {
     
     private func listView() -> some View {
         List {
-            ForEach(notes, id: \.id) {noteObject in
+            ForEach(notes, id: \.objectID) { noteObject in
                 NavigationLink {
                     EditNoteView(note: Note(managedObject: noteObject), isModifyMode: true, colorTheme: $colorTheme)
                 } label: {
@@ -68,17 +68,21 @@ extension NoteListView {
             }
             .onDelete(perform: deleteNote)
             .listRowSeparator(.visible)
+
         }
     }
 }
 
 extension NoteListView {
     func deleteNote(at offsets: IndexSet) {
-        for offset in offsets {
-            let note = notes[offset]
-            managedObjectContext.delete(note)
+        withAnimation {
+
+        managedObjectContext.perform {
+            offsets.map { notes[$0] }.forEach(managedObjectContext.delete)
+            saveContext()
         }
-        saveContext()
+        }
+        
     }
     
     func saveContext() {

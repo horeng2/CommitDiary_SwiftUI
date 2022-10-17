@@ -12,7 +12,6 @@ struct EditNoteView: View {
     @Environment(\.managedObjectContext) private var managedObjectContext
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var commitInfoService: CommitInfoService
-//    @ObservedObject var note: NoteEntity
     @State var note: Note
     @State var isModifyMode: Bool
     @State var isEmptyData = false
@@ -84,9 +83,8 @@ extension EditNoteView {
     }
     
     private func pickRepoView() -> some View {
-        HStack {
+        VStack {
             formTitleView(title: "레포지토리 선택")
-            Spacer()
             Picker("레포지토리", selection: $note.repositoryName) {
                 let repoList = commitInfoService.repos.filter{ $0.repoName != note.repositoryName }
                 Text(note.repositoryName).tag(note.repositoryName)
@@ -95,6 +93,7 @@ extension EditNoteView {
                 }
             }
             .onChange(of: note.repositoryName, perform: { repoName in
+                note.commitMessage = "선택 안함"
                 Task {
                     await commitInfoService.loadCommits(of: repoName)
                 }
@@ -103,9 +102,8 @@ extension EditNoteView {
     }
     
     private func pickCommitView() -> some View {
-        HStack {
+        VStack {
             formTitleView(title: "커밋 내역 선택")
-            Spacer()
             Picker("커밋", selection: $note.commitMessage) {
                 let commitList = commitInfoService.commitMessages
                     .filter{ $0.infoItmes.message != note.commitMessage }

@@ -29,7 +29,7 @@ extension NoteRowView {
         VStack(alignment: .leading) {
             Text(noteEntity.title)
                 .font(.system(.headline, design: .monospaced))
-            Text(noteEntity.date.toString())
+            Text(noteEntity.date?.toString() ?? "")
                 .font(.system(.subheadline, design: .monospaced))
         }
     }

@@ -16,7 +16,7 @@ extension NoteEntity {
     }
     @NSManaged public var id: String
     @NSManaged public var title: String
-    @NSManaged public var date: Date
+    @NSManaged public var date: Date?
     @NSManaged public var noteDescription: String
     @NSManaged public var commitCount: Int
     @NSManaged public var repositoryName: String
