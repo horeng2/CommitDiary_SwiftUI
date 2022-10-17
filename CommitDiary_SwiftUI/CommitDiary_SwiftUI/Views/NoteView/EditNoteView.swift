@@ -29,7 +29,7 @@ struct EditNoteView: View {
     
     private var content: some View {
         ScrollViewReader { (proxy: ScrollViewProxy) in
-            ScrollView {
+            ScrollView(.vertical) {
                 dayInfoView()
                 pickLogView()
                 titleView()
@@ -40,6 +40,7 @@ struct EditNoteView: View {
             }
         }
     }
+    
 }
 
 // MARK: Views
@@ -47,7 +48,7 @@ struct EditNoteView: View {
 extension EditNoteView {
     
     // MARK: Date, CommitCount Text
-
+    
     private func dayInfoView() -> some View {
         VStack {
             dateView()
@@ -83,17 +84,27 @@ extension EditNoteView {
     }
     
     private func pickRepoView() -> some View {
-        VStack {
-            formTitleView(title: "레포지토리 선택")
-            Picker("레포지토리", selection: $note.repositoryName) {
-                let repoList = commitInfoService.repos.filter{ $0.repoName != note.repositoryName }
-                Text(note.repositoryName).tag(note.repositoryName)
-                ForEach(repoList, id: \.id) { repo in
-                    Text(repo.repoName).tag(repo.repoName)
+        HStack {
+            formTitleView(title: "레포지토리")
+            Spacer()
+            Menu {
+                Picker("레포지토리", selection: $note.repositoryName) {
+                    let repoList = commitInfoService.repos.filter{ $0.repoName != note.repositoryName }
+                    ForEach(repoList, id: \.id) { repo in
+                        Text(repo.repoName).tag(repo.repoName)
+                    }
+                }
+            } label: {
+                Text(note.repositoryName)
+                    .frame(alignment: .trailing)
+            }
+            .onAppear {
+                Task {
+                    await commitInfoService.loadCommits(of: note.repositoryName)
                 }
             }
             .onChange(of: note.repositoryName, perform: { repoName in
-                note.commitMessage = "선택 안함"
+                note.commitMessage = "선택해주세요."
                 Task {
                     await commitInfoService.loadCommits(of: repoName)
                 }
@@ -102,19 +113,24 @@ extension EditNoteView {
     }
     
     private func pickCommitView() -> some View {
-        VStack {
-            formTitleView(title: "커밋 내역 선택")
-            Picker("커밋", selection: $note.commitMessage) {
-                let commitList = commitInfoService.commitMessages
-                    .filter{ $0.infoItmes.message != note.commitMessage }
-                Text(note.commitMessage).tag(note.commitMessage)
-                ForEach(commitList, id: \.id) { commit in
-                    Text(commit.infoItmes.message).tag(commit.infoItmes.message)
+        HStack {
+            formTitleView(title: "커밋 내역")
+            Spacer()
+            Menu {
+                Picker("커밋", selection: $note.commitMessage) {
+                    let commitList = commitInfoService.commitMessages
+                        .filter{ $0.infoItmes.message != note.commitMessage }
+                    ForEach(commitList, id: \.id) { commit in
+                        Text(commit.infoItmes.message).tag(commit.infoItmes.message)
+                    }
                 }
+            } label: {
+                Text(note.commitMessage)
+                    .multilineTextAlignment(.trailing)
             }
         }
     }
-
+    
     
     // MARK: Edit Title, Description Text
     

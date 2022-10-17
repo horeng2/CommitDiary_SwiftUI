@@ -23,7 +23,7 @@ struct Note {
         self.date = Date()
         self.noteDescription = ""
         self.commitCount = commitCount
-        self.repositoryName = "선택 없음"
-        self.commitMessage = "선택 없음"
+        self.repositoryName = "선택해주세요."
+        self.commitMessage = "선택해주세요."
     }
 }
