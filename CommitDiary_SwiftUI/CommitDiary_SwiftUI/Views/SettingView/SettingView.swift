@@ -56,7 +56,7 @@ extension SettingView {
                     }
             }
         }
-        .font(.system(size: 17, design: .monospaced))
+        .font(.system(.body, design: .monospaced))
         .foregroundColor(.black)
     }
     

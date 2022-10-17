@@ -54,18 +54,19 @@ extension EditNoteView {
             dateView()
             commitCountView()
         }
-        .padding()
     }
     
     private func dateView() -> some View {
         Text(note.date.toString())
-            .font(.system(size: 23, weight: .bold, design: .monospaced))
+            .font(.system(.title2, design: .monospaced))
+            .fontWeight(.bold)
             .foregroundColor(.black)
     }
     
     private func commitCountView() -> some View {
-        Text("🌱오늘의 커밋은 \(note.commitCount)회🌱")
-            .font(.system(size: 20, weight: .medium, design: .monospaced))
+        Text("🌱 × \(note.commitCount)")
+            .font(.system(.title3, design: .monospaced))
+            .fontWeight(.bold)
             .foregroundColor(.gray)
             .padding(.top, 5)
     }
@@ -84,7 +85,7 @@ extension EditNoteView {
     private func pickRepoView() -> some View {
         HStack {
             Text("레포지토리 선택")
-                .font(.system(size: 15, weight: .medium))
+                .font(.system(.headline, design: .monospaced))
                 .foregroundColor(.gray)
             Spacer()
             Picker("레포지토리", selection: $selectedRepoId) {
@@ -105,11 +106,11 @@ extension EditNoteView {
     private func pickCommitView() -> some View {
         HStack {
             Text("커밋 내역 선택")
-                .font(.system(size: 15, weight: .medium))
+                .font(.system(.headline, design: .monospaced))
                 .foregroundColor(.gray)
             Spacer()
             Picker("커밋", selection: $selectedCommitId) {
-                Text("선택해주세요.").tag(UUID())
+                Text("레포지토리 선택 후 선택해주세요.").tag(UUID())
                 ForEach(commitInfoService.commitComments, id: \.id) { commit in
                     Text(commit.infoItmes.message)
                         .tag(commit.id)
@@ -124,11 +125,11 @@ extension EditNoteView {
     private func titleView() -> some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("제목")
-                .font(.system(size: 15, weight: .medium))
+                .font(.system(.headline, design: .monospaced))
                 .foregroundColor(.gray)
                 .padding(.horizontal)
             TextField(note.title, text: $note.title)
-                .font(.system(size: 18))
+                .font(.system(.body, design: .monospaced))
                 .foregroundColor(.black)
                 .border(colorTheme.levelOneColor)
                 .textFieldStyle(.roundedBorder)
@@ -137,6 +138,7 @@ extension EditNoteView {
                         note.title = String(note.title.prefix(20))
                     }
                 }
+                .padding()
         }
         .onAppear(perform: UIApplication.shared.hideKeyboard)
     }
@@ -144,13 +146,13 @@ extension EditNoteView {
     private func noteDescriptionView() -> some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("내용")
-                .font(.system(size: 15, weight: .medium))
+                .font(.system(.headline, design: .monospaced))
                 .foregroundColor(.gray)
                 .padding(.horizontal)
             TextEditor(text: $note.description)
-                .frame(minHeight: 500)
-                .font(.system(size: 18))
+                .font(.system(.body, design: .monospaced))
                 .foregroundColor(.black)
+                .frame(minHeight: 500)
                 .overlay(
                     Rectangle()
                         .stroke(colorTheme.levelOneColor)
@@ -179,7 +181,8 @@ extension EditNoteView {
             }
         } label: {
             Text("저장")
-                .font(.system(size: 20))
+                .font(.system(.body))
+                .fontWeight(.bold)
         }
         .alert("모든 값을 입력해주세요.", isPresented: $isEmptyData) {}
     }

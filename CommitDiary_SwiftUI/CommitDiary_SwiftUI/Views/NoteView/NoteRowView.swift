@@ -30,19 +30,20 @@ extension NoteRowView {
     private func noteInfoView() -> some View {
         VStack(alignment: .leading) {
             Text(title)
-                .font(.system(size: 18, weight: .bold, design: .monospaced))
+                .font(.system(.headline, design: .monospaced))
             Text(date.toString())
-                .font(.system(size: 15, design: .monospaced))
+                .font(.system(.subheadline, design: .monospaced))
         }
     }
     
     private func commitCountView() -> some View {
         Text("🌱\(commitCount)")
+            .font(.system(.body, design: .monospaced))
     }
 }
 
 struct NoteRowView_Previews: PreviewProvider {
     static var previews: some View {
-        NoteRowView(title: "title", date: Date(), commitCount: 5)
+        NoteRowView(title: "오늘의 삽질기록", date: Date(), commitCount: 5)
     }
 }
