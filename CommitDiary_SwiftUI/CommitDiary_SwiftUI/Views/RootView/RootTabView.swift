@@ -16,12 +16,12 @@ struct RootTabView: View {
     @EnvironmentObject var userInfoService: UserInfoService
     
     var body: some View {
-        if contributionService.contributions.isEmpty && isLogin {
-            progressView()
-        } else if isLogin {
-            rootTabView()
-        } else {
+        if isLogin == false {
             LoginView()
+        } else if contributionService.contributions.isEmpty {
+            progressView()
+        } else {
+            rootTabView()
         }
     }
 }
@@ -59,6 +59,9 @@ extension RootTabView {
         ProgressView()
             .progressViewStyle(.circular)
             .scaleEffect(2)
+            .task {
+                await contributionService.loadContribution(with: userInfoService.userInfo.id)
+            }
     }
 }
 

@@ -8,13 +8,9 @@
 import Foundation
 
 class CommitInfoService: ObservableObject {
-    @Published var commitComments = [CommitInfo]()
+    @Published var commitMessages = [CommitInfo]()
     @Published var repos = [RepoInfo]()
-    
-    init() {
-        
-    }
-    
+
     func loadRepos(from url: String) async {
         let githubNetwork = GithubNetwork()
         guard let token = Keychain.read(key: LoginManager.tokenKey) else {
@@ -41,7 +37,7 @@ class CommitInfoService: ObservableObject {
             return
         }
         DispatchQueue.main.async {
-            self.commitComments = commitInfos
+            self.commitMessages = commitInfos
         }
     }
 }

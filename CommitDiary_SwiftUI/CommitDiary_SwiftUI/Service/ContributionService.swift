@@ -14,32 +14,25 @@ class ContributionService: ObservableObject {
     @Published var currentContinuousCommit = 0
     @Published var bestContinuousCommit = 0
     
-    init() {
-        let userId = UserDefaults.standard.string(forKey: "userId") ?? ""
-        Task {
-            await loadContribution(with: userId)
-            todaysCommitCount()
-            continuousCommitCount()
-        }
-    }
-    
     func loadContribution(with userId: String) async {
         let githubNetwork = GithubNetwork()
         guard let contributions = try? await githubNetwork.getContributions(with: userId) else {
             return
         }
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [self] in
             self.contributions = contributions
+            self.todaysCommitCount()
+            self.continuousCommitCount()
         }
     }
     
-    func todaysCommitCount() {
+    private func todaysCommitCount() {
         DispatchQueue.main.async {
             self.todaysCommit = self.contributions.last?.commitCount ?? 0
         }
     }
     
-    func continuousCommitCount() {
+    private func continuousCommitCount() {
         DispatchQueue.main.async {
             let continuousGroup = self.contributions
                 .map{ String($0.level.rawValue) }
