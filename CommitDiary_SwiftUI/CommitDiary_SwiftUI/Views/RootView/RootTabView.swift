@@ -34,19 +34,24 @@ extension RootTabView {
                     Image(systemName: "leaf.fill")
                     Text("Today")
                 }
-            NoteListView()
+            NoteListView(colorTheme: $colorTheme)
                 .tabItem {
                     Image(systemName: "magazine")
                     Text("Note")
                 }
             SettingView(
                 userInfo: $userInfoService.userInfo,
+                profilImage: $userInfoService.profilImage,
                 colorTheme: $colorTheme
             )
             .tabItem {
                 Image(systemName: "gear")
                 Text("Setting")
             }
+        }
+        .accentColor(colorTheme.levelThreeColor)
+        .onAppear{
+            UITableView.appearance().backgroundColor = .clear
         }
     }
     

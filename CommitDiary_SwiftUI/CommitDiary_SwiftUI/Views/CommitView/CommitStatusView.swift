@@ -39,7 +39,7 @@ extension CommitStatusView {
     private func contributionView() -> some View {
         VStack(alignment: .leading) {
             Text("CONTRIBUTIONS")
-                .font(.system(size: 20, weight: .medium))
+                .font(.system(size: 20, weight: .medium, design: .monospaced))
                 .foregroundColor(.gray)
                 .padding(.horizontal)
             
@@ -55,10 +55,10 @@ extension CommitStatusView {
     private func todaysCommitView() -> some View {
         VStack {
             Text("오늘의 커밋")
-                .font(.system(size: 20, weight: .bold))
+                .font(.system(size: 20, weight: .bold, design: .monospaced))
                 .foregroundColor(.gray)
             Text("\(contributionService.todaysCommit)회")
-                .font(.system(size: 25, weight: .medium))
+                .font(.system(size: 25, weight: .medium, design: .monospaced))
                 .foregroundColor(.black)
         }
     }
@@ -66,10 +66,10 @@ extension CommitStatusView {
     private func currentContinuousCommitView() -> some View {
         VStack {
             Text("연속 기록")
-                .font(.system(size: 20, weight: .bold))
+                .font(.system(size: 20, weight: .bold, design: .monospaced))
                 .foregroundColor(.gray)
             Text("\(contributionService.currentContinuousCommit)일")
-                .font(.system(size: 25, weight: .medium))
+                .font(.system(size: 25, weight: .medium, design: .monospaced))
                 .foregroundColor(.black)
         }
     }
@@ -77,10 +77,10 @@ extension CommitStatusView {
     private func bestContinuousCommitView() -> some View {
         VStack {
             Text("최장 연속 기록")
-                .font(.system(size: 20, weight: .bold))
+                .font(.system(size: 20, weight: .bold, design: .monospaced))
                 .foregroundColor(.gray)
             Text("연속 \(contributionService.bestContinuousCommit)일")
-                .font(.system(size: 25, weight: .medium))
+                .font(.system(size: 25, weight: .medium, design: .monospaced))
                 .foregroundColor(.black)
         }
     }

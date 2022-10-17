@@ -12,6 +12,7 @@ struct SettingView: View {
     @State var tapColorThemeButton = false
     @State var tapLogoutButton = false
     @Binding var userInfo: UserInfo
+    @Binding var profilImage: UIImage
     @Binding var colorTheme: Theme
     
     var body: some View {
@@ -61,15 +62,10 @@ extension SettingView {
     
     private func userInfoView() -> some View {
         HStack {
-            AsyncImage(url: URL(string: userInfo.profileImageUrl)) { image in
-                image.resizable()
-            } placeholder: {
-                Image(systemName: "person")
-                    .resizable()
-                    .frame(width: 30, height: 30)
-            }
-            .frame(width: 100, height: 100)
-            .clipShape(RoundedRectangle(cornerRadius: 50))
+            Image(uiImage: profilImage)
+                .resizable()
+                .frame(width: 100, height: 100)
+                .clipShape(RoundedRectangle(cornerRadius: 50))
             
             VStack(alignment: .leading) {
                 Text(userInfo.name)
@@ -112,6 +108,6 @@ extension SettingView {
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView(userInfo: .constant(UserInfo.mock), colorTheme: .constant(.defaultGreen))
+        SettingView(userInfo: .constant(UserInfo.mock), profilImage: .constant(UIImage(systemName: "person")!), colorTheme: .constant(.defaultGreen))
     }
 }

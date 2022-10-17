@@ -30,7 +30,7 @@ extension NoteRowView {
     private func noteInfoView() -> some View {
         VStack(alignment: .leading) {
             Text(title)
-                .font(.system(size: 20, weight: .bold, design: .monospaced))
+                .font(.system(size: 18, weight: .bold, design: .monospaced))
             Text(date.toString())
                 .font(.system(size: 15, design: .monospaced))
         }

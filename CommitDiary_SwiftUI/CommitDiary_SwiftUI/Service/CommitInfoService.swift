@@ -25,7 +25,6 @@ class CommitInfoService: ObservableObject {
         }
         DispatchQueue.main.async {
             self.repos = repos.sorted(by: { $0.updatedDate > $1.updatedDate })
-            print(repos)
         }
     }
     
@@ -43,7 +42,6 @@ class CommitInfoService: ObservableObject {
         }
         DispatchQueue.main.async {
             self.commitComments = commitInfos
-            print(commitInfos)
         }
     }
 }
