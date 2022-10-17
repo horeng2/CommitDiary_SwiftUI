@@ -14,8 +14,9 @@ class ContributionService: ObservableObject {
     @Published var currentContinuousCommit = 0
     @Published var bestContinuousCommit = 0
     
-    func loadContribution(with userId: String) async {
+    func loadContribution() async {
         let githubNetwork = GithubNetwork()
+        let userId = UserDefaults.standard.string(forKey: "userId") ?? ""
         guard let contributions = try? await githubNetwork.getContributions(with: userId) else {
             return
         }

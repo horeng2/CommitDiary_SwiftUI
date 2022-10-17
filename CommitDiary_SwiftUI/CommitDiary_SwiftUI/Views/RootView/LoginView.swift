@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     @Environment(\.openURL) var openURL
-    @State var device = MTLCreateSystemDefaultDevice()
+
     var body: some View {
         VStack {
             Spacer()

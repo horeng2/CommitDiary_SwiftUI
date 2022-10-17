@@ -8,26 +8,20 @@
 import SwiftUI
 
 struct RootTabView: View {
-    @AppStorage(LoginManager.isLoginKey)
-    var isLogin = UserDefaults.standard.bool(forKey: LoginManager.isLoginKey) == true
-    @AppStorage("theme")
-    var colorTheme = Theme(rawValue: UserDefaults.standard.string(forKey: "theme") ?? "") ?? .defaultGreen
     @EnvironmentObject var contributionService: ContributionService
-    @EnvironmentObject var userInfoService: UserInfoService
+    @Binding var colorTheme: Theme
     
     var body: some View {
-        if isLogin == false {
-            LoginView()
-        } else if contributionService.contributions.isEmpty {
+        if contributionService.contributions.isEmpty {
             progressView()
         } else {
-            rootTabView()
+            tabView()
         }
     }
 }
 
 extension RootTabView {
-    private func rootTabView() -> some View {
+    private func tabView() -> some View {
         TabView {
             CommitStatusView(colorTheme: $colorTheme)
                 .tabItem {
@@ -39,11 +33,7 @@ extension RootTabView {
                     Image(systemName: "magazine")
                     Text("Note")
                 }
-            SettingView(
-                userInfo: $userInfoService.userInfo,
-                profilImage: $userInfoService.profilImage,
-                colorTheme: $colorTheme
-            )
+            SettingView(colorTheme: $colorTheme)
             .tabItem {
                 Image(systemName: "gear")
                 Text("Setting")
@@ -59,9 +49,6 @@ extension RootTabView {
         ProgressView()
             .progressViewStyle(.circular)
             .scaleEffect(2)
-            .task {
-                await contributionService.loadContribution(with: userInfoService.userInfo.id)
-            }
     }
 }
 
@@ -69,7 +56,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let contriburionService = ContributionService()
         let userInfoService = UserInfoService()
-        RootTabView()
+        RootTabView(colorTheme: .constant(Theme.blue))
             .environmentObject(contriburionService)
             .environmentObject(userInfoService)
     }

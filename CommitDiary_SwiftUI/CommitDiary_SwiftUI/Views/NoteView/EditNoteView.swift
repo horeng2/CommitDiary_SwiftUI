@@ -108,7 +108,7 @@ extension EditNoteView {
             Spacer()
             Picker("커밋", selection: $selectedCommitId) {
                 Text("레포지토리 선택 후 선택해주세요.").tag(UUID())
-                ForEach(commitInfoService.commitComments, id: \.id) { commit in
+                ForEach(commitInfoService.commitMessages, id: \.id) { commit in
                     Text(commit.infoItmes.message)
                         .tag(commit.id)
                 }

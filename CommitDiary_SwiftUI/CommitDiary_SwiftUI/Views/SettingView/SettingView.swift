@@ -9,10 +9,9 @@ import SwiftUI
 
 struct SettingView: View {
     @Environment(\.openURL) var openURL
+    @EnvironmentObject var userInfoService: UserInfoService
     @State var tapColorThemeButton = false
     @State var tapLogoutButton = false
-    @Binding var userInfo: UserInfo
-    @Binding var profilImage: UIImage
     @Binding var colorTheme: Theme
     
     var body: some View {
@@ -62,15 +61,15 @@ extension SettingView {
     
     private func userInfoView() -> some View {
         HStack {
-            Image(uiImage: profilImage)
+            Image(uiImage: userInfoService.profilImage)
                 .resizable()
                 .frame(width: 100, height: 100)
                 .clipShape(RoundedRectangle(cornerRadius: 50))
             
             VStack(alignment: .leading) {
-                Text(userInfo.name)
+                Text(userInfoService.userInfo.name)
                     .fontWeight(.bold)
-                Text(userInfo.id)
+                Text(userInfoService.userInfo.id)
                     .fontWeight(.bold)
             }
             .padding(.horizontal)
@@ -88,7 +87,7 @@ extension SettingView {
     
     private func moveButtonView() -> some View {
         Button("Github로 이동") {
-            openURL(URL(string: userInfo.githubUrl)!)
+            openURL(URL(string: userInfoService.userInfo.githubUrl)!)
         }
     }
     
@@ -108,6 +107,6 @@ extension SettingView {
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView(userInfo: .constant(UserInfo.mock), profilImage: .constant(UIImage(systemName: "person")!), colorTheme: .constant(.defaultGreen))
+        SettingView(colorTheme: .constant(.defaultGreen))
     }
 }
