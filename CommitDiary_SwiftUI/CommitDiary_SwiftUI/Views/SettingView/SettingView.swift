@@ -36,22 +36,26 @@ extension SettingView {
             Section {
                 ForEach(Theme.allCases, id: \.self) { theme in
                     pickColorButtonView(theme: theme)
+                        .listRowBackground(colorTheme.viewBackground)
                 }
             } header: {
                 Text("테마 색상")
             }
             Section {
                 moveButtonView()
+                    .listRowBackground(colorTheme.viewBackground)
             } header: {
                 Text("이동")
             }
             Section {
                 logoutButtonView()
+                    .listRowBackground(colorTheme.viewBackground)
                     .onTapGesture {
                         LoginManager.shared.logout()
                     }
             }
         }
+        .font(.system(size: 17, design: .monospaced))
         .foregroundColor(.black)
     }
     

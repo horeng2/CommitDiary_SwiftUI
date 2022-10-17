@@ -17,7 +17,7 @@ struct NoteListView: View {
         NSSortDescriptor(keyPath: \NoteEntity.date, ascending: false)
       ]
     ) var notes: FetchedResults<NoteEntity>
-
+    @Binding var colorTheme: Theme
     
     var body: some View {
         NavigationView {
@@ -52,7 +52,7 @@ extension NoteListView {
     private func plusButtonView() -> some View {
         NavigationLink {
             let newNote = Note(commitCount: contributionService.todaysCommit)
-            EditNoteView(note: newNote, isModifyMode: false)
+            EditNoteView(note: newNote, isModifyMode: false, colorTheme: $colorTheme)
         } label: {
             Image(systemName: "plus")
         }
@@ -62,6 +62,7 @@ extension NoteListView {
         List {
             ForEach(notes, id: \.id) {noteObject in
                 makeNavigationLink(of: Note(managedObject: noteObject))
+                    .listRowBackground(colorTheme.viewBackground)
             }
             .onDelete(perform: deleteNote)
             .listRowSeparator(.visible)
@@ -70,7 +71,7 @@ extension NoteListView {
     
     private func makeNavigationLink(of note: Note) -> some View {
         NavigationLink {
-            EditNoteView(note: note, isModifyMode: true)
+            EditNoteView(note: note, isModifyMode: true, colorTheme: $colorTheme)
         } label: {
             NoteRowView(
                 title: note.title,
@@ -102,7 +103,7 @@ extension NoteListView {
 struct NoteListView_Previews: PreviewProvider {
     static var previews: some View {
         let contributionService = ContributionService()
-        NoteListView()
+        NoteListView(colorTheme: .constant(Theme.blue))
             .environmentObject(contributionService)
     }
 }

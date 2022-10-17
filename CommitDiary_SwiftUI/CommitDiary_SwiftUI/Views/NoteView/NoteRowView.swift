@@ -29,9 +29,10 @@ struct NoteRowView: View {
 extension NoteRowView {
     private func noteInfoView() -> some View {
         VStack(alignment: .leading) {
-            Text(date.toString())
             Text(title)
-                .fontWeight(.bold)
+                .font(.system(size: 20, weight: .bold, design: .monospaced))
+            Text(date.toString())
+                .font(.system(size: 15, design: .monospaced))
         }
     }
     

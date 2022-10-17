@@ -30,18 +30,18 @@ enum Theme: String, CaseIterable {
         }
     }
     
-    var tableViewBackground: Color {
+    var viewBackground: Color {
         switch self {
         case .defaultGreen:
-            return .greenTable
+            return .greenBackground
         case .blue:
-            return .blueTable
+            return .blueBackground
         case .orange:
-            return .orangeTable
+            return .orangeBackground
         case .pink:
-            return .pinkTable
+            return .pinkBackground
         case .black:
-            return .blackTable
+            return .blackBackground
         }
     }
         
