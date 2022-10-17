@@ -19,7 +19,6 @@ struct EditNoteView: View {
     @State var selectedCommitId = UUID()
     @Binding var colorTheme: Theme
     
-    
     var body: some View {
         content
             .toolbar {
@@ -40,7 +39,6 @@ struct EditNoteView: View {
             }
         }
     }
-    
 }
 
 // MARK: Views
