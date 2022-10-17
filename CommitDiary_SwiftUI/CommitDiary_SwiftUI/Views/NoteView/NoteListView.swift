@@ -33,7 +33,7 @@ struct NoteListView: View {
     private var emptyContent: some View {
         Text("기록을 작성해주세요.")
             .foregroundColor(.gray)
-            .navigationTitle("빈 일기장 💬")
+            .navigationTitle("텅 💬")
             .toolbar {
                 plusButtonView()
             }
