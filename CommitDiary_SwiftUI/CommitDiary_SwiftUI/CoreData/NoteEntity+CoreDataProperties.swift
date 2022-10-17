@@ -2,7 +2,7 @@
 //  NoteEntity+CoreDataProperties.swift
 //  CommitDiary_SwiftUI
 //
-//  Created by 서녕 on 2022/10/04.
+//  Created by 서녕 on 2022/10/17.
 //
 //
 
@@ -14,7 +14,6 @@ extension NoteEntity {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<NoteEntity> {
         return NSFetchRequest<NoteEntity>(entityName: "NoteEntity")
     }
-    
     @NSManaged public var id: String
     @NSManaged public var title: String
     @NSManaged public var date: Date
@@ -22,6 +21,7 @@ extension NoteEntity {
     @NSManaged public var commitCount: Int
     @NSManaged public var repositoryName: String
     @NSManaged public var commitMessage: String
+
     
     static let idKey = "id"
     static let titleKey = "title"

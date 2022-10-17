@@ -88,8 +88,9 @@ extension EditNoteView {
             formTitleView(title: "레포지토리 선택")
             Spacer()
             Picker("레포지토리", selection: $note.repositoryName) {
+                let repoList = commitInfoService.repos.filter{ $0.repoName != note.repositoryName }
                 Text(note.repositoryName).tag(note.repositoryName)
-                ForEach(commitInfoService.repos, id: \.id) { repo in
+                ForEach(repoList, id: \.id) { repo in
                     Text(repo.repoName).tag(repo.repoName)
                 }
             }
@@ -106,8 +107,10 @@ extension EditNoteView {
             formTitleView(title: "커밋 내역 선택")
             Spacer()
             Picker("커밋", selection: $note.commitMessages) {
+                let commitList = commitInfoService.commitMessages
+                    .filter{ $0.infoItmes.message != note.commitMessages }
                 Text(note.commitMessages).tag(note.commitMessages)
-                ForEach(commitInfoService.commitMessages, id: \.id) { commit in
+                ForEach(commitList, id: \.id) { commit in
                     Text(commit.infoItmes.message).tag(commit.infoItmes.message)
                 }
             }
