@@ -23,11 +23,11 @@ struct CommitStatusView: View {
         VStack {
             contributionView()
             Spacer()
-            todaysCommitView()
+            logView(title: "오늘의 커밋", log: "\(contributionService.todaysCommit)회")
             Spacer()
-            currentContinuousCommitView()
+            logView(title: "연속 기록", log: "\(contributionService.currentContinuousCommit)일")
             Spacer()
-            bestContinuousCommitView()
+            logView(title: "최장 연속 기록", log: "연속 \(contributionService.bestContinuousCommit)일")
             Spacer()
             commitGraphStatusView()
             Spacer()
@@ -37,12 +37,11 @@ struct CommitStatusView: View {
 
 extension CommitStatusView {
     private func contributionView() -> some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 0) {
             Text("CONTRIBUTIONS")
-                .font(.system(size: 20, weight: .medium, design: .monospaced))
+                .font(.system(.headline, design: .monospaced))
                 .foregroundColor(.gray)
                 .padding(.horizontal)
-            
             let cellsColor = contributionService.setCellsColor(
                 theme: colorTheme,
                 columnsCount: 20
@@ -52,35 +51,14 @@ extension CommitStatusView {
         .padding(.top, 30)
     }
     
-    private func todaysCommitView() -> some View {
-        VStack {
-            Text("오늘의 커밋")
-                .font(.system(size: 20, weight: .bold, design: .monospaced))
+    private func logView(title: String, log: String) -> some View {
+        VStack(spacing: 10) {
+            Text(title)
+                .font(.system(.title2, design: .monospaced))
                 .foregroundColor(.gray)
-            Text("\(contributionService.todaysCommit)회")
-                .font(.system(size: 25, weight: .medium, design: .monospaced))
-                .foregroundColor(.black)
-        }
-    }
-    
-    private func currentContinuousCommitView() -> some View {
-        VStack {
-            Text("연속 기록")
-                .font(.system(size: 20, weight: .bold, design: .monospaced))
-                .foregroundColor(.gray)
-            Text("\(contributionService.currentContinuousCommit)일")
-                .font(.system(size: 25, weight: .medium, design: .monospaced))
-                .foregroundColor(.black)
-        }
-    }
-    
-    private func bestContinuousCommitView() -> some View {
-        VStack {
-            Text("최장 연속 기록")
-                .font(.system(size: 20, weight: .bold, design: .monospaced))
-                .foregroundColor(.gray)
-            Text("연속 \(contributionService.bestContinuousCommit)일")
-                .font(.system(size: 25, weight: .medium, design: .monospaced))
+            Text(log)
+                .font(.system(.title2, design: .monospaced))
+                .fontWeight(.medium)
                 .foregroundColor(.black)
         }
     }
@@ -90,11 +68,11 @@ extension CommitStatusView {
             commitGraphView()
             HStack{
                 Text("0일")
-                    .font(.system(size: 20, weight: .medium))
+                    .font(.system(.title2, design: .monospaced))
                     .foregroundColor(.gray)
                 Spacer()
                 Text("\(contributionService.bestContinuousCommit)일")
-                    .font(.system(size: 20, weight: .medium))
+                    .fontWeight(.bold)
                     .foregroundColor(.gray)
             }
         }

@@ -54,6 +54,7 @@ extension EditNoteView {
             dateView()
             commitCountView()
         }
+        .padding(.top)
     }
     
     private func dateView() -> some View {
@@ -84,9 +85,7 @@ extension EditNoteView {
     
     private func pickRepoView() -> some View {
         HStack {
-            Text("레포지토리 선택")
-                .font(.system(.headline, design: .monospaced))
-                .foregroundColor(.gray)
+            formTitleView(title: "레포지토리 선택")
             Spacer()
             Picker("레포지토리", selection: $selectedRepoId) {
                 Text("선택해주세요.").tag(UUID())
@@ -105,9 +104,7 @@ extension EditNoteView {
     
     private func pickCommitView() -> some View {
         HStack {
-            Text("커밋 내역 선택")
-                .font(.system(.headline, design: .monospaced))
-                .foregroundColor(.gray)
+            formTitleView(title: "커밋 내역 선택")
             Spacer()
             Picker("커밋", selection: $selectedCommitId) {
                 Text("레포지토리 선택 후 선택해주세요.").tag(UUID())
@@ -123,11 +120,8 @@ extension EditNoteView {
     // MARK: Edit Title, Description Text
     
     private func titleView() -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text("제목")
-                .font(.system(.headline, design: .monospaced))
-                .foregroundColor(.gray)
-                .padding(.horizontal)
+        VStack(alignment: .leading) {
+            formTitleView(title: "제목")
             TextField(note.title, text: $note.title)
                 .font(.system(.body, design: .monospaced))
                 .foregroundColor(.black)
@@ -138,17 +132,14 @@ extension EditNoteView {
                         note.title = String(note.title.prefix(20))
                     }
                 }
-                .padding()
         }
+        .padding()
         .onAppear(perform: UIApplication.shared.hideKeyboard)
     }
     
     private func noteDescriptionView() -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text("내용")
-                .font(.system(.headline, design: .monospaced))
-                .foregroundColor(.gray)
-                .padding(.horizontal)
+        VStack(alignment: .leading) {
+            formTitleView(title: "내용")
             TextEditor(text: $note.description)
                 .font(.system(.body, design: .monospaced))
                 .foregroundColor(.black)
@@ -157,19 +148,9 @@ extension EditNoteView {
                     Rectangle()
                         .stroke(colorTheme.levelOneColor)
                 )
-                .padding()
         }
+        .padding()
         .onAppear(perform: UIApplication.shared.hideKeyboard)
-    }
-    
-    private func noteDescriptionPlacehoder() -> some View {
-        VStack {
-            Text("내용을 입력해주세요.")
-                .padding(.top, 10)
-                .padding(.leading, 5)
-                .opacity(0.2)
-            Spacer()
-        }
     }
     
     private func saveButtonView() -> some View {
@@ -185,6 +166,25 @@ extension EditNoteView {
                 .fontWeight(.bold)
         }
         .alert("모든 값을 입력해주세요.", isPresented: $isEmptyData) {}
+    }
+    
+    
+    //MARK: View Utility
+    
+    private func formTitleView(title: String) -> some View {
+        Text(title)
+            .font(.system(.headline, design: .monospaced))
+            .foregroundColor(.gray)
+    }
+    
+    private func noteDescriptionPlacehoder() -> some View {
+        VStack {
+            Text("내용을 입력해주세요.")
+                .padding(.top, 10)
+                .padding(.leading, 5)
+                .opacity(0.2)
+            Spacer()
+        }
     }
 }
 
