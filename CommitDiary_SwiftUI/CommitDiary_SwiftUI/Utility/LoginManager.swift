@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct LoginManager {
+    @AppStorage(LoginManager.isLoginKey) var isLogin = false
     static var shared = LoginManager()
     static let isLoginKey = "isLogin"
     static let tokenKey = "token"
@@ -33,12 +34,14 @@ struct LoginManager {
         requestAccessToken(with: code) { token in
             Keychain.create(key: LoginManager.tokenKey, token: token)
         }
-        UserDefaults.standard.set(true, forKey: LoginManager.isLoginKey)
+        isLogin = true
+//        UserDefaults.standard.set(true, forKey: LoginManager.isLoginKey)
     }
     
     func logout() {
         Keychain.delete(key: LoginManager.tokenKey)
-        UserDefaults.standard.set(false, forKey: LoginManager.isLoginKey)
+//        UserDefaults.standard.set(false, forKey: LoginManager.isLoginKey)
+        isLogin = false
     }
     
     

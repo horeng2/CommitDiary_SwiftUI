@@ -87,16 +87,15 @@ extension EditNoteView {
         HStack {
             formTitleView(title: "레포지토리 선택")
             Spacer()
-            Picker("레포지토리", selection: $selectedRepoId) {
-                Text("선택해주세요.").tag(UUID())
+            Picker("레포지토리", selection: $note.repositoryName) {
+                Text(note.repositoryName).tag(note.repositoryName)
                 ForEach(commitInfoService.repos, id: \.id) { repo in
-                    Text(repo.repoName)
-                        .tag(repo.id)
+                    Text(repo.repoName).tag(repo.repoName)
                 }
             }
-            .onChange(of: selectedRepoId, perform: { id in
+            .onChange(of: note.repositoryName, perform: { repoName in
                 Task {
-                    await commitInfoService.loadCommits(of: id)
+                    await commitInfoService.loadCommits(of: repoName)
                 }
             })
         }
@@ -106,11 +105,10 @@ extension EditNoteView {
         HStack {
             formTitleView(title: "커밋 내역 선택")
             Spacer()
-            Picker("커밋", selection: $selectedCommitId) {
-                Text("레포지토리 선택 후 선택해주세요.").tag(UUID())
+            Picker("커밋", selection: $note.commitMessages) {
+                Text(note.commitMessages).tag(note.commitMessages)
                 ForEach(commitInfoService.commitMessages, id: \.id) { commit in
-                    Text(commit.infoItmes.message)
-                        .tag(commit.id)
+                    Text(commit.infoItmes.message).tag(commit.infoItmes.message)
                 }
             }
         }

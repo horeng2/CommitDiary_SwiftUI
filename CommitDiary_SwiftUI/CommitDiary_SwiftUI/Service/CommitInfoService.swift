@@ -24,12 +24,12 @@ class CommitInfoService: ObservableObject {
         }
     }
     
-    func loadCommits(of repoId: UUID) async {
+    func loadCommits(of repoName: String) async {
         let githubNetwork = GithubNetwork()
         guard let token = Keychain.read(key: LoginManager.tokenKey) else {
             return
         }
-        guard let repo = repos.filter({ $0.id == repoId }).first else {
+        guard let repo = repos.filter({ $0.repoName == repoName }).first else {
             return
         }
         let request = CommitInfoRequest(repo: repo, token: token)

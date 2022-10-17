@@ -13,6 +13,8 @@ struct Note {
     var date: Date
     var description: String
     var commitCount: Int
+    var repositoryName: String
+    var commitMessages: String
     
     
     init(commitCount: Int) {
@@ -21,5 +23,7 @@ struct Note {
         self.date = Date()
         self.description = ""
         self.commitCount = commitCount
+        self.repositoryName = "선택 없음"
+        self.commitMessages = "선택 없음"
     }
 }

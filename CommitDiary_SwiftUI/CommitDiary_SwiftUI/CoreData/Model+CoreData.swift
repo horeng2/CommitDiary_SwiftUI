@@ -17,6 +17,8 @@ extension Note {
         self.date = managedObject.date
         self.description = managedObject.noteDescription
         self.commitCount = managedObject.commitCount
+        self.repositoryName = managedObject.repositoryName
+        self.commitMessages = managedObject.commitMessage
     }
     
     func store(in context: NSManagedObjectContext) {
@@ -28,6 +30,8 @@ extension Note {
         note.date = date
         note.noteDescription = description
         note.commitCount = commitCount
+        note.repositoryName = repositoryName
+        note.commitMessage = commitMessages
     }
     
     func update(_ note: Note, in context: NSManagedObjectContext) {
@@ -39,5 +43,7 @@ extension Note {
         updatedObject.setValue(title, forKey: NoteEntity.titleKey)
         updatedObject.setValue(date, forKey: NoteEntity.dateKey)
         updatedObject.setValue(description, forKey: NoteEntity.noteDescriptionKey)
+        updatedObject.setValue(repositoryName, forKey: NoteEntity.repositoryName)
+        updatedObject.setValue(commitMessages, forKey: NoteEntity.commitMessage)
     }
 }
