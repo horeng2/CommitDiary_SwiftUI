@@ -176,7 +176,7 @@ for index in stride(from: 0, to: levels.count, by: rows) {
 ```
  - Calendar 타입의 메소드를 이용하여 Contribution Cell 개수를 산출합니다.
  - 로드된 Contribution Data에서 Cell 개수만큼 분할 후 `level` 타입으로 변환합니다.
-- 현재 색상 테마의 level별 색상으로 변환합니다.
+ - 현재 색상 테마의 level별 색상으로 변환합니다.
 
 **2. 그래프**
 - `ZStack`을 이용하여 바탕 그래프 영역, 색칠되는 그래프 영역을 구현했습니다.
@@ -237,115 +237,101 @@ UIKit+MVVM 구조와 비교하여 편의성은 좋았지만, 지금처럼 단순
 
 ## Trouble Shooting
 ### `AsyncImage` 사용 시 View가 만들어지는 타이밍과 Image 로드 타이밍의 딜레이 발생
-
 - 문제점
-    `AsyncImage`를 사용 시 뷰가 생성된 이후에 이미지 로드가 완료되어 딜레이가 발생하는 문제가 있었습니다.
+    - `AsyncImage`를 사용 시 뷰가 생성된 이후에 이미지 로드가 완료되어 딜레이가 발생하는 문제가 있었습니다.
 
 - 원인 분석
-`AsyncImage`는 비동기적으로 이미지를 불러오기 때문에 이미지 로드 시간보다 뷰의 생성시간이 빠르기 때문이었습니다.
+    - `AsyncImage`는 비동기적으로 이미지를 불러오기 때문에 이미지 로드 시간보다 뷰의 생성시간이 빠르기 때문이었습니다.
 
 - 해결
-`UserInfoService`에서 이미지 로드를 미리 처리하도록 했습니다. 
-`UserInfoService`는 `userInfo`, `profileImage`의  `@Published` 객체를 가지게 되었으며 이것을 `View`에서 사용하도록 했습니다.
+    - `UserInfoService`에서 이미지 로드를 미리 처리하도록 했습니다. 
+    - `UserInfoService`는 `userInfo`, `profileImage`의  `@Published` 객체를 가지게 되었으며 이것을 `View`에서 사용하도록 했습니다.
 
 
 ### 키보드가 화면을 가리는 문제
 
 - 문제점
-
-`TextEditor`에 입력 시 키보드가 올라와 타이핑 영역을 가리는 문제가 있었습니다.
+    - `TextEditor`에 입력 시 키보드가 올라와 타이핑 영역을 가리는 문제가 있었습니다.
 
 - 원인 분석
-
-Xcode Beta 4 버전부터 `TextField`에는 화면이 자동으로 키보드에 가리지 않도록 스크롤링 되는 방법이 지원되었으나 `TextEditor`에는 적용되지 않은 기능이었기 때문입니다.
+    - Xcode Beta 4 버전부터 `TextField`에는 화면이 자동으로 키보드에 가리지 않도록 스크롤링 되는 방법이 지원되었으나 `TextEditor`에는 적용되지 않은 기능이었기 때문입니다.
 
 - 시도해본 방법들
-
     - TextField 사용
-내부의 스크롤링 기능을 이용하기 위하여 `TextField`를 사용하는 방법입니다. 하지만 노트의 내용을 여러 줄 입력하는 기능에는 `TextField`보다 `TextEditor`가 적합하다고 생각하여 이 방식은 사용하지 않았습니다.
+        - 내부의 스크롤링 기능을 이용하기 위하여 `TextField`를 사용하는 방법입니다. 하지만 노트의 내용을 여러 줄 입력하는 기능에는 `TextField`보다 `TextEditor`가 적합하다고 생각하여 이 방식은 사용하지 않았습니다.
 
     - `UIResponder`, `NotificationCenter`, `Combine` 사용
-    `UIResponder`의 `keyboardWillShowNotification`, `keyboardFrameEndUserInfoKey`, `keyboardWillHideNotification`을 `publisher`에 등록하여 변경에 따라 `offSet`의 크기를 조절하는 방식이었습니다.
-    하지만 Xcode Beta 5 버전부터 `Form, List, TextEditor`가 키보드 뒤에 겹치지 않는 방식으로 변경되었고, 이 때문에 키보드가 올라오면 키보드의 상단 지점부터 offSet이 적용되는 문제가 발생했습니다. 
+        - `UIResponder`의 `keyboardWillShowNotification`, `keyboardFrameEndUserInfoKey`, `keyboardWillHideNotification`을 `publisher`에 등록하여 변경에 따라 `offSet`의 크기를 조절하는 방식입니다.
+        - 하지만 Xcode Beta 5 버전부터 `Form, List, TextEditor`가 키보드 뒤에 겹치지 않는 방식으로 변경되었고, 이 때문에 키보드가 올라오면 키보드의 상단 지점부터 offSet이 적용되는 문제가 발생했습니다. 
     
     - `GeometryReader`를 이용하여 프레임 크기 조절
-    현재의 프레임 크기에서 키보드 높이만큼을 뺀 값으로 프레임을 재설정하는 시도를 하였습니다. 하지만 위의 방식과 마찬가지로, 키보드가 올라온 뒤에는 키보드 영역을 제외한 부분만큼 프레임이 자동으로 재설정되기 때문에 사용이 불가능했습니다.
+        - 현재의 프레임 크기에서 키보드 높이만큼을 뺀 값으로 프레임을 재설정하는 시도를 하였습니다. 하지만 위의 방식과 마찬가지로, 키보드가 올라온 뒤에는 키보드 영역을 제외한 부분만큼 프레임이 자동으로 재설정되기 때문에 사용이 불가능했습니다.
     
     
 - 해결
-
-`ScrollViewReader`을 사용하여 해결했습니다.
-키보드가 올라와도 키보드 뒤로 뷰가 겹치지 않는 방식으로 앱이 작동되기 때문에, 프레임이나 오프셋을 설정하는 방식은 어려울 것으로 판단했습니다. 
-따라서 `ScrollView`를 이용하여 스크롤 지점을 제어하는 방향으로 해결책을 고민했고, `ScrollViewReader`와 `ScrollViewProxy`를 사용하여 `TextEditor`가 변경될 때 원하는 지점으로의 스크롤을 구현했습니다.
-`withAnimation` 키워드를 사용하여 자연스러운 스크롤이 되도록 하였습니다. 
+    - `ScrollViewReader`을 사용하여 해결했습니다.
+    - 키보드가 올라와도 키보드 뒤로 뷰가 겹치지 않는 방식으로 앱이 작동되기 때문에, 프레임이나 오프셋을 설정하는 방식은 어려울 것으로 판단했습니다. 
+    - 따라서 `ScrollView`를 이용하여 스크롤 지점을 제어하는 방향으로 해결책을 고민했고, `ScrollViewReader`와 `ScrollViewProxy`를 사용하여 `TextEditor`가 변경될 때 원하는 지점으로의 스크롤을 구현했습니다.
+    - `withAnimation` 키워드를 사용하여 자연스러운 스크롤이 되도록 하였습니다. 
 
 
 ### Custom Font의 사용
 
 - 문제점
-
-프로젝트에 다양한 `Custom Font`를 사용했는데, 적용된 `Text`의 수가 많아지다보니 관리가 어렵다는 생각이 들었습니다.
+    - 프로젝트에 다양한 `Custom Font`를 사용했는데, 적용된 `Text`의 수가 많아지다보니 관리가 어렵다는 생각이 들었습니다.
 
 - 고민해본 것들
-
     - FontManager 타입 구현
-    폰트를 관리하는 타입을 구현해서 싱글톤으로 사용하는 방법입니다.
+        - 폰트를 관리하는 타입을 구현해서 싱글톤으로 사용하는 방법입니다.
     - SystemFont 사용
-    내장된 폰트를 사용하는 방법입니다.
+        - 내장된 폰트를 사용하는 방법입니다.
     
 - 해결
-
-`SystemFont`를 사용하는 방식으로 결정했습니다. 
-그 이유는 다음과 같습니다.
-    - `automatically` 등 다른 다이나믹 타입 기능들과의 호환성
-    - 내장되어 있는 폰트 기능을 최대한 활용하는 것이 효율성, 가독성 측면에서 효율적
+    - `SystemFont`를 사용하는 방식으로 결정했습니다. 
+    - 그 이유는 다음과 같습니다.
+        - `automatically` 등 다른 다이나믹 타입 기능들과의 호환성
+        - 내장되어 있는 폰트 기능을 최대한 활용하는 것이 효율성, 가독성 측면에서 효율적
 
 ### `ObservedObject`로 코어데이터 엔티티를 참조하고 있는 Row 삭제시 앱 충돌
 - 문제점
- ```swift
-struct NoteRowView: View {
-    @ObservedObject var noteEntity: NoteEntity
-    ...
-}
-```
-
-위와 같은 방식으로 코어데이터 엔티티를 참조하고 있는 Row를 삭제했을 때 앱 충돌이 발생했습니다.
+    ```swift
+    struct NoteRowView: View {
+        @ObservedObject var noteEntity: NoteEntity
+        ...
+    }
+    ```
+    - 위와 같이 코어데이터 엔티티를 참조하고 있는 Row를 삭제했을 때 앱 충돌이 발생했습니다.
 
 - 원인 분석
-
- breakPoint를 사용해서 상태를 점검해보았을 때, 코어데이터를 삭제할 때 잠시동안 비어있는 코어데이터가 발견되었습니다. 이 때, 엔티티의 `String` 프로퍼티는 `""`와 같은 형태로 출력되었지만, `Date`타입 프로퍼티에는 값이 존재하지 않아서 오류가 발생한 것으로 보였습니다.
+    - breakPoint를 사용해서 상태를 점검해보았을 때, 코어데이터를 삭제할 때 잠시동안 비어있는 코어데이터가 발견되었습니다. 이 때, 엔티티의 `String` 프로퍼티는 `""`와 같은 형태로 출력되었지만, `Date`타입 프로퍼티에는 값이 존재하지 않아서 오류가 발생한 것으로 보였습니다.
  
  - 해결
- 
- 코어데이터 엔티티의 `Date` 타입 프로퍼티를 옵셔널로 변경하여 해결하였습니다.
+    - 코어데이터 엔티티의 `Date` 타입 프로퍼티를 옵셔널로 변경하여 해결하였습니다.
  
  
  ### 앱 구동 초기 로딩 지연
  
  - 문제점
- 
- 앱을 구동 시 초기 로딩 속도가 느린 문제가 있었습니다.
+    - 앱을 구동 시 초기 로딩 속도가 느린 문제가 있었습니다.
  
  - 원인 분석
- 
- ```swift
-RootTabView(colorTheme: $colorTheme)
-    .environment(\.managedObjectContext, coreDataStack.context)
-    .environmentObject(userInfoService)
-    .environmentObject(contributionService)
-    .environmentObject(commitInfoService)
-    .task {
-        await userInfoService.loadUserInfo()
-        await contributionService.loadContribution()
-        await commitInfoService.loadRepos(from: userInfoService.userInfo.reposUrl)
-    }
-```
- 초기 `App`파일에서 3개의 `awit` 메소드를 호출했는데, 이 메소드들이 동기적으로 처리됨에 따라서 발생하는 속도 지연을 의심할 수 있었습니다.
+    ```swift
+    RootTabView(colorTheme: $colorTheme)
+        .environment(\.managedObjectContext, coreDataStack.context)
+        .environmentObject(userInfoService)
+        .environmentObject(contributionService)
+        .environmentObject(commitInfoService)
+        .task {
+            await userInfoService.loadUserInfo()
+            await contributionService.loadContribution()
+            await commitInfoService.loadRepos(from: userInfoService.userInfo.reposUrl)
+        }
+    ```
+    - 초기 `App`파일에서 3개의 `awit` 메소드를 호출했는데, 이 메소드들이 동기적으로 처리됨에 따라서 발생하는 속도 지연을 의심할 수 있었습니다.
  
  - 해결
- 
-각 메소드가 비동기적으로 처리되도록 `task`를 분리하여 로딩 속도가 향상되었습니다.
-```swift
+    - 각 메소드가 비동기적으로 처리되도록 `task`를 분리하여 로딩 속도가 향상되었습니다.
+    - ```swift
 RootTabView(colorTheme: $colorTheme)
     .environment(\.managedObjectContext, coreDataStack.context)
     .environmentObject(userInfoService)
