@@ -197,10 +197,11 @@ for index in stride(from: 0, to: levels.count, by: rows) {
     - 로그아웃 버튼을 눌렀을 때
 
 
-
-
 <br/>
 <br/>
+
+---
+
 
 ## 새롭게 시도해본 기술
 ### SwiftUI에서의 CoreData
@@ -232,8 +233,10 @@ UIKit+MVVM 구조와 비교하여 편의성은 좋았지만, 지금처럼 단순
 [2022.09.29. 블로그 작성 글 _ [Swift] Keychain](https://velog.io/@horeng2/Swift-KeyChain...CF...%EB%AD%90...-%EB%84%A4)
 
 
-
 <br/>
+<br/>
+
+---
 
 ## Trouble Shooting
 ### `AsyncImage` 사용 시 View가 만들어지는 타이밍과 Image 로드 타이밍의 딜레이 발생
@@ -246,7 +249,7 @@ UIKit+MVVM 구조와 비교하여 편의성은 좋았지만, 지금처럼 단순
 - 해결
     - `UserInfoService`에서 이미지 로드를 미리 처리하도록 했습니다. 
     - `UserInfoService`는 `userInfo`, `profileImage`의  `@Published` 객체를 가지게 되었으며 이것을 `View`에서 사용하도록 했습니다.
-
+<br/>
 
 ### 키보드가 화면을 가리는 문제
 
@@ -273,7 +276,7 @@ UIKit+MVVM 구조와 비교하여 편의성은 좋았지만, 지금처럼 단순
     - 키보드가 올라와도 키보드 뒤로 뷰가 겹치지 않는 방식으로 앱이 작동되기 때문에, 프레임이나 오프셋을 설정하는 방식은 어려울 것으로 판단했습니다. 
     - 따라서 `ScrollView`를 이용하여 스크롤 지점을 제어하는 방향으로 해결책을 고민했고, `ScrollViewReader`와 `ScrollViewProxy`를 사용하여 `TextEditor`가 변경될 때 원하는 지점으로의 스크롤을 구현했습니다.
     - `withAnimation` 키워드를 사용하여 자연스러운 스크롤이 되도록 하였습니다. 
-
+<br/>
 
 ### Custom Font의 사용
 
@@ -292,15 +295,19 @@ UIKit+MVVM 구조와 비교하여 편의성은 좋았지만, 지금처럼 단순
         - `automatically` 등 다른 다이나믹 타입 기능들과의 호환성
         - 내장되어 있는 폰트 기능을 최대한 활용하는 것이 효율성, 가독성 측면에서 효율적
 
+<br/>
+
 ### `ObservedObject`로 코어데이터 엔티티를 참조하고 있는 Row 삭제시 앱 충돌
 - 문제점
+    - 코어데이터 엔티티를 참조하고 있는 Row를 삭제했을 때 앱 충돌이 발생했습니다.
+    <br/>
+    
     ```swift
     struct NoteRowView: View {
         @ObservedObject var noteEntity: NoteEntity
         ...
     }
     ```
-    - 위와 같이 코어데이터 엔티티를 참조하고 있는 Row를 삭제했을 때 앱 충돌이 발생했습니다.
 
 - 원인 분석
     - breakPoint를 사용해서 상태를 점검해보았을 때, 코어데이터를 삭제할 때 잠시동안 비어있는 코어데이터가 발견되었습니다. 이 때, 엔티티의 `String` 프로퍼티는 `""`와 같은 형태로 출력되었지만, `Date`타입 프로퍼티에는 값이 존재하지 않아서 오류가 발생한 것으로 보였습니다.
@@ -308,6 +315,7 @@ UIKit+MVVM 구조와 비교하여 편의성은 좋았지만, 지금처럼 단순
  - 해결
     - 코어데이터 엔티티의 `Date` 타입 프로퍼티를 옵셔널로 변경하여 해결하였습니다.
  
+ <br/>
  
  ### 앱 구동 초기 로딩 지연
  
@@ -315,6 +323,9 @@ UIKit+MVVM 구조와 비교하여 편의성은 좋았지만, 지금처럼 단순
     - 앱을 구동 시 초기 로딩 속도가 느린 문제가 있었습니다.
  
  - 원인 분석
+    - 초기 `App`파일에서 3개의 `awit` 메소드를 호출했는데, 이 메소드들이 동기적으로 처리됨에 따라서 발생하는 속도 지연을 의심할 수 있었습니다.
+    <br/>
+    
     ```swift
     RootTabView(colorTheme: $colorTheme)
         .environment(\.managedObjectContext, coreDataStack.context)
@@ -327,12 +338,13 @@ UIKit+MVVM 구조와 비교하여 편의성은 좋았지만, 지금처럼 단순
             await commitInfoService.loadRepos(from: userInfoService.userInfo.reposUrl)
         }
     ```
-    - 초기 `App`파일에서 3개의 `awit` 메소드를 호출했는데, 이 메소드들이 동기적으로 처리됨에 따라서 발생하는 속도 지연을 의심할 수 있었습니다.
  
  - 해결
     - 각 메소드가 비동기적으로 처리되도록 `task`를 분리하여 로딩 속도가 향상되었습니다.
-    - ```swift
-RootTabView(colorTheme: $colorTheme)
+    <br/>
+    
+    ```swift
+    RootTabView(colorTheme: $colorTheme)
     .environment(\.managedObjectContext, coreDataStack.context)
     .environmentObject(userInfoService)
     .environmentObject(contributionService)
@@ -346,4 +358,4 @@ RootTabView(colorTheme: $colorTheme)
     .task {
         await commitInfoService.loadRepos(from: userInfoService.userInfo.reposUrl)
     }
-```
+    ```
