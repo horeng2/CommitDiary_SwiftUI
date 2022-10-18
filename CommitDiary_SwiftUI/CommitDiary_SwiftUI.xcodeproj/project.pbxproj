@@ -21,7 +21,7 @@
 		4865DBC128FDE98300235A1B /* UserInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4865DBB928FDE98300235A1B /* UserInfoRequest.swift */; };
 		4865DBC228FDE98300235A1B /* CommitInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4865DBBA28FDE98300235A1B /* CommitInfoRequest.swift */; };
 		4865DBC328FDE98300235A1B /* ContributionsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4865DBBB28FDE98300235A1B /* ContributionsRequest.swift */; };
-		4865DBC428FDE98300235A1B /* RepoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4865DBBC28FDE98300235A1B /* RepoRequest.swift */; };
+		4865DBC428FDE98300235A1B /* RepoInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4865DBBC28FDE98300235A1B /* RepoInfoRequest.swift */; };
 		4865DBC528FDE98300235A1B /* GithubNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4865DBBE28FDE98300235A1B /* GithubNetwork.swift */; };
 		4865DBC828FDE9A700235A1B /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4865DBC728FDE9A700235A1B /* NetworkError.swift */; };
 		486EAA4328EA1EF100D86DA2 /* CommitStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EAA4228EA1EF100D86DA2 /* CommitStatusView.swift */; };
@@ -90,7 +90,7 @@
 		4865DBB928FDE98300235A1B /* UserInfoRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoRequest.swift; sourceTree = "<group>"; };
 		4865DBBA28FDE98300235A1B /* CommitInfoRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommitInfoRequest.swift; sourceTree = "<group>"; };
 		4865DBBB28FDE98300235A1B /* ContributionsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContributionsRequest.swift; sourceTree = "<group>"; };
-		4865DBBC28FDE98300235A1B /* RepoRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoRequest.swift; sourceTree = "<group>"; };
+		4865DBBC28FDE98300235A1B /* RepoInfoRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoInfoRequest.swift; sourceTree = "<group>"; };
 		4865DBBE28FDE98300235A1B /* GithubNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubNetwork.swift; sourceTree = "<group>"; };
 		4865DBC728FDE9A700235A1B /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		486EAA4228EA1EF100D86DA2 /* CommitStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitStatusView.swift; sourceTree = "<group>"; };
@@ -219,7 +219,7 @@
 				4865DBB928FDE98300235A1B /* UserInfoRequest.swift */,
 				4865DBBA28FDE98300235A1B /* CommitInfoRequest.swift */,
 				4865DBBB28FDE98300235A1B /* ContributionsRequest.swift */,
-				4865DBBC28FDE98300235A1B /* RepoRequest.swift */,
+				4865DBBC28FDE98300235A1B /* RepoInfoRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -484,7 +484,7 @@
 				483C593A28FBC3A8002443A8 /* CommitInfo.swift in Sources */,
 				486EAA5F28EC1F8900D86DA2 /* NoteEntity+CoreDataClass.swift in Sources */,
 				4884573428F5B22A007269F3 /* APIKeyBundle.swift in Sources */,
-				4865DBC428FDE98300235A1B /* RepoRequest.swift in Sources */,
+				4865DBC428FDE98300235A1B /* RepoInfoRequest.swift in Sources */,
 				486EAA5C28EC1B8900D86DA2 /* CoreDataHelpers.swift in Sources */,
 				483C593228FBB39C002443A8 /* RepoInfo.swift in Sources */,
 				4865DBC028FDE98300235A1B /* APIRequest+Protocol.swift in Sources */,

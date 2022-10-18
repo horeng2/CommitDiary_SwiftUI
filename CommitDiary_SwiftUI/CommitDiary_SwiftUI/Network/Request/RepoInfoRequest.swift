@@ -1,5 +1,5 @@
 //
-//  RepoRequest.swift
+//  RepoInfoRequest.swift
 //  CommitDiary_SwiftUI
 //
 //  Created by 서녕 on 2022/10/16.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RepoRequest: APIRequest {
+struct RepoInfoRequest: APIRequest {
     typealias ResponseType = [RepoInfo]
     
     let token: String

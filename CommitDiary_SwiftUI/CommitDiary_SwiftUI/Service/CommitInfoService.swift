@@ -16,7 +16,7 @@ class CommitInfoService: ObservableObject {
         guard let token = Keychain.read(key: LoginManager.tokenKey) else {
             return
         }
-        guard let repos = try? await githubNetwork.dataRequest(of: RepoRequest(token: token)) else {
+        guard let repos = try? await githubNetwork.dataRequest(of: RepoInfoRequest(token: token)) else {
             return
         }
         DispatchQueue.main.async {
