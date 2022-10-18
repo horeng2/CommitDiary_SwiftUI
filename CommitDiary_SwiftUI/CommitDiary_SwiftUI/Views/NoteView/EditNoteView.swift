@@ -34,7 +34,9 @@ struct EditNoteView: View {
                 titleView()
                 noteDescriptionView()
                     .onChange(of: note.noteDescription) { newValue in
-                        proxy.scrollTo("newInput", anchor: .bottom)
+                        withAnimation {
+                            proxy.scrollTo("newInput", anchor: .bottom)
+                        }
                     }.id("newInput")
             }
         }
@@ -156,7 +158,7 @@ extension EditNoteView {
             TextEditor(text: $note.noteDescription)
                 .font(.system(.body, design: .monospaced))
                 .foregroundColor(.black)
-                .frame(minHeight: 500)
+                .frame(minHeight: 200)
                 .overlay(
                     Rectangle()
                         .stroke(colorTheme.levelOneColor)
