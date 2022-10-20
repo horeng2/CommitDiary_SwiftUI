@@ -47,7 +47,7 @@ extension LoginView {
                         .resizable()
                         .frame(width: 40, height: 40)
                         .padding(5)
-                    Text("GitHub 계정으로 시작하기")
+                    Text("Github 계정으로 시작하기")
                         .font(.system(size: 20))
                         .foregroundColor(Color.white)
                         .fontWeight(.bold)

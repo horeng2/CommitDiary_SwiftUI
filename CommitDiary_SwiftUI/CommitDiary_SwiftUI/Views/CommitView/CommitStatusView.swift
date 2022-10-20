@@ -21,20 +21,29 @@ struct CommitStatusView: View {
                 }
         }
         .navigationViewStyle(.stack)
+        .padding(.bottom)
     }
     
     private var content: some View {
         VStack {
             contributionView()
             Spacer()
-            logView(title: "오늘의 커밋", log: "\(contributionService.todaysCommit)회")
+            Text("오늘의 커밋")
+                .logContent {
+                    Text("\(contributionService.todaysCommit)회")
+                }
             Spacer()
-            logView(title: "연속 기록", log: "\(contributionService.currentContinuousCommit)일")
+            Text("연속 기록")
+                .logContent {
+                    Text("\(contributionService.currentContinuousCommit)일")
+                }
             Spacer()
-            logView(title: "최장 연속 기록", log: "연속 \(contributionService.bestContinuousCommit)일")
+            Text("최장 연속 기록")
+                .logContent {
+                    Text("\(contributionService.bestContinuousCommit)일")
+                }
             Spacer()
             commitGraphStatusView()
-            Spacer()
         }
     }
 }
@@ -74,24 +83,12 @@ extension CommitStatusView {
         }
         .padding(.top, 30)
     }
-    
-    private func logView(title: String, log: String) -> some View {
-        VStack(spacing: 10) {
-            Text(title)
-                .font(.system(.title2, design: .monospaced))
-                .foregroundColor(.gray)
-            Text(log)
-                .font(.system(.title2, design: .monospaced))
-                .fontWeight(.medium)
-                .foregroundColor(.black)
-        }
-    }
-    
+ 
     private func commitGraphStatusView() -> some View {
         VStack {
             commitGraphView()
             HStack{
-                Text("0일")
+                Text("\(0)일")
                     .font(.system(.title3, design: .monospaced))
                     .foregroundColor(.gray)
                 Spacer()

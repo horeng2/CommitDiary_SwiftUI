@@ -43,12 +43,10 @@ struct EditNoteView: View {
     }
 }
 
-// MARK: Views
-
+// MARK: - Views
 extension EditNoteView {
     
-    // MARK: Date, CommitCount Text
-
+    // MARK: - Date, CommitCount Text
     private func dayInfoView() -> some View {
         VStack {
             dateView()
@@ -72,9 +70,7 @@ extension EditNoteView {
             .padding(.top, 5)
     }
     
-    
-    // MARK: Repository, Commit Picker
-    
+    // MARK: - Repository, Commit Picker
     private func pickLogView() -> some View {
         VStack {
             pickRepoView()
@@ -85,7 +81,8 @@ extension EditNoteView {
     
     private func pickRepoView() -> some View {
         HStack {
-            formTitleView(title: "레포지토리")
+            Text("레포지토리")
+                .modifier(SubtitleTextModifier())
             Spacer()
             Menu {
                 Picker("레포지토리", selection: $note.repositoryName) {
@@ -104,7 +101,7 @@ extension EditNoteView {
                 }
             }
             .onChange(of: note.repositoryName, perform: { repoName in
-                note.commitMessage = "선택해주세요."
+                note.commitMessage = "선택해주세요.".localizedString()
                 Task {
                     await commitInfoService.loadCommits(of: repoName)
                 }
@@ -114,7 +111,8 @@ extension EditNoteView {
     
     private func pickCommitView() -> some View {
         HStack {
-            formTitleView(title: "커밋 내역")
+            Text("커밋 내역")
+                .modifier(SubtitleTextModifier())
             Spacer()
             Menu {
                 Picker("커밋", selection: $note.commitMessage) {
@@ -132,11 +130,11 @@ extension EditNoteView {
     }
     
     
-    // MARK: Edit Title, Description Text
-    
+    // MARK: - Edit Title, Description Text
     private func titleView() -> some View {
         VStack(alignment: .leading, spacing: 15) {
-            formTitleView(title: "제목")
+            Text("제목")
+                .modifier(SubtitleTextModifier())
             TextField(note.title, text: $note.title)
                 .placeholder(when: note.title.isEmpty) {
                     Text("제목을 입력해주세요.")
@@ -157,7 +155,8 @@ extension EditNoteView {
     
     private func noteDescriptionView() -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            formTitleView(title: "내용")
+            Text("내용")
+                .modifier(SubtitleTextModifier())
             TextEditor(text: $note.noteDescription)
                 .placeholder(when: note.noteDescription.isEmpty) {
                     Text("내용을 입력해주세요.")
@@ -188,20 +187,9 @@ extension EditNoteView {
         }
         .alert("모든 값을 입력해주세요.", isPresented: $isEmptyData) {}
     }
-    
-    
-    //MARK: View Utility
-    
-    private func formTitleView(title: String) -> some View {
-        Text(title)
-            .font(.system(.headline, design: .monospaced))
-            .foregroundColor(.gray)
-    }
 }
 
-
-// MARK: Core Data
-
+// MARK: - Core Data
 extension EditNoteView {
     private func saveNote(isModifyMode: Bool) {
         if isModifyMode {
