@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 extension String {
     func stringToDate() -> Date {
@@ -33,7 +34,7 @@ extension String {
         return htmlElements
     }
     
-    func localize() -> LocalizedStringKey {
-        return LocalizedStringKey(self)
+    func localizedString() -> String {
+        return NSLocalizedString(self, comment: "")
     }
 }
