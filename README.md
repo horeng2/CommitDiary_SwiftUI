@@ -6,7 +6,7 @@ GitHub API를 통하여 Commit 정보가 제공되고, 원하는 레포지토리
 
 GitHub token을 Keychain으로 관리하며 메모는 CoreData에 저장됩니다.
 
-설정에서 원하는 테마 색상으로 변경할 수 있습니다.
+Localization이 지원되며, 설정에서 원하는 테마 색상으로 변경할 수 있습니다.
 
 ## 목차
 - [키워드](#키워드)
