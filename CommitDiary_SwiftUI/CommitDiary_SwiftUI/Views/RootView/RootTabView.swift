@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RootTabView: View {
     @EnvironmentObject private var contributionService: ContributionService
+    @Binding var isLogin: Bool
     @Binding var colorTheme: Theme
     
     var body: some View {
@@ -33,7 +34,7 @@ extension RootTabView {
                     Image(systemName: "magazine")
                     Text("Note")
                 }
-            SettingView(colorTheme: $colorTheme)
+            SettingView(isLogin: $isLogin, colorTheme: $colorTheme)
             .tabItem {
                 Image(systemName: "gear")
                 Text("Setting")
@@ -56,7 +57,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let contriburionService = ContributionService()
         let userInfoService = UserInfoService()
-        RootTabView(colorTheme: .constant(Theme.blue))
+        RootTabView(isLogin: .constant(true),colorTheme: .constant(Theme.blue))
             .environmentObject(contriburionService)
             .environmentObject(userInfoService)
     }

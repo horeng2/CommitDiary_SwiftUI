@@ -12,6 +12,7 @@ struct SettingView: View {
     @EnvironmentObject private var userInfoService: UserInfoService
     @State var tapColorThemeButton = false
     @State var tapLogoutButton = false
+    @Binding var isLogin: Bool
     @Binding var colorTheme: Theme
     
     var body: some View {
@@ -77,10 +78,9 @@ extension SettingView {
     }
     
     private func pickColorButtonView(theme: Theme) -> some View {
-        Button(theme.rawValue) {
+        Button(theme.rawValue.localizedString()) {
             tapColorThemeButton = true
             colorTheme = theme
-            UserDefaults.standard.set(theme.rawValue, forKey: "theme")
         }
         .alert("테마가 변경되었습니다!", isPresented: $tapColorThemeButton) {}
     }
@@ -99,7 +99,7 @@ extension SettingView {
         .alert("로그아웃 하시겠습니까?", isPresented: $tapLogoutButton) {
             Button("취소", role: .cancel) {}
             Button("확인", role: .destructive) {
-                UserDefaults.standard.set(false, forKey: LoginManager.isLoginKey)
+                isLogin = false
             }
         }
     }
@@ -107,6 +107,6 @@ extension SettingView {
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView(colorTheme: .constant(.defaultGreen))
+        SettingView(isLogin: .constant(true), colorTheme: .constant(.defaultGreen))
     }
 }

@@ -20,7 +20,7 @@ struct CommitDiary_SwiftUIApp: App {
     var body: some Scene {
         WindowGroup {
             if isLogin {
-                RootTabView(colorTheme: $colorTheme)
+                RootTabView(isLogin: $isLogin, colorTheme: $colorTheme)
                     .environment(\.managedObjectContext, coreDataStack.context)
                     .environmentObject(userInfoService)
                     .environmentObject(contributionService)

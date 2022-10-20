@@ -7,8 +7,7 @@
 */
 
 // MARK: - Title Name
-"잔디 일기" = "Commit Diary";
-"Commit Diary" = "";
+"잔디 일기" = "Note your commit";
 
 // MARK: - Views Title
 "활동" = "Activity";
@@ -30,7 +29,7 @@
 "제목" = "Title";
 "내용" = "Contents";
 "제목을 입력해주세요." = "Please enter the title";
-"내용을 입력해주세요" = "Please enter the contents";
+"내용을 입력해주세요." = "Please enter the contents";
 "저장" = "Save";
 
 
