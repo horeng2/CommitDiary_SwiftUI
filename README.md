@@ -1,5 +1,5 @@
 # Commit Diary 프로젝트
-- 기간: 2022. 10. 03. ~ 2022. 10. 11.
+- 기간: 2022. 10. 03. ~ 2022. 10. 18.
 
 ## 프로젝트 소개
 GitHub API를 통하여 Commit 정보가 제공되고, 원하는 레포지토리와 커밋 메세지를 선택하여 메모를 작성할 수 있습니다.
@@ -13,6 +13,7 @@ GitHub token을 Keychain으로 관리하며 메모는 CoreData에 저장됩니�
 - [디렉토리 구조](#디렉토리-구조)
 - [기능 명세](#기능-명세)
 - [새롭게 시도해본 기술](#새롭게-시도해본-기술)
+- [Trouble Shooting](#trouble-shooting)
 
 ## 키워드
 - `SwiftUI`
@@ -34,6 +35,7 @@ GitHub token을 Keychain으로 관리하며 메모는 CoreData에 저장됩니�
     - `FetchRequest`
     - `FetchedResults`
     - `sortDescriptors`
+- `Localization`
 - `UserDefault`
 - `HTML Parsing`
 
@@ -53,13 +55,10 @@ GitHub token을 Keychain으로 관리하며 메모는 CoreData에 저장됩니�
 │   ├── NoteView
 │   │   ├── NoteListView.swift
 │   │   ├── NoteRowView.swift
-│   │   └── EditNoteView.swift
-│   ├── SettingView
-│   │   └── SettingView.swift
-│   └── Extensions
-│       ├── Extension+Date.swift
-│       ├── Extension+Colorv
-│       └── Extension+UIApplication.swift
+│   │   ├── EditNoteView.swift
+│   │   └── SubtitleTextModifier.swift
+│   └── SettingView
+│       └── SettingView.swift
 ├── Service
 │   ├── UserInfoService.swift
 │   ├── ContributionService.swift
@@ -87,12 +86,18 @@ GitHub token을 Keychain으로 관리하며 메모는 CoreData에 저장됩니�
 │   ├── NoteData.xcdatamodeld
 │   ├── NoteEntity+CoreDataClass.swift
 │   └── NoteEntity+CoreDataProperties.swift
-└── Uillity
-    ├── LoginManager.swift
-    ├── Keychain.swift
-    ├── htmlParser.swift
-    ├── Extension+String.swift   
-    └── APIKeyBundle.swift
+├── Uillity
+│   ├── LoginManager.swift
+│   ├── Keychain.swift
+│   ├── htmlParser.swift
+│   ├── APIKeyBundle.swift
+│   └── Localizable.string
+└── Extensions
+    ├── Extension+View.swift
+    ├── Extension+Date.swift
+    ├── Extension+Color.swif
+    ├── Extension+UIApplication.swift
+    └── Extension+String.swift
 
 
 ```
@@ -109,7 +114,7 @@ GitHub token을 Keychain으로 관리하며 메모는 CoreData에 저장됩니�
 
 |노트 등록|
 | :-: |
-| ![editnote](https://user-images.githubusercontent.com/87305744/196351668-b302e469-dc7d-4793-8d6a-65e9ea640b0c.gif) |
+| ![Simulator Screen Recording - iPhone 13 - 2022-10-20 at 11 22 46](https://user-images.githubusercontent.com/87305744/196841234-167e2e66-4e22-45f8-82c3-f3c96d218fc1.gif) |
 
 |테마 변경|
 | :-: |
@@ -118,6 +123,10 @@ GitHub token을 Keychain으로 관리하며 메모는 CoreData에 저장됩니�
 |새로고침|
 | :-: |
 | ![refresh](https://user-images.githubusercontent.com/87305744/196351757-bb3865ed-97b2-4fff-b0d4-36b90602a9e5.gif) |
+
+|Localization|
+| :-: |
+| ![Simulator Screen Recording - iPhone 13 - 2022-10-20 at 17 32 14](https://user-images.githubusercontent.com/87305744/196898300-03fc15eb-0776-4c1a-b87c-7a2bb014c079.gif) |
 
 <br/>
 <br/>
