@@ -1,0 +1,59 @@
+/* 
+  Localizable.strings
+  CommitDiary_SwiftUI
+
+  Created by 서녕 on 2022/10/20.
+  
+*/
+
+// MARK: - Title Name
+"잔디 일기" = "Commit Diary";
+"Commit Diary" = "";
+
+// MARK: - Views Title
+"활동" = "Activity";
+"잔디일기 🌱" = "Diary 🌱";
+"텅 💬" = "Empty 💬";
+
+// MARK: - Commit Status View Text
+"오늘의 커밋" = "Today's Commit";
+"연속 기록" = "Continuous Days";
+"최장 연속 기록" = "Best Continuous Days";
+
+"%lld회" = "%lld times";
+"%lld일" = "%lld days";
+
+// MARK: - Edit Note View Text
+"레포지토리" = "Repository";
+"커밋 내역" = "Commit";
+"선택해주세요." = "Please select";
+"제목" = "Title";
+"내용" = "Contents";
+"제목을 입력해주세요." = "Please enter the title";
+"내용을 입력해주세요" = "Please enter the contents";
+"저장" = "Save";
+
+
+// MARK: - Setting View Text
+"설정" = "Setting";
+
+"테마 색상" = "Theme Colors";
+"초록" = "Green";
+"파랑" = "Blue";
+"주황" = "Orange";
+"분홍" = "Pink";
+"검정" = "Black";
+
+"이동" = "Move";
+"Github로 이동" = "Move to Github";
+
+"로그아웃" = "Logout";
+
+// MARK: - System, Alert Text
+"앱을 사용하려면 GitHub 계정 로그인이 필요합니다." = "GitHub account login is required to use the app.";
+"Github 계정으로 시작하기" = "Github Login";
+"기록을 작성해주세요." = "Please make a diary.";
+"모든 값을 입력해주세요." = "Please enter all values.";
+"로그아웃 하시겠습니까?" = "Do you want to log out?";
+"취소" = "Cancel";
+"확인" = "Done";

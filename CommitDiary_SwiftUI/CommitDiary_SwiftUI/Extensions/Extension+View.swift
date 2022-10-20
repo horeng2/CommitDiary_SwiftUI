@@ -21,4 +21,16 @@ extension View {
                 self
             }
         }
+    
+    func logContent<Content: View>(
+        @ViewBuilder logText: () -> Content
+    ) -> some View {
+        VStack(spacing: 10) {
+            self
+                .font(.system(.title2, design: .monospaced))
+                .foregroundColor(.gray)
+            logText()
+                .font(.system(.title2, design: .monospaced))
+        }
+    }
 }

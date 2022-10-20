@@ -32,4 +32,8 @@ extension String {
         }
         return htmlElements
     }
+    
+    func localize() -> LocalizedStringKey {
+        return LocalizedStringKey(self)
+    }
 }
