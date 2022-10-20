@@ -135,13 +135,16 @@ extension EditNoteView {
     // MARK: Edit Title, Description Text
     
     private func titleView() -> some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 15) {
             formTitleView(title: "제목")
             TextField(note.title, text: $note.title)
+                .placeholder(when: note.title.isEmpty) {
+                    Text("제목을 입력해주세요.")
+                        .foregroundColor(colorTheme.levelOneColor)
+                }
                 .font(.system(.body, design: .monospaced))
                 .foregroundColor(.black)
-                .border(colorTheme.levelOneColor)
-                .textFieldStyle(.roundedBorder)
+                .padding(.leading, 3)
                 .onReceive(Just(note.title)) { _ in
                     if note.title.count > 20 {
                         note.title = String(note.title.prefix(20))
@@ -153,16 +156,19 @@ extension EditNoteView {
     }
     
     private func noteDescriptionView() -> some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 10) {
             formTitleView(title: "내용")
             TextEditor(text: $note.noteDescription)
+                .placeholder(when: note.noteDescription.isEmpty) {
+                    Text("내용을 입력해주세요.")
+                        .foregroundColor(colorTheme.levelOneColor)
+                        .padding(.leading, 3)
+                }
                 .font(.system(.body, design: .monospaced))
                 .foregroundColor(.black)
-                .frame(minHeight: 200)
-                .overlay(
-                    Rectangle()
-                        .stroke(colorTheme.levelOneColor)
-                )
+                .onAppear{
+                    UITextView.appearance().backgroundColor = .clear
+                }
         }
         .padding()
         .onAppear(perform: UIApplication.shared.hideKeyboard)
@@ -190,16 +196,6 @@ extension EditNoteView {
         Text(title)
             .font(.system(.headline, design: .monospaced))
             .foregroundColor(.gray)
-    }
-    
-    private func noteDescriptionPlacehoder() -> some View {
-        VStack {
-            Text("내용을 입력해주세요.")
-                .padding(.top, 10)
-                .padding(.leading, 5)
-                .opacity(0.2)
-            Spacer()
-        }
     }
 }
 
