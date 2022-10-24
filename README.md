@@ -360,8 +360,6 @@ UIKit+MVVM 구조와 비교하여 편의성은 좋았지만, 지금처럼 단순
     .environmentObject(commitInfoService)
     .task {
         await userInfoService.loadUserInfo()
-    }
-    .task {
         await contributionService.loadContribution()
     }
     .task {
