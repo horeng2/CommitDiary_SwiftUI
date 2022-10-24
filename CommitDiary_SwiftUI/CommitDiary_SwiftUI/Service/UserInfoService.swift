@@ -13,17 +13,19 @@ class UserInfoService: ObservableObject {
     @Published var profilImage = UIImage()
     
     func loadUserInfo() async {
-        guard let token = Keychain.read(key: LoginManager.tokenKey) else {
-            return
-        }
         let githubNetwork = GithubNetwork()
-        guard let info = try? await githubNetwork.dataRequest(of: UserInfoRequest(token: token)) else {
+        guard let token = Keychain.read(key: LoginManager.tokenKey),
+              let info = try? await githubNetwork.dataRequest(of: UserInfoRequest(token: token)) else {
             return
         }
+        
+        if LoginManager.shared.isLogin == false {
+            UserDefaults.standard.set("horeng2", forKey: "userId")
+        }
+        
         DispatchQueue.main.async {
             self.userInfo = info
-            UserDefaults.standard.set(info.id, forKey: "userId")
-            self.loadProfilImage(url: info.profileImageUrl)
+            self.loadProfilImage(url: "https://avatars.githubusercontent.com/u/87305744?v=4")
         }
     }
     

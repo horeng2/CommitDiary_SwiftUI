@@ -16,11 +16,12 @@ class ContributionService: ObservableObject {
     
     func loadContribution() async {
         let githubNetwork = GithubNetwork()
-        let userId = UserDefaults.standard.string(forKey: "userId") ?? ""
-        guard let contributions = try? await githubNetwork.getContributions(with: userId) else {
+        guard let userId = UserDefaults.standard.string(forKey: "userId"),
+              let contributions = try? await githubNetwork.getContributions(with: userId) else {
             return
         }
-        DispatchQueue.main.async { [self] in
+        
+        DispatchQueue.main.async {
             self.contributions = contributions
             self.todaysCommitCount()
             self.continuousCommitCount()

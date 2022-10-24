@@ -25,10 +25,8 @@ struct CommitDiary_SwiftUIApp: App {
                     .environmentObject(userInfoService)
                     .environmentObject(contributionService)
                     .environmentObject(commitInfoService)
-                    .task {
+                    .task(priority: .high) {
                         await userInfoService.loadUserInfo()
-                    }
-                    .task {
                         await contributionService.loadContribution()
                     }
                     .task {
