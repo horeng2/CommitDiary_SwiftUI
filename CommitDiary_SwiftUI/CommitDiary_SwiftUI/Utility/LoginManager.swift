@@ -29,6 +29,8 @@ struct LoginManager {
         return components.url!
     }()
     
+    private init() { }
+    
     func login(with temporaryCode: URL) {
         let code = temporaryCode.absoluteString.components(separatedBy: "code=").last ?? ""
         requestAccessToken(with: code) { token in
