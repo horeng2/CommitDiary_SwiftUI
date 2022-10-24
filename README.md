@@ -358,7 +358,7 @@ UIKit+MVVM 구조와 비교하여 편의성은 좋았지만, 지금처럼 단순
     .environmentObject(userInfoService)
     .environmentObject(contributionService)
     .environmentObject(commitInfoService)
-    .task {
+    .task(priority: .high) {
         await userInfoService.loadUserInfo()
         await contributionService.loadContribution()
     }
