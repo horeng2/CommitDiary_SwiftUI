@@ -39,6 +39,7 @@ struct LoginManager {
     
     func logout() {
         Keychain.delete(key: LoginManager.tokenKey)
+        UserDefaults.standard.removeObject(forKey: "userId")
         isLogin = false
     }
     

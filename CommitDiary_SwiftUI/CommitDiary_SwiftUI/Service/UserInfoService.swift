@@ -20,7 +20,7 @@ class UserInfoService: ObservableObject {
         }
         
         if LoginManager.shared.isLogin == false {
-            UserDefaults.standard.set("horeng2", forKey: "userId")
+            UserDefaults.standard.set(info.id, forKey: "userId")
         }
         
         DispatchQueue.main.async {
