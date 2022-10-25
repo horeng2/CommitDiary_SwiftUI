@@ -1,4 +1,9 @@
 # Gitgub API rate limit 관련 이슈로 현재 실행이 되지 않습니다. 10.25.기한 내로 조치 예정입니다.
+## 원인
+서버 통신 Response의 Status Code 401
+## 경과
+10.24. rate limit 초과로 3시간동안 Lock 되었고, 시간 경과 후 ratelimit이 초기화 됨.
+하지만 초기화 된 이후에도 401 코드가 반환되며 통신이 되지 않는 상황
 
 ---
 
