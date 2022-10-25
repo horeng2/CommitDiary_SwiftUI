@@ -18,11 +18,7 @@ class UserInfoService: ObservableObject {
               let info = try? await githubNetwork.dataRequest(of: UserInfoRequest(token: token)) else {
             return
         }
-        
-        if LoginManager.shared.isLogin == false {
-            UserDefaults.standard.set(info.id, forKey: "userId")
-        }
-        
+        UserDefaults.standard.set(info.id, forKey: "userId")
         DispatchQueue.main.async {
             self.userInfo = info
             self.loadProfilImage(url: "https://avatars.githubusercontent.com/u/87305744?v=4")
