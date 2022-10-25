@@ -1,12 +1,3 @@
-# Gitgub API rate limit 관련 이슈로 현재 실행이 되지 않습니다. 10.25.기한 내로 조치 예정입니다.
-## 원인
-서버 통신 Response의 Status Code 401
-## 경과
-10.24. rate limit 초과로 3시간동안 Lock 되었고, 시간 경과 후 ratelimit이 초기화 됨.
-하지만 초기화 된 이후에도 401 코드가 반환되며 통신이 되지 않는 상황
-
----
-
 # Commit Diary 프로젝트
 - 기간: 2022. 10. 03. ~ 2022. 10. 18.
 
@@ -375,3 +366,15 @@ UIKit+MVVM 구조와 비교하여 편의성은 좋았지만, 지금처럼 단순
         await commitInfoService.loadRepos(from: userInfoService.userInfo.reposUrl)
     }
     ```
+
+ ### API Rate Limit
+ - 문제 상황
+    - 오류를 수정하는 과정에서 과도한 API Call이 발생하며 API Rate Limit이 걸려 API 사용이 중단되었습니다.
+    - 하지만 Rate Limit Time이 경과한 뒤에도 401번 코드 에러가 뜨며 통신이 되지 않는 문제가 있었습니다.
+ 
+ - 원인
+    - Rate Limit 문제 해결 방법을 찾아보며 테스트 용도로 추가한 token의 문제였습니다.
+ 
+ - 해결
+    - 사용하지 않는 token을 정리하고, 기존의 token을 재발급 받는 것으로 해결했습니다.
+    - [해당 내용을 이슈로 정리했습니다.](https://github.com/horeng2/CommitDiary_SwiftUI/issues/1)
