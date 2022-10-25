@@ -19,7 +19,6 @@ class ContributionService: ObservableObject {
         guard let contributions = try? await githubNetwork.getContributions(with: userId) else {
             return
         }
-        
         DispatchQueue.main.async {
             self.contributions = contributions
             self.todaysCommitCount()

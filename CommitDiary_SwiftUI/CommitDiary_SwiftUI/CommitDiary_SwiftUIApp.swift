@@ -11,7 +11,6 @@ import SwiftUI
 struct CommitDiary_SwiftUIApp: App {
     @AppStorage(LoginManager.isLoginKey) private var isLogin = false
     @AppStorage("theme") private var colorTheme = Theme.defaultGreen
-    
     @StateObject private var userInfoService = UserInfoService()
     @StateObject private var contributionService = ContributionService()
     @StateObject private var commitInfoService = CommitInfoService()

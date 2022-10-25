@@ -56,7 +56,6 @@ struct LoginManager {
         ]
         
         var request = URLRequest(url: components.url!)
-        
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
 
