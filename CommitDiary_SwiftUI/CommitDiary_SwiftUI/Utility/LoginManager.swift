@@ -31,11 +31,12 @@ struct LoginManager {
     
     private init() { }
     
-    func login(with temporaryCode: URL) {
+    func login(with temporaryCode: URL) async {
         let code = temporaryCode.absoluteString.components(separatedBy: "code=").last ?? ""
-        requestAccessToken(with: code) { token in
-            Keychain.create(key: LoginManager.tokenKey, token: token)
+        guard let token = try? await requestAccessToken(with: code) else {
+            return
         }
+        Keychain.create(key: LoginManager.tokenKey, token: token)
         isLogin = true
     }
     
@@ -45,8 +46,7 @@ struct LoginManager {
         isLogin = false
     }
     
-    
-    private func requestAccessToken(with code: String, completion: @escaping (String) -> Void)  {
+    private func requestAccessToken(with code: String) async throws -> String {
         let urlString = "https://github.com/login/oauth/access_token"
         var components = URLComponents(string: urlString)!
         components.queryItems = [
@@ -60,20 +60,22 @@ struct LoginManager {
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
 
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data else {
-                print(NetworkError.invaildData)
-                return
-            }
-            guard let json = try? JSONSerialization.jsonObject(with: data, options: []) else {
-                print(NetworkError.parsingError(type: "JSON"))
-                return
-            }
-            if let parsedData = json as? [String: Any] {
-                let token = parsedData["access_token"] as! String
-                completion(token)
-            }
+        guard let (data, response) = try? await URLSession.shared.data(for: request)
+            else {
+            throw NetworkError.invaildData
         }
-        .resume()
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+            let errorCode = String(describing: response)
+            print(errorCode)
+            throw NetworkError.statusCodeError(code: errorCode)
+        }
+        guard let json = try? JSONSerialization.jsonObject(with: data, options: []),
+              let parsedData = json as? [String: Any],
+              let token = parsedData["access_token"] as? String else {
+            throw NetworkError.parsingError(type: "JSON")
+        }
+            
+        return token
     }
 }

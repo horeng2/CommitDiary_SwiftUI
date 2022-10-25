@@ -58,7 +58,9 @@ extension LoginView {
                 .padding(.bottom, 80)
             }
             .onOpenURL { temporaryCode in
-                LoginManager.shared.login(with: temporaryCode)
+                Task{
+                    await LoginManager.shared.login(with: temporaryCode)
+                }
             }
         }
     }

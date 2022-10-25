@@ -27,7 +27,8 @@ struct CommitDiary_SwiftUIApp: App {
                     .environmentObject(commitInfoService)
                     .task(priority: .high) {
                         await userInfoService.loadUserInfo()
-                        await contributionService.loadContribution()
+                        let userId = userInfoService.userInfo.id
+                        await contributionService.loadContribution(userId: userId)
                     }
                     .task {
                         await commitInfoService.loadRepos(from: userInfoService.userInfo.reposUrl)

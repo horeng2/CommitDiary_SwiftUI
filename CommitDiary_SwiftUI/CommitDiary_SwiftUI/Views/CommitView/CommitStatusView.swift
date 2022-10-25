@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CommitStatusView: View {
+    @EnvironmentObject private var userInfoService: UserInfoService
     @EnvironmentObject private var contributionService: ContributionService
     @State private var isLoding = false
     @Binding var colorTheme: Theme
@@ -54,7 +55,8 @@ extension CommitStatusView {
             isLoding = true
             Task{
                 try await Task.sleep(nanoseconds: 800_000_000)
-                await contributionService.loadContribution()
+                let userId = userInfoService.userInfo.id
+                await contributionService.loadContribution(userId: userId)
                 isLoding = false
             }
         } label: {

@@ -14,11 +14,12 @@ class UserInfoService: ObservableObject {
     
     func loadUserInfo() async {
         let githubNetwork = GithubNetwork()
-        guard let token = Keychain.read(key: LoginManager.tokenKey),
-              let info = try? await githubNetwork.dataRequest(of: UserInfoRequest(token: token)) else {
+        guard let token = Keychain.read(key: LoginManager.tokenKey) else {
             return
         }
-        UserDefaults.standard.set(info.id, forKey: "userId")
+             guard let info = try? await githubNetwork.dataRequest(of: UserInfoRequest(token: token)) else {
+            return
+        }
         DispatchQueue.main.async {
             self.userInfo = info
             self.loadProfilImage(url: info.profileImageUrl)

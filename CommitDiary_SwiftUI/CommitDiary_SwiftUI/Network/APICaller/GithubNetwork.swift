@@ -26,6 +26,7 @@ class GithubNetwork {
         guard let httpResponse = response as? HTTPURLResponse,
               (200...299).contains(httpResponse.statusCode) else {
             let errorCode = String(describing: response)
+            print(errorCode)
             throw NetworkError.statusCodeError(code: errorCode)
         }
         
@@ -34,7 +35,6 @@ class GithubNetwork {
         }
         return decodedData
     }
-
     
     func getContributions(with userId: String) async throws -> [Contribution] {
         guard let contributionRequest = ContributionsRequest(userId: userId).urlReauest else {
