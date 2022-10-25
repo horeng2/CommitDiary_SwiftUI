@@ -21,7 +21,7 @@ class UserInfoService: ObservableObject {
         UserDefaults.standard.set(info.id, forKey: "userId")
         DispatchQueue.main.async {
             self.userInfo = info
-            self.loadProfilImage(url: "https://avatars.githubusercontent.com/u/87305744?v=4")
+            self.loadProfilImage(url: info.profileImageUrl)
         }
     }
     
