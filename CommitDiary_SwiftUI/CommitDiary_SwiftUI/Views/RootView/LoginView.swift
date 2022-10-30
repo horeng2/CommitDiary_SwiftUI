@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import SafariServices
 
 struct LoginView: View {
     @Environment(\.openURL) private var openURL
+    @State private var showSafari = false
 
     var body: some View {
         VStack {
@@ -40,7 +42,7 @@ extension LoginView {
             Text("앱을 사용하려면 GitHub 계정 로그인이 필요합니다.")
                 .foregroundColor(Color.gray)
             Button {
-                openURL(LoginManager.shared.loginUrl)
+                showSafari = true
             } label: {
                 HStack(spacing: 0 ) {
                     Image("github")
@@ -57,12 +59,25 @@ extension LoginView {
                 .cornerRadius(5)
                 .padding(.bottom, 80)
             }
-            .onOpenURL { temporaryCode in
-                Task{
-                    await LoginManager.shared.login(with: temporaryCode)
-                }
+            .popover(isPresented: $showSafari) {
+                SafariView()
+                    .onOpenURL { temporaryCode in
+                        Task{
+                            await LoginManager.shared.login(with: temporaryCode)
+                        }
+                    }
             }
         }
+    }
+}
+
+struct SafariView: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> some UIViewController {
+        return SFSafariViewController(url: LoginManager.shared.loginUrl)
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+        return
     }
 }
 
