@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  CommitDiary_SwiftUI
+
+  Created by 서녕 on 2022/10/30.
+  
+*/
+
+
+// MARK: - App Name
+"CFBundleDisplayName" = "잔디일기";

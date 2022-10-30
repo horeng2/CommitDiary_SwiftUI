@@ -56,6 +56,7 @@
 		4884572A28F55463007269F3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884572928F55463007269F3 /* LoginView.swift */; };
 		4884573228F5B1D7007269F3 /* SecretKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4884573128F5B1D7007269F3 /* SecretKey.plist */; };
 		4884573428F5B22A007269F3 /* APIKeyBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884573328F5B22A007269F3 /* APIKeyBundle.swift */; };
+		48A7499C290E8F7E00164AFB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 48A7499E290E8F7E00164AFB /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +131,8 @@
 		4884572928F55463007269F3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		4884573128F5B1D7007269F3 /* SecretKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SecretKey.plist; sourceTree = "<group>"; };
 		4884573328F5B22A007269F3 /* APIKeyBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKeyBundle.swift; sourceTree = "<group>"; };
+		48A7499D290E8F7E00164AFB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		48A7499F290E8F8000164AFB /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +289,7 @@
 				4884573128F5B1D7007269F3 /* SecretKey.plist */,
 				4884573328F5B22A007269F3 /* APIKeyBundle.swift */,
 				4823B5E92900E93500B6A250 /* Localizable.strings */,
+				48A7499E290E8F7E00164AFB /* InfoPlist.strings */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -469,6 +473,7 @@
 				4823B5E72900E93500B6A250 /* Localizable.strings in Resources */,
 				4884573228F5B1D7007269F3 /* SecretKey.plist in Resources */,
 				480BE8F728EA1DAD00883E98 /* Assets.xcassets in Resources */,
+				48A7499C290E8F7E00164AFB /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,6 +585,15 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
+		48A7499E290E8F7E00164AFB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				48A7499D290E8F7E00164AFB /* en */,
+				48A7499F290E8F8000164AFB /* ko */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -634,6 +648,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -689,6 +704,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -725,7 +741,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -755,7 +771,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
